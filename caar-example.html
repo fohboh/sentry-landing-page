@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAAR — Certified Audit &amp; Action Report | FohBoh | MGE™ | January 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#F0EDE8}
+body{
+  font-family:'Plus Jakarta Sans',-apple-system,sans-serif;
+  background:#F0EDE8;
+  color:#1C1208;
+  font-size:11.5px;
+  line-height:1.55;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+:root{
+  --ink:#1C1208;
+  --ink2:rgba(28,18,8,.6);
+  --ink3:rgba(28,18,8,.38);
+  --navy:#1A3F7A;
+  --navy-light:rgba(26,63,122,.07);
+  --navy-border:rgba(26,63,122,.15);
+  --amber:#C8820A;
+  --amber-light:rgba(200,130,10,.08);
+  --amber-border:rgba(200,130,10,.22);
+  --green:#1A7A4A;
+  --green-light:rgba(26,122,74,.08);
+  --green-border:rgba(26,122,74,.18);
+  --red:#C0392B;
+  --red-light:rgba(192,57,43,.07);
+  --border:rgba(0,0,0,.1);
+  --border2:rgba(0,0,0,.06);
+  --mono:'JetBrains Mono',monospace;
+}
+
+/* ── PRINT WRAPPER ── */
+.document{
+  max-width:780px;
+  margin:32px auto;
+  background:white;
+  border:1px solid var(--border);
+  box-shadow:0 4px 40px rgba(0,0,0,.12);
+}
+@media print{
+  body{background:white}
+  .document{max-width:none;margin:0;border:none;box-shadow:none}
+  .no-print{display:none}
+  .section{page-break-inside:avoid}
+  .page-break{page-break-after:always}
+}
+
+/* ── PRINT BAR ── */
+.print-bar{
+  background:#1A3F7A;color:white;
+  padding:8px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:10.5px;font-weight:600;letter-spacing:.04em;
+}
+.print-btn{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+  color:white;padding:4px 14px;border-radius:4px;
+  font-size:10px;font-weight:700;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  transition:all .12s;
+}
+.print-btn:hover{background:rgba(255,255,255,.25)}
+
+/* ── ILLUSTRATIVE BANNER ── */
+.illustrative-banner{
+  background:repeating-linear-gradient(45deg,#C8820A,#C8820A 10px,#B8760A 10px,#B8760A 20px);
+  color:white;
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:.04em;
+  text-align:center;
+  padding:10px 20px;
+  text-shadow:0 1px 2px rgba(0,0,0,.25);
+}
+@media print{
+  .illustrative-banner{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+
+/* ── COVER PAGE ── */
+.cover{
+  padding:48px 48px 36px;
+  border-bottom:3px solid var(--navy);
+  position:relative;
+}
+.cover-stripe{
+  position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,#1A3F7A 0%,#C8820A 50%,#1A7A4A 100%);
+}
+.cover-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px}
+.cover-brand{font-size:15px;font-weight:800;color:var(--navy);letter-spacing:-.02em}
+.cover-brand span{color:var(--amber);font-weight:300;margin:0 2px}
+.cover-brand-sub{font-size:9.5px;font-weight:600;color:var(--ink3);margin-top:2px;letter-spacing:.05em}
+.cover-cert-badge{
+  display:flex;flex-direction:column;align-items:flex-end;gap:4px;
+}
+.cert-badge{
+  font-size:10px;font-weight:700;padding:3px 10px;border-radius:3px;
+  letter-spacing:.05em;
+}
+.badge-certified{background:#1A7A4A;color:white}
+.badge-fre{background:var(--navy);color:white}
+.badge-dcls{background:rgba(0,0,0,.07);color:var(--ink2);border:1px solid var(--border)}
+
+.cover-title-block{margin-bottom:28px}
+.cover-doc-label{font-size:9.5px;font-weight:700;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:8px}
+.cover-doc-title{font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1.1}
+.cover-doc-subtitle{font-size:13px;color:var(--ink2);margin-top:6px;font-weight:500}
+
+.cover-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px}
+.cover-field{border-bottom:1px solid var(--border2);padding-bottom:8px}
+.cover-field-label{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;margin-bottom:3px}
+.cover-field-value{font-size:12px;font-weight:700;color:var(--ink)}
+.cover-field-sub{font-size:10px;color:var(--ink3);margin-top:1px}
+
+.cover-recovery{
+  background:linear-gradient(135deg,rgba(26,63,122,.07) 0%,rgba(26,122,74,.05) 100%);
+  border:1px solid var(--navy-border);
+  border-radius:6px;
+  padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;
+}
+.recovery-label{font-size:9.5px;font-weight:700;letter-spacing:.08em;color:var(--navy);text-transform:uppercase}
+.recovery-amount{font-size:28px;font-weight:800;color:var(--green);letter-spacing:-.04em}
+.recovery-annualized{font-size:10.5px;color:var(--ink3);margin-top:2px}
+.recovery-ts{text-align:right}
+.ts-number{font-size:32px;font-weight:800;color:var(--navy);letter-spacing:-.04em;line-height:1}
+.ts-label{font-size:9.5px;font-weight:700;color:var(--navy);letter-spacing:.04em}
+.ts-zone{font-size:10px;font-weight:700;color:var(--green);margin-top:2px}
+
+.cover-warning{
+  background:var(--amber-light);border:1px solid var(--amber-border);
+  border-radius:4px;padding:8px 12px;
+  font-size:10.5px;color:var(--amber);font-weight:600;
+  display:flex;gap:6px;
+}
+
+/* ── SECTION STRUCTURE ── */
+.section{padding:32px 48px;border-bottom:1px solid var(--border2)}
+.section:last-child{border-bottom:none}
+.section-num{font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;margin-bottom:4px}
+.section-title{font-size:14px;font-weight:800;color:var(--navy);letter-spacing:-.02em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--navy)}
+.section-body{font-size:11.5px;color:var(--ink2);line-height:1.65}
+.section-body p{margin-bottom:8px}
+.section-body p:last-child{margin-bottom:0}
+.section-body strong{color:var(--ink);font-weight:600}
+
+/* ── TABLES ── */
+.cert-table{width:100%;border-collapse:collapse;font-size:11px;margin:10px 0}
+.cert-table th{
+  font-size:9px;font-weight:700;letter-spacing:.08em;color:white;
+  background:var(--navy);padding:7px 10px;text-align:left;
+}
+.cert-table td{padding:7px 10px;border-bottom:1px solid var(--border2);vertical-align:top;color:var(--ink2)}
+.cert-table tr:last-child td{border-bottom:none}
+.cert-table tr:hover td{background:rgba(26,63,122,.03)}
+.cert-table .total-row td{
+  border-top:2px solid var(--navy);
+  font-weight:700;color:var(--ink);background:var(--navy-light);
+}
+.cert-table td.amount{text-align:right;font-weight:700;color:var(--green);font-family:var(--mono);font-size:11px}
+.cert-table td.amount-red{text-align:right;font-weight:700;color:var(--red);font-family:var(--mono);font-size:11px}
+.cert-table td.amount-total{text-align:right;font-weight:800;color:var(--navy);font-family:var(--mono);font-size:12px}
+.cert-table td.rule-id{font-family:var(--mono);font-size:10px;color:var(--amber);font-weight:600}
+.cert-table td.mono-sm{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+
+/* ── GATE TABLE ── */
+.gate-table{width:100%;border-collapse:collapse;font-size:10.5px;margin:8px 0}
+.gate-table th{font-size:9px;font-weight:700;letter-spacing:.08em;color:white;background:var(--navy);padding:6px 8px;text-align:left}
+.gate-table td{padding:6px 8px;border-bottom:1px solid var(--border2);vertical-align:middle}
+.gate-table tr:last-child td{border-bottom:none;border-top:2px solid var(--navy);font-weight:700;background:var(--navy-light)}
+.gate-pass{color:var(--green);font-weight:700}
+.gate-elevated{color:var(--amber);font-weight:700}
+.gate-score{font-family:var(--mono);font-size:11px;font-weight:700}
+.gate-weight{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+.gate-bar-cell{width:80px}
+.gate-bar{height:5px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden}
+.gate-bar-fill{height:100%;border-radius:3px}
+.gate-fill-green{background:#1A7A4A}
+.gate-fill-amber{background:#C8820A}
+
+/* ── CHAIN OF CUSTODY ── */
+.coc-table{width:100%;border-collapse:collapse;font-size:10px;margin:8px 0}
+.coc-table th{font-size:8.5px;font-weight:700;letter-spacing:.08em;color:white;background:#1C1208;padding:6px 8px;text-align:left}
+.coc-table td{padding:5px 8px;border-bottom:1px solid var(--border2);font-family:var(--mono);font-size:9.5px;color:var(--ink2);vertical-align:top}
+.coc-table tr:last-child td{border-bottom:none}
+.coc-event{font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:600;color:var(--ink)}
+.coc-check{color:var(--green);font-weight:700;font-family:'Plus Jakarta Sans',sans-serif}
+
+/* ── ATTESTATION BLOCK ── */
+.attest-block{
+  background:var(--navy-light);border:2px solid var(--navy-border);
+  border-radius:6px;padding:16px 20px;margin:12px 0;
+}
+.attest-title{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--navy);text-transform:uppercase;margin-bottom:10px}
+.attest-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.attest-item{font-size:10.5px}
+.attest-label{font-size:9px;font-weight:700;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-bottom:2px}
+.attest-val{font-family:var(--mono);font-size:10px;color:var(--ink);font-weight:600;word-break:break-all;line-height:1.4}
+.sha-block{
+  background:rgba(0,0,0,.04);border:1px solid var(--border);
+  border-radius:4px;padding:8px 10px;margin:4px 0;
+}
+.sha-label{font-size:9px;font-weight:700;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-bottom:3px}
+.sha-val{font-family:var(--mono);font-size:9.5px;color:var(--navy);word-break:break-all;line-height:1.6;font-weight:600}
+
+/* ── EXPORTPACK MANIFEST ── */
+.manifest-table{width:100%;border-collapse:collapse;font-size:10px;margin:8px 0;table-layout:fixed}
+.manifest-table th{font-size:8.5px;font-weight:700;letter-spacing:.08em;color:white;background:#1C1208;padding:6px 8px;text-align:left}
+.manifest-table td{padding:6px 8px;border-bottom:1px solid var(--border2);vertical-align:top;overflow:hidden}
+.manifest-table tr:last-child td{border-bottom:none;background:var(--green-light);font-weight:700}
+.manifest-table td.comp-num{font-weight:700;color:var(--navy);text-align:center;width:28px}
+.manifest-table td.comp-name{font-weight:600;color:var(--ink);font-size:10.5px;width:160px}
+.manifest-table td.comp-file{font-family:var(--mono);font-size:9px;color:var(--ink3);width:160px;word-break:break-all}
+.manifest-table td.comp-hash{font-family:var(--mono);font-size:9px;color:var(--ink3);word-break:break-all;line-height:1.5}
+.manifest-table td.comp-status{color:var(--green);font-weight:700;font-size:10px;white-space:nowrap;width:60px}
+
+/* ── FORMULA BOX ── */
+.formula-box{
+  background:#0D1117;border-radius:4px;
+  padding:12px 14px;margin:10px 0;
+  font-family:var(--mono);font-size:10.5px;color:#E6EDF3;
+  line-height:1.7;
+}
+.formula-comment{color:#6E7681}
+.formula-key{color:#79C0FF}
+.formula-op{color:#FF7B72}
+.formula-val{color:#A5D6FF}
+
+/* ── CALLOUT BOXES ── */
+.callout{border-radius:4px;padding:10px 14px;margin:10px 0;font-size:11px;line-height:1.6}
+.callout-navy{background:var(--navy-light);border-left:3px solid var(--navy)}
+.callout-green{background:var(--green-light);border-left:3px solid var(--green)}
+.callout-amber{background:var(--amber-light);border-left:3px solid var(--amber)}
+.callout strong{font-weight:700}
+
+/* ── SCOPE BOX ── */
+.scope-box{
+  border:1px solid var(--border);border-radius:4px;
+  padding:12px 16px;margin:10px 0;font-size:11px;
+}
+.scope-item{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid var(--border2);line-height:1.45}
+.scope-item:last-child{border-bottom:none}
+.scope-num{font-weight:700;color:var(--navy);flex-shrink:0;min-width:16px}
+
+/* ── LEGAL NOTICE ── */
+.legal-notice{
+  background:rgba(0,0,0,.04);border:1px solid var(--border);
+  border-radius:4px;padding:10px 14px;
+  font-size:9.5px;color:var(--ink3);line-height:1.6;
+  margin:10px 0;
+}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--border2);margin:12px 0}
+
+/* ── FOOTER ── */
+.doc-footer{
+  padding:16px 48px;
+  background:var(--navy);color:rgba(255,255,255,.7);
+  font-size:9px;letter-spacing:.04em;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+}
+.footer-brand{font-size:11px;font-weight:800;color:white}
+.footer-brand span{color:var(--amber);font-weight:300;margin:0 2px}
+
+/* ── PLAIN-LANGUAGE INFO SLIDE-IN ── */
+.caar-info-btn{
+  width:20px;height:20px;border-radius:50%;flex-shrink:0;
+  background:var(--navy-light);border:1px solid var(--navy-border);
+  color:var(--navy);font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:11px;font-weight:700;line-height:1;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:0;transition:background .12s,transform .12s;
+}
+.caar-info-btn:hover{background:var(--navy-border);transform:scale(1.06)}
+.caar-info-btn[aria-expanded="true"]{background:var(--navy);color:white}
+.caar-info-panel{
+  max-height:0;overflow:hidden;
+  transition:max-height .28s ease;
+  background:var(--navy-light);
+  border-radius:6px;
+}
+.caar-info-panel.open{max-height:420px;overflow-y:auto}
+.caar-info-panel-inner{padding:14px 16px;margin:0 0 14px}
+.caar-info-eyebrow{
+  font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--navy);font-weight:700;margin-bottom:8px;
+}
+.caar-info-row{display:grid;grid-template-columns:112px 1fr;gap:3px 10px;margin-bottom:9px;align-items:start}
+.caar-info-row:last-of-type{margin-bottom:0}
+.caar-info-k{font-size:9.5px;font-weight:700;padding-top:1px;letter-spacing:.02em}
+.caar-info-v{font-size:11px;color:var(--ink2);line-height:1.55}
+.caar-info-value{
+  margin-top:10px;padding:8px 10px;background:var(--green-light);
+  border-left:2px solid var(--green);border-radius:3px;
+  font-size:10.5px;line-height:1.5;color:var(--ink);
+}
+.caar-info-value b{color:var(--green)}
+
+/* ─── preview gate ──────────────────────────────────── */
+
+
+.caar-gate{position:relative;background:#fff;border-top:2px solid var(--navy);padding:30px 34px 34px}
+.caar-gate-eyebrow{
+  font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:8px;
+}
+.caar-gate-title{
+  font-size:19px;font-weight:800;color:var(--navy);letter-spacing:-.02em;
+  margin:0 0 12px;line-height:1.25;max-width:34ch;
+}
+.caar-gate-body{
+  font-size:12.5px;line-height:1.65;color:var(--ink2);max-width:68ch;margin:0 0 22px;
+}
+.caar-gate-list{
+  list-style:none;margin:0 0 26px;padding:0;
+  display:grid;gap:1px;background:rgba(28,18,8,.1);border:1px solid rgba(28,18,8,.1);
+}
+.caar-gate-list li{
+  background:#FAFAFA;display:flex;align-items:center;gap:12px;
+  padding:9px 14px;font-size:11.5px;color:var(--ink2);
+}
+.caar-gate-list .cg-n{
+  font-size:9.5px;font-weight:700;letter-spacing:.1em;color:var(--ink3);
+  flex:none;width:20px;
+}
+.caar-gate-cta{border-top:1px solid rgba(28,18,8,.12);padding-top:22px}
+.cg-btn{
+  display:inline-block;background:var(--navy);color:#fff;text-decoration:none;
+  font-size:12.5px;font-weight:700;letter-spacing:.01em;
+  padding:13px 24px;border-radius:6px;
+}
+.cg-btn:hover{opacity:.88}
+.cg-note{font-size:11px;color:var(--ink3);margin:12px 0 0;max-width:52ch;line-height:1.6}
+@media print{ .caar-gate{display:none} }
+</style>
+</head>
+<body>
+
+<!-- PRINT BAR (screen only) -->
+<div class="print-bar no-print">
+  <span>FohBoh | MGE™ · CAAR · certified narrative · January 2026 · Sample Data · Preview — Sections 1–4 of 11</span>
+  <a class="print-btn" href="LANDING_REQUEST" style="text-decoration:none;display:inline-block">Request the full report →</a>
+</div>
+
+<div class="document">
+
+<div class="illustrative-banner">⚠ ILLUSTRATIVE CAAR REPORT ONLY — Sample data for demonstration purposes, not a real certification</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- COVER PAGE                                        -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-stripe"></div>
+
+  <div class="cover-header">
+    <div>
+      <div class="cover-brand">FohBoh<span>|</span>MGE™</div>
+      <div class="cover-brand-sub">Deterministic certification narrative</div>
+    </div>
+    <div class="cover-cert-badge">
+      <span class="cert-badge badge-certified">✦ CERTIFIED · TS 92</span>
+      <span class="cert-badge badge-fre">FRE 803(6) · 902(11) · 1002</span>
+      <span class="cert-badge badge-dcls">certified narrative · KPI v1.0.0 Locked</span>
+    </div>
+  </div>
+
+  <div class="cover-title-block">
+    <div class="cover-doc-label">Certified Audit &amp; Action Report</div>
+    <div class="cover-doc-title">Delivery Fee Recovery<br>Certification Report</div>
+    <div class="cover-doc-subtitle">DFR Spoke · R016–R055 · Sample Merchant · January 2026</div>
+  </div>
+
+  <div class="cover-grid">
+    <div class="cover-field">
+      <div class="cover-field-label">Merchant</div>
+      <div class="cover-field-value">Sample Merchant LLC</div>
+      <div class="cover-field-sub">McNeely Enterprises format · DFR spoke</div>
+    </div>
+    <div class="cover-field">
+      <div class="cover-field-label">DSP / Vendor</div>
+      <div class="cover-field-value">DoorDash, Inc.</div>
+      <div class="cover-field-sub">Marketplace facilitator</div>
+    </div>
+    <div class="cover-field">
+      <div class="cover-field-label">Certification Period</div>
+      <div class="cover-field-value">January 2026</div>
+      <div class="cover-field-sub">2026-01-01 – 2026-01-31 · 31 days</div>
+    </div>
+    <div class="cover-field">
+      <div class="cover-field-label">CAAR ID</div>
+      <div class="cover-field-value" style="font-family:var(--mono);font-size:10.5px">CAAR-DFR-2026-01-001</div>
+      <div class="cover-field-sub">Immutable · KPI Vault sealed</div>
+    </div>
+    <div class="cover-field">
+      <div class="cover-field-label">Certification Date</div>
+      <div class="cover-field-value">2026-06-06</div>
+      <div class="cover-field-sub">Valid until: 2027-06-06</div>
+    </div>
+    <div class="cover-field">
+      <div class="cover-field-label">Legal Opinion</div>
+      <div class="cover-field-value" style="color:var(--amber)">{legal_opinion_ref}</div>
+      <div class="cover-field-sub">P0 — required before distribution</div>
+    </div>
+  </div>
+
+  <div class="cover-recovery">
+    <div>
+      <div class="recovery-label">Total Certified Recovery</div>
+      <div class="recovery-amount">$8,200.00</div>
+      <div class="recovery-annualized">Annualized projection (×12): $98,400.00</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-bottom:4px">Rules Triggered</div>
+      <div style="font-size:24px;font-weight:800;color:var(--navy)">3</div>
+      <div style="font-size:10px;color:var(--ink3)">of 40 DFR rules evaluated</div>
+    </div>
+    <div class="recovery-ts">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase;margin-bottom:4px">Trust Score</div>
+      <div class="ts-number">92</div>
+      <div class="ts-label">/ 100</div>
+      <div class="ts-zone">✦ CERTIFIED ZONE (≥85)</div>
+    </div>
+  </div>
+
+  <div class="cover-warning">
+    <span>⚠</span>
+    <span>SAMPLE DATA — January 2026 · Production-ready structure · P0 blockers must be cleared before real merchant distribution · {legal_opinion_reference_number} is a placeholder</span>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 1 — CERTIFICATION DECLARATION             -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-num">Section 1</div>
+  <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span>Certification Declaration</span><button type="button" class="caar-info-btn" aria-expanded="false" aria-controls="caar-info-1" onclick="caarToggleInfo(1, this)" title="What does this section mean?">i</button></div>
+  <div class="caar-info-panel" id="caar-info-1">
+    <div class="caar-info-panel-inner">
+      <div class="caar-info-eyebrow">In plain language</div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--amber)">What it is</span><span class="caar-info-v">The header confirming this report cleared every quality check before it was ever generated.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--green)">Where the data comes from</span><span class="caar-info-v">The engine's own processing record for this specific run — not a judgment call made by a person after the fact.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--navy)">What it does</span><span class="caar-info-v">Confirms the analysis actually completed and met the minimum data-quality bar before anything downstream was produced.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--red)">Why it matters</span><span class="caar-info-v">You're not looking at a rough first draft. Nothing reaches this page unless the underlying data already passed inspection.</span></div>
+      <div class="caar-info-value">Worth more than a spreadsheet: a spreadsheet prints whatever was typed into it, right or wrong. This has a gate in front of it.</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>FohBoh | MGE™ hereby certifies, pursuant to its Rule Registry v1.0 (R001–R152) and the certified narrative Deterministic Certification Language System, that the data inputs described in this report have been evaluated against the full Dual-Loop Engine rule set and that the findings stated herein are the mathematically reproducible output of that evaluation.</p>
+
+    <table class="cert-table" style="margin-top:12px">
+      <thead><tr>
+        <th>Parameter</th><th>Value</th><th>Notes</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Certification State</strong></td>
+          <td style="color:var(--green);font-weight:700">S1 · CERTIFIED</td>
+          <td style="color:var(--ink3)">Trust Score ≥ 85 · all CAAR conditions met</td>
+        </tr>
+        <tr>
+          <td><strong>Trust Score</strong></td>
+          <td style="font-family:var(--mono);font-weight:700;color:var(--navy)">92 / 100</td>
+          <td style="color:var(--ink3)">Weighted sum of TG01–TG11 · R136</td>
+        </tr>
+        <tr>
+          <td><strong>KPI Vault Record ID</strong></td>
+          <td style="font-family:var(--mono);font-size:10px">vault_dfr_2026_01_001</td>
+          <td style="color:var(--ink3)">Immutably locked · R142 · record-level SHA-256</td>
+        </tr>
+        <tr>
+          <td><strong>R198 MASTER_SYSTEM_HEALTHY</strong></td>
+          <td style="color:var(--green);font-weight:700">PASS</td>
+          <td style="color:var(--ink3)">Supports the FRE 902(11) self-authentication design</td>
+        </tr>
+        <tr>
+          <td><strong>CAAR Eligible</strong></td>
+          <td style="color:var(--green);font-weight:700">YES</td>
+          <td style="color:var(--ink3)">TS ≥ 85 + R198 pass + IUM > 50%</td>
+        </tr>
+        <tr>
+          <td><strong>Formula Version</strong></td>
+          <td style="font-family:var(--mono)">KPI v1.0.0</td>
+          <td style="color:var(--ink3)">Locked · same inputs → same output · always</td>
+        </tr>
+        <tr>
+          <td><strong>certified narrative Template Version</strong></td>
+          <td style="font-family:var(--mono)">certified narrative · CERTIFIED_DFR</td>
+          <td style="color:var(--ink3)">Token Injector R144 · Narrative Hash R145</td>
+        </tr>
+        <tr>
+          <td><strong>Valid Until</strong></td>
+          <td style="font-family:var(--mono)">2027-06-06</td>
+          <td style="color:var(--ink3)">Retained 24 months: 2028-06-06</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 2 — DATA SCOPE                            -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-num">Section 2</div>
+  <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span>Data Scope Statement</span><button type="button" class="caar-info-btn" aria-expanded="false" aria-controls="caar-info-2" onclick="caarToggleInfo(2, this)" title="What does this section mean?">i</button></div>
+  <div class="caar-info-panel" id="caar-info-2">
+    <div class="caar-info-panel-inner">
+      <div class="caar-info-eyebrow">In plain language</div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--amber)">What it is</span><span class="caar-info-v">The exact list of files, locations, and time period this report covers — nothing more, nothing less.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--green)">Where the data comes from</span><span class="caar-info-v">Your own POS exports, your vendor's statements, and your signed contract for the period stated.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--navy)">What it does</span><span class="caar-info-v">Draws a clear line around the analysis so there's no ambiguity about what was — and wasn't — reviewed.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--red)">Why it matters</span><span class="caar-info-v">Anyone reading this — you, your bookkeeper, even the vendor — can see precisely what was checked. Nothing can be dismissed as “we don't know what data you used.”</span></div>
+      <div class="caar-info-value">Worth more than a spot-check: a consultant samples a few months. This covers the full stated period, completely.</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>This CAAR certifies the following data inputs, and only these inputs, for the period specified. Any data source not identified below is outside the scope of this certification.</p>
+
+    <table class="cert-table" style="margin-top:10px">
+      <thead><tr><th>Source</th><th>Type</th><th>Period</th><th>Records</th><th>SHA-256 (file)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>doordash_statement_jan2026.csv</strong></td>
+          <td>DSP platform statement</td>
+          <td class="mono-sm">2026-01-01/31</td>
+          <td class="mono-sm">312</td>
+          <td class="mono-sm">7c394ff1208b9a5d…</td>
+        </tr>
+        <tr>
+          <td><strong>pos_delivery_export_jan2026.csv</strong></td>
+          <td>POS delivery sales export</td>
+          <td class="mono-sm">2026-01-01/31</td>
+          <td class="mono-sm">298</td>
+          <td class="mono-sm">a4f8e2c1d9b073f4…</td>
+        </tr>
+        <tr>
+          <td><strong>doordash_contract_exhibit.pdf</strong></td>
+          <td>Signed DSP contract · rate schedule</td>
+          <td class="mono-sm">Effective date</td>
+          <td class="mono-sm">1 document</td>
+          <td class="mono-sm">f3e891bc24a07d3c…</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="cert-table" style="margin-top:12px">
+      <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Merchant</td><td>Sample Merchant LLC</td></tr>
+        <tr><td>POS System</td><td>Toast POS · Processor: Toast Payments (Cost+0.55%+$0.05/tx)</td></tr>
+        <tr><td>DSP</td><td>DoorDash, Inc. · Marketplace facilitator</td></tr>
+        <tr><td>Certification Period</td><td>2026-01-01 through 2026-01-31 (31 days)</td></tr>
+        <tr><td>Platform Gross Sales</td><td style="font-family:var(--mono);font-weight:700">$75,000.00</td></tr>
+        <tr><td>POS Delivery Sales</td><td style="font-family:var(--mono);font-weight:700">$73,500.00</td></tr>
+        <tr><td>DSP Commission Rate Applied</td><td style="font-family:var(--mono);font-weight:700;color:var(--red)">30%</td></tr>
+        <tr><td>Contracted Commission Rate</td><td style="font-family:var(--mono);font-weight:700;color:var(--green)">20%</td></tr>
+        <tr><td>Total Records Evaluated</td><td style="font-family:var(--mono)">612</td></tr>
+        <tr><td>Marketplace Facilitator Tax Note</td><td style="font-size:10.5px;color:var(--ink3)">Positive POS/settlement delta from marketplace facilitator tax is expected and is NOT a DFR recovery finding. Excluded per architecture rule.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 3 — METHODOLOGY + DETERMINISM             -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-num">Section 3</div>
+  <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span>Methodology &amp; Determinism Statement</span><button type="button" class="caar-info-btn" aria-expanded="false" aria-controls="caar-info-3" onclick="caarToggleInfo(3, this)" title="What does this section mean?">i</button></div>
+  <div class="caar-info-panel" id="caar-info-3">
+    <div class="caar-info-panel-inner">
+      <div class="caar-info-eyebrow">In plain language</div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--amber)">What it is</span><span class="caar-info-v">A plain statement of how the numbers were produced — the same checks, applied the same way, every single time.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--green)">Where the data comes from</span><span class="caar-info-v">The engine's internal processing log for this report — an automatic record, not something written up afterward.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--navy)">What it does</span><span class="caar-info-v">Confirms no AI, no guesswork, and no estimation were involved anywhere in the calculation — only a fixed set of checks run consistently against your data.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--red)">Why it matters</span><span class="caar-info-v">Because the process is fixed and repeatable, running the same data through it again produces the same result — the kind of consistency auditors and attorneys look for in a business record.</span></div>
+      <div class="caar-info-value">Worth more than a consultant's judgment: a person's read on the numbers can shift day to day. This doesn't.</div>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <table class="cert-table">
+      <thead><tr><th>FRE Rule</th><th>Basis</th><th>How This Report Is Built to Support It</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="white-space:nowrap"><strong>FRE 803(6)</strong></td>
+          <td>Business Records Exception</td>
+          <td>Every pipeline event is logged automatically at execution time (R152), on the same schedule every period, whether or not a variance is found — the hallmark of a regularly conducted activity.</td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap"><strong>FRE 902(11)</strong></td>
+          <td>Self-Authentication of Business Records</td>
+          <td>The Attestation Block (R149) and ExportPack Manifest (R151) let any recipient independently recompute and verify every hash. A compliant Rule 902(11) certification additionally requires a signed custodian declaration, provided separately alongside this report where applicable.</td>
+        </tr>
+        <tr>
+          <td style="white-space:nowrap"><strong>FRE 1002</strong></td>
+          <td>Best Evidence Rule</td>
+          <td>Original source files are included unmodified in ExportPack components #1 and #2. Rule-governed normalization is documented separately in component #4. This report is a summary of those records, not a substitute for them.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="legal-notice" style="margin-top:8px">
+      This section describes how the certification pipeline was designed with these evidentiary principles in mind. It is not a legal conclusion that this document is admissible in any particular proceeding — that depends on the specific facts, forum, and applicable rules, and should be assessed with your own counsel.
+    </div>
+
+    <div class="callout callout-navy" style="margin-top:12px">
+      <strong>Determinism Statement (R144 / R145):</strong> This CAAR is produced by the certified narrative deterministic output architecture. No language model inference is used at any stage. No probabilistic estimates are included. Given identical certified inputs, the certified narrative Token Injector (R144) will always produce identical output. The SHA-256 Narrative Hash (R145) provides mathematical proof that the narrative has not been altered since generation. Any modification to this document — including a single character — will invalidate the CAAR Integrity Hash. <strong>Same inputs + same rules = same output. Always.</strong>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-comment">// Primary Reconciliation Formula · KPI v1.0.0 · LOCKED</div>
+      <div><span class="formula-key">Primary_Reconciliation_Variance</span> =</div>
+      <div style="padding-left:20px"><span class="formula-val">platform_gross_sales</span> <span class="formula-op">−</span> ( <span class="formula-val">pos_delivery_sales</span> <span class="formula-op">+</span> <span class="formula-val">delivery_partner_fees</span> <span class="formula-op">+</span> <span class="formula-val">platform_fees</span> )</div>
+      <div style="margin-top:6px;color:#6E7681">// January 2026 certified inputs (Token Injector R144 — pulled from KPI Vault only):</div>
+      <div><span class="formula-key">platform_gross_sales</span>         = <span class="formula-val">$75,000.00</span></div>
+      <div><span class="formula-key">pos_delivery_sales</span>           = <span class="formula-val">$73,500.00</span></div>
+      <div><span class="formula-key">commission_basis_charged</span>      = <span class="formula-val">30%</span> <span class="formula-comment">// DSP applied rate</span></div>
+      <div><span class="formula-key">commission_basis_contracted</span>   = <span class="formula-val">20%</span> <span class="formula-comment">// per signed contract exhibit</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 4 — TRUST GATE BREAKDOWN                  -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-num">Section 4</div>
+  <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span>11-Gate Trust Score Breakdown</span><button type="button" class="caar-info-btn" aria-expanded="false" aria-controls="caar-info-4" onclick="caarToggleInfo(4, this)" title="What does this section mean?">i</button></div>
+  <div class="caar-info-panel" id="caar-info-4">
+    <div class="caar-info-panel-inner">
+      <div class="caar-info-eyebrow">In plain language</div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--amber)">What it is</span><span class="caar-info-v">A single score summarizing how complete and reliable the underlying data was going into this analysis.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--green)">Where the data comes from</span><span class="caar-info-v">A set of automated checks — completeness, source verification, cross-system reconciliation, and others — run against your files during processing.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--navy)">What it does</span><span class="caar-info-v">Breaks data quality down so you can see what's behind the number, instead of just being asked to trust it.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--red)">Why it matters</span><span class="caar-info-v">A high score means the findings in this report are standing on solid ground, not shaky or incomplete data.</span></div>
+      <div class="caar-info-value">Worth more than “trust me”: the quality check is shown, not just asserted.</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Each Trust Gate receives an explicit pass/fail/partial/elevated status. The Trust Score score is the weighted sum of all gate scores. No gate result is hidden or summarized — every point is accounted for below.</p>
+
+    <table class="gate-table" style="margin-top:10px">
+      <thead><tr>
+        <th style="width:40px">#</th>
+        <th>Gate Name</th>
+        <th style="width:50px">Weight</th>
+        <th style="width:70px">Status</th>
+        <th style="width:60px">Score</th>
+        <th style="width:90px">Bar</th>
+        <th>Notes</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">TG01</td>
+          <td>Data Completeness</td>
+          <td class="gate-weight">10%</td>
+          <td class="gate-pass">PASS</td>
+          <td class="gate-score" style="color:var(--green)">10/10</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">All required fields present. No gaps. (R117)</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">TG02</td>
+          <td>Source Authenticity</td>
+          <td class="gate-weight">9%</td>
+          <td class="gate-pass">PASS</td>
+          <td class="gate-score" style="color:var(--green)">9/9</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">Source provenance verified. (R118 — no caveat)</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">TG03</td>
+          <td>Vendor Profile Currency</td>
+          <td class="gate-weight">5%</td>
+          <td class="gate-pass">PASS</td>
+          <td class="gate-score" style="color:var(--green)">5/5</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">Signed DSP contract exhibit on file and unexpired.</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">TG04</td>
+          <td>POS Reconciliation</td>
+          <td class="gate-weight">12%</td>
+          <td class="gate-pass">PASS</td>
+          <td class="gate-score" style="color:var(--green)">12/12</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">POS/DSP order-level reconciliation within ±0.8%. PASS threshold met. (R122)</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">TG05</td>
+          <td>Duplicate Absence</td>
+          <td class="gate-weight">7%</td>
+          <td class="gate-pass">PASS</td>
+          <td class="gate-score" style="color:var(--green)">7/7</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">No duplicate transactions detected. (R124)</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">TG06</td>
+          <td>Period Coverage</td>
+          <td class="gate-weight">8%</td>
+          <td class="gate-pass">PASS</td>
+          <td class="gate-score" style="color:var(--green)">8/8</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">Full period covered; no gaps. (R126)</td>
+        </tr>
+        <tr style="background:var(--amber-light)">
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--amber);font-weight:700">TG07</td>
+          <td><strong>Fee Legitimacy Engine</strong></td>
+          <td class="gate-weight" style="font-weight:700;color:var(--amber)">25%</td>
+          <td class="gate-elevated">ELEVATED</td>
+          <td class="gate-score" style="color:var(--amber)">17/25</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-amber" style="width:68%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">Certified fee variance &gt;5% of fees reviewed. HIGH_FEE_VARIANCE flagged. Score reduced (R130). CAAR remains achievable at TS ≥ 85. Signed contract on file — rate variance certifiable.</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">TG08</td>
+          <td>KPI Formula Currency</td>
+          <td class="gate-weight">9%</td>
+          <td class="gate-pass">PASS</td>
+          <td class="gate-score" style="color:var(--green)">9/9</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">KPI formula v1.0.0 active and unchanged for full period. (R131)</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">TG09</td>
+          <td>Audit Trail Integrity</td>
+          <td class="gate-weight">8%</td>
+          <td class="gate-pass">PASS</td>
+          <td class="gate-score" style="color:var(--green)">8/8</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">Complete audit trail; no gaps in processing event log. (R133)</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">TG10</td>
+          <td>Narrative Hash Match</td>
+          <td class="gate-weight">6%</td>
+          <td class="gate-pass">PASS</td>
+          <td class="gate-score" style="color:var(--green)">6/6</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">Narrative hash recomputed and verified against Audit Trail entry. (R134)</td>
+        </tr>
+        <tr>
+          <td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">TG11</td>
+          <td>CAAR Eligibility</td>
+          <td class="gate-weight">6%</td>
+          <td class="gate-pass">PASS</td>
+          <td class="gate-score" style="color:var(--green)">6/6</td>
+          <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
+          <td style="font-size:10px;color:var(--ink3)">Trust Score = 92 ≥ 85 threshold. CAAR unlocked. (R141)</td>
+        </tr>
+        <tr style="background:var(--navy-light)">
+          <td colspan="2" style="font-weight:800;color:var(--navy)">TOTAL TRUST SCORE</td>
+          <td class="gate-weight" style="font-weight:700;color:var(--navy)">100%</td>
+          <td style="color:var(--green);font-weight:800">CERTIFIED</td>
+          <td class="gate-score" style="color:var(--navy);font-size:14px;font-weight:800">92 / 100</td>
+          <td class="gate-bar-cell"><div class="gate-bar" style="height:7px"><div class="gate-bar-fill gate-fill-green" style="width:92%"></div></div></td>
+          <td style="font-size:10px;color:var(--navy);font-weight:600">Certified zone: TS ≥ 85. All CAAR conditions met.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- PREVIEW GATE — remaining sections withheld         -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="caar-gate no-print">
+    <div class="caar-gate-eyebrow">Preview ends here</div>
+    <h2 class="caar-gate-title">The findings themselves are in the full report.</h2>
+    <p class="caar-gate-body">
+      You've seen the declaration, the data scope, the determinism
+      statement, and the full 11-gate Trust Score breakdown — everything that establishes
+      <em>how</em> a finding is qualified. The findings themselves, and the six sections that
+      follow them, are shown in a live walkthrough rather than published.
+    </p>
+
+    <ul class="caar-gate-list">
+      <li><span class="cg-n">05</span><span>Certified Recovery Findings — explicit calculations</span></li>
+      <li><span class="cg-n">06</span><span>Rule-to-Finding Map — evidence qualification</span></li>
+      <li><span class="cg-n">07</span><span>Recovery Eligibility Statement</span></li>
+      <li><span class="cg-n">08</span><span>Chain of Custody Declaration</span></li>
+      <li><span class="cg-n">09</span><span>Certification Attestation Block</span></li>
+      <li><span class="cg-n">10</span><span>Evidence ExportPack Manifest</span></li>
+      <li><span class="cg-n">11</span><span>Scope of Certification and Legal Notice</span></li>
+    </ul>
+
+    <div class="caar-gate-cta">
+      <a class="cg-btn" href="LANDING_REQUEST">Walk through a full CAAR with an account manager</a>
+      <p class="cg-note">
+        Thirty minutes. We'll open a complete report against a real cycle and answer
+        whatever the sample doesn't.
+      </p>
+  </div>
+</div>
+
+</div><!-- /.document -->
+
+<script>
+/* Set once — where the CTA sends people. */
+var LANDING_REQUEST = "pricing.html#request";
+document.querySelectorAll('a[href="LANDING_REQUEST"]').forEach(function(a){
+  a.href = LANDING_REQUEST;
+});
+
+function caarToggleInfo(n, btn){
+  var panel = document.getElementById('caar-info-' + n);
+  if (!panel) return;
+  var isOpen = panel.classList.contains('open');
+  if (isOpen) {
+    panel.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    panel.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+</script>
+</body>
+</html>

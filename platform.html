@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platform — how certification works | FohBoh | Sentry</title>
+<meta name="description" content="How MGE turns operational data into certified evidence: the Trust Score gate, the eight-step certification pipeline, and the FRE evidence standard behind every CAAR.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── tokens ─────────────────────────────────────────────── */
+:root{
+  --paper:#F6F2ED;
+  --card:#FFFFFF;
+  --ink:#17161A;
+  --ink-2:#57534C;
+  --ink-3:#8A857C;
+  --hair:#E5DFD6;
+  --red:#D42A1F;
+  --red-deep:#A81E15;
+  --red-tint:#FBE8E5;
+  --green:#12A150;
+  --green-tint:#E7F5EC;
+
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  --r:16px;
+  --shadow:0 1px 2px rgba(23,22,26,.04),0 8px 24px rgba(23,22,26,.05);
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+
+/* ─── type ───────────────────────────────────────────────── */
+h1,h2,h3,h4{font-family:var(--display);margin:0;letter-spacing:-.028em;line-height:1.04;font-weight:800}
+h1{font-size:clamp(38px,6.2vw,68px)}
+h2{font-size:clamp(28px,3.9vw,44px);line-height:1.08}
+h3{font-size:clamp(18px,2vw,22px);letter-spacing:-.02em;font-weight:700;line-height:1.25}
+h4{font-size:16px;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+.lede{font-size:clamp(17px,1.6vw,19px);color:var(--ink-2);max-width:56ch}
+
+.eyebrow{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);
+}
+.pill{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--red-tint);color:var(--red-deep);
+  border-radius:999px;padding:8px 16px;
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red)}
+.red{color:var(--red)}
+
+/* ─── layout ─────────────────────────────────────────────── */
+.wrap{max-width:1240px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+section{padding:clamp(56px,7vw,104px) 0}
+.rule{height:1px;background:var(--hair);border:0;margin:0}
+.sec-head{max-width:64ch;margin-bottom:clamp(28px,4vw,48px)}
+.sec-head .eyebrow{display:block;margin-bottom:14px}
+.sec-head p{margin-top:16px}
+
+.card{
+  background:var(--card);border:1px solid var(--hair);
+  border-radius:var(--r);box-shadow:var(--shadow);
+}
+
+/* ─── buttons ────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;white-space:nowrap;
+  font-family:var(--body);font-weight:600;font-size:15px;
+  padding:14px 24px;border-radius:10px;border:1px solid transparent;
+  text-decoration:none;cursor:pointer;
+  transition:transform .15s ease,background .15s ease,border-color .15s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:#000}
+.btn-ghost{background:transparent;color:var(--ink);border-color:#CFC8BE}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(23,22,26,.03)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep)}
+.btn-sm{padding:11px 18px;font-size:14px}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:28px}
+.btn-note{font-size:13px;color:var(--ink-3);max-width:34ch}
+.play-link{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-size:14.5px;font-weight:600;color:var(--ink-2);padding:6px 2px;
+  transition:color .15s ease;
+}
+.play-link:hover{color:var(--ink)}
+.play-link .pl-icon{
+  flex:none;width:24px;height:24px;border-radius:50%;background:var(--red-tint);
+  display:grid;place-items:center;
+}
+.play-link .pl-icon svg{margin-left:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid var(--red);outline-offset:3px;border-radius:6px;
+}
+
+/* ─── nav ────────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:50;background:rgba(246,242,237,.88);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--hair);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.03em;text-decoration:none}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--red);flex:none}
+.logo .bar{color:#CFC8BE;font-weight:500}
+.logo .s{color:var(--red);font-style:italic}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{font-size:14.5px;color:var(--ink-2);text-decoration:none;font-weight:500;white-space:nowrap}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.report-link{color:var(--red);font-weight:600;display:inline-flex;align-items:center;gap:7px}
+.nav-links a.report-link::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);flex:none}
+@media(max-width:1140px){.nav-links{display:none}}
+@media(max-width:520px){.nav-in{gap:12px}.btn-sm{font-size:12.5px;padding:9px 13px}.logo{font-size:16.5px;gap:8px}}
+
+/* ─── hero ───────────────────────────────────────────────── */
+.hero{padding-top:clamp(44px,6vw,80px);padding-bottom:clamp(40px,5vw,64px)}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(28px,4vw,56px);align-items:start}
+.hero h1{margin:22px 0 22px}
+@media(max-width:980px){.hero-grid{grid-template-columns:1fr}}
+
+/* video */
+.video-card{overflow:hidden;padding:0}
+.video-frame{position:relative;aspect-ratio:16/10;background:#100F12;display:block;width:100%;border:0;padding:0;cursor:pointer}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-poster{position:absolute;inset:0;background:
+  radial-gradient(120% 90% at 78% 12%,rgba(212,42,31,.30),transparent 58%),
+  linear-gradient(155deg,#1D1B21 0%,#100F12 62%);}
+.video-grid-lines{position:absolute;inset:0;opacity:.16;
+  background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);
+  background-size:44px 44px;mask-image:radial-gradient(75% 65% at 50% 50%,#000,transparent);}
+.video-meta{position:absolute;left:22px;right:22px;bottom:20px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;text-align:left}
+.video-meta .t{color:#fff;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.02em}
+.video-meta .s{color:rgba(255,255,255,.55);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-top:6px;display:block}
+.play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:74px;height:74px;border-radius:50%;background:var(--red);
+  display:grid;place-items:center;box-shadow:0 10px 40px rgba(212,42,31,.45);
+  transition:transform .2s ease;
+}
+.video-frame:hover .play{transform:translate(-50%,-50%) scale(1.07)}
+.play svg{margin-left:4px}
+.video-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 20px;border-top:1px solid var(--hair);flex-wrap:wrap}
+.video-foot span{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+
+/* stat strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:clamp(32px,4vw,48px)}
+.stat{padding:22px 22px 24px}
+.stat .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3)}
+.stat .v{font-family:var(--display);font-weight:800;font-size:clamp(32px,3.6vw,44px);letter-spacing:-.045em;line-height:1;margin:12px 0 8px}
+.stat .d{font-size:13.5px;color:var(--ink-2);line-height:1.45}
+.stat .v.money{color:var(--green)}
+@media(max-width:860px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.stats{grid-template-columns:1fr}}
+
+/* ─── trust meter (signature) ────────────────────────────── */
+.meter-card{padding:clamp(24px,3.4vw,40px)}
+.meter-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+.meter-top h3{max-width:30ch}
+.meter-read{text-align:right}
+.meter-read .n{font-family:var(--display);font-weight:800;font-size:clamp(44px,5.4vw,64px);letter-spacing:-.05em;line-height:1}
+.meter-read .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3)}
+.meter{position:relative;padding-top:34px}
+.track{display:flex;height:16px;border-radius:4px;overflow:hidden;background:#EDE7DE}
+.band{height:100%;border-right:1px solid var(--paper)}
+.band:last-child{border-right:0}
+.band-labels{display:flex;margin-top:12px}
+.band-labels div{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding-right:8px;line-height:1.4}
+.band-labels b{display:block;color:var(--ink-2);font-weight:600;letter-spacing:.06em}
+.gate{position:absolute;top:0;bottom:34px;width:2px;background:var(--red);left:85%}
+.gate::after{
+  content:"CERTIFICATION GATE · 85";position:absolute;top:-2px;left:-8px;
+  transform:translateY(-100%);font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:.12em;color:var(--red);white-space:nowrap;
+}
+@media(max-width:640px){.gate::after{left:auto;right:-4px;font-size:9px}}
+.marker{
+  position:absolute;top:34px;height:16px;width:3px;background:var(--ink);left:0;
+  transition:left 1.1s cubic-bezier(.2,.7,.2,1);
+}
+.marker::after{
+  content:"";position:absolute;left:50%;top:-7px;transform:translateX(-50%);
+  width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid var(--ink);
+}
+.meter-note{margin-top:26px;padding-top:22px;border-top:1px solid var(--hair);font-size:14.5px;color:var(--ink-2);max-width:78ch}
+.hashline{font-family:var(--mono);font-size:11px;color:var(--ink-3);word-break:break-all;margin-top:14px}
+@media(prefers-reduced-motion:reduce){.marker{transition:none}.btn:hover{transform:none}}
+
+/* ─── two-column compare ─────────────────────────────────── */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.compare > div{padding:clamp(22px,2.6vw,32px)}
+.compare .old{background:transparent;box-shadow:none;border-style:dashed}
+.compare h3{margin-bottom:18px}
+.compare ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.compare li{display:flex;gap:12px;font-size:14.8px;color:var(--ink-2);line-height:1.5}
+.compare li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;margin-top:8px;background:#C9C2B8}
+.compare .new li::before{background:var(--red)}
+.compare .new li{color:var(--ink)}
+@media(max-width:860px){.compare{grid-template-columns:1fr}}
+
+/* ─── use cases ──────────────────────────────────────────── */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.case{padding:clamp(22px,2.4vw,30px);display:flex;flex-direction:column}
+.case .who{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.case h3{margin-bottom:12px}
+.case .body{font-size:14.8px;color:var(--ink-2);line-height:1.55}
+.case .out{
+  margin-top:20px;padding-top:16px;border-top:1px solid var(--hair);
+  font-size:13.5px;color:var(--ink);display:flex;gap:10px;align-items:flex-start;
+}
+.case .out b{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);flex:none;padding-top:2px}
+@media(max-width:980px){.cases{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.cases{grid-template-columns:1fr}}
+
+/* ─── modules ────────────────────────────────────────────── */
+.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mod{padding:clamp(22px,2.4vw,30px)}
+.mod-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.mod-id{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.04em}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+.tag.live{background:var(--green-tint);color:#0B7A3C}
+.tag.soon{background:#F0EBE3;color:var(--ink-3)}
+.mod p{font-size:14.8px;color:var(--ink-2);margin-top:10px;line-height:1.55}
+.mod.dim{opacity:.62}
+@media(max-width:860px){.mods{grid-template-columns:1fr}}
+
+/* ─── pipeline ───────────────────────────────────────────── */
+.pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:var(--r);overflow:hidden}
+.step{background:var(--card);padding:24px 22px 26px}
+.step .n{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--red)}
+.step h4{margin:12px 0 8px}
+.step p{font-size:13.8px;color:var(--ink-2);line-height:1.5}
+.step .zone{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--hair);border-radius:999px;padding:4px 9px}
+@media(max-width:980px){.pipe{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.pipe{grid-template-columns:1fr}}
+
+/* ─── evidence ───────────────────────────────────────────── */
+.evid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ev{padding:clamp(22px,2.4vw,30px)}
+.ev .code{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--red);display:block;margin-bottom:14px}
+.ev p{font-size:14.5px;color:var(--ink-2);margin-top:10px;line-height:1.55}
+@media(max-width:860px){.evid{grid-template-columns:1fr}}
+
+/* ─── deep dive panel ────────────────────────────────────── */
+.deep{
+  background:#0B0E15;border-radius:var(--r);color:#F0F2F7;
+  padding:clamp(28px,3.6vw,52px);
+  display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,56px);align-items:center;
+  border:1px solid rgba(255,255,255,.08);
+}
+.deep .eyebrow{color:#7D8798}
+.deep h2{color:#fff;margin:14px 0 16px;max-width:18ch}
+.deep p{color:#B8C0D2;font-size:15.5px;max-width:46ch}
+.deep .btn-row{margin-top:28px}
+.deep .btn-ghost{color:#fff;border-color:rgba(255,255,255,.26)}
+.deep .btn-ghost:hover{background:rgba(255,255,255,.07);border-color:#fff}
+.deep-toc{display:grid;gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden}
+.toc-row{background:#0F131C;padding:15px 18px;display:flex;align-items:center;gap:14px}
+.toc-row .i{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:#F5C842;flex:none;width:26px}
+.toc-row .t{font-size:14px;color:#E4E8F1;line-height:1.35}
+.toc-row .n{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:#6B7488;flex:none}
+@media(max-width:900px){.deep{grid-template-columns:1fr}}
+
+
+.steps-list{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:var(--r);overflow:hidden}
+.srow{background:var(--card);display:grid;grid-template-columns:64px 1fr 1.25fr;gap:20px;padding:24px clamp(20px,2.4vw,30px);align-items:start}
+.srow .n{font-family:var(--display);font-weight:800;font-size:22px;color:#CFC8BE;letter-spacing:-.04em}
+.srow p{font-size:14.8px;color:var(--ink-2);line-height:1.55}
+@media(max-width:760px){.srow{grid-template-columns:44px 1fr;gap:14px}.srow p{grid-column:2}}
+
+/* ─── CTA band ───────────────────────────────────────────── */
+.band-cta{background:var(--ink);border-radius:var(--r);padding:clamp(30px,4vw,52px);color:#fff;display:grid;grid-template-columns:1.3fr auto;gap:28px;align-items:center}
+.band-cta h2{color:#fff;max-width:22ch}
+.band-cta p{color:rgba(255,255,255,.62);margin-top:14px;max-width:48ch;font-size:15.5px}
+.band-cta .btn-ghost{color:#fff;border-color:rgba(255,255,255,.32)}
+.band-cta .btn-ghost:hover{background:rgba(255,255,255,.08);border-color:#fff}
+.band-cta .btn-row{margin-top:0;justify-content:flex-end}
+@media(max-width:860px){.band-cta{grid-template-columns:1fr}.band-cta .btn-row{justify-content:flex-start}}
+
+/* ─── form ───────────────────────────────────────────────── */
+.req-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(24px,4vw,56px);align-items:start}
+@media(max-width:900px){.req-grid{grid-template-columns:1fr}}
+.form-card{padding:clamp(24px,3vw,38px)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f{display:flex;flex-direction:column;gap:7px}
+.f.full{grid-column:1/-1}
+.f label{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.f input,.f select,.f textarea{
+  font-family:var(--body);font-size:15px;color:var(--ink);
+  background:#FBF9F6;border:1px solid var(--hair);border-radius:9px;padding:12px 13px;width:100%;
+}
+.f textarea{resize:vertical;min-height:86px}
+.f input::placeholder{color:#B5AFA5}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:4px}
+.checks label{display:flex;gap:9px;align-items:center;font-size:14px;color:var(--ink-2);font-family:var(--body);text-transform:none;letter-spacing:0}
+.checks input{width:16px;height:16px;accent-color:var(--red);flex:none}
+@media(max-width:560px){.fields,.checks{grid-template-columns:1fr}}
+.form-foot{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.form-foot .note{font-size:13px;color:var(--ink-3)}
+.consent{margin-top:16px;font-size:12.5px;color:var(--ink-3);line-height:1.55;max-width:56ch}
+.consent a{color:var(--red);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+.contact-line{margin-top:26px;padding-top:22px;border-top:1px solid var(--hair);font-size:14.5px;color:var(--ink-2)}
+.contact-line a{color:var(--red);font-weight:500}
+.aside-list{display:grid;gap:18px;margin-top:26px}
+.aside-list div{display:flex;gap:12px;font-size:14.8px;color:var(--ink-2);line-height:1.5}
+.aside-list b{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);flex:none;padding-top:3px;width:22px}
+
+/* ─── the artifact (CAAR value prop) ─────────────────────── */
+.artifact{
+  background:var(--card);border:1px solid var(--hair);border-radius:var(--r);box-shadow:var(--shadow);
+  padding:clamp(26px,3.6vw,54px);
+  display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(28px,4.5vw,64px);align-items:center;
+}
+@media(max-width:940px){.artifact{grid-template-columns:1fr}}
+.artifact h2{margin:16px 0 20px;max-width:19ch}
+.artifact .kicker{
+  font-size:clamp(17px,1.7vw,19.5px);color:var(--ink);font-weight:600;
+  max-width:46ch;margin-bottom:16px;line-height:1.45;letter-spacing:-.011em;
+}
+.artifact .body{font-size:15.5px;color:var(--ink-2);max-width:50ch;line-height:1.65}
+.artifact .body + .body{margin-top:13px}
+.proofs{display:grid;gap:13px;margin-top:26px;padding-top:24px;border-top:1px solid var(--hair)}
+.proofs div{display:flex;gap:12px;align-items:flex-start;font-size:14.8px;color:var(--ink);line-height:1.5}
+.proofs .tick{
+  flex:none;width:19px;height:19px;border-radius:50%;background:var(--red-tint);
+  display:grid;place-items:center;margin-top:2px;
+}
+.proofs .tick svg{display:block}
+.proofs b{font-weight:600}
+.proofs span.sub{color:var(--ink-2);font-weight:400}
+
+.artifact-shot{position:relative}
+.artifact-shot .frame{
+  border:1px solid var(--hair);border-radius:12px;overflow:hidden;background:#EEE9E1;
+  box-shadow:0 2px 6px rgba(23,22,26,.05),0 18px 44px rgba(23,22,26,.11);
+  display:block;text-decoration:none;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.artifact-shot .frame:hover{transform:translateY(-3px);box-shadow:0 2px 6px rgba(23,22,26,.06),0 24px 56px rgba(23,22,26,.15)}
+.artifact-shot img{width:100%;height:auto}
+.seal-bar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  background:var(--ink);color:#fff;padding:14px 18px;
+}
+.seal-bar .l{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:#12D96A;display:inline-flex;align-items:center;gap:7px;flex:none;
+}
+.seal-bar .l::before{content:"";width:6px;height:6px;border-radius:50%;background:#12D96A;flex:none}
+.seal-bar .v{font-family:var(--display);font-weight:700;font-size:14.5px;letter-spacing:-.02em;flex:none}
+.seal-bar .s{
+  font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,.45);
+  letter-spacing:.06em;margin-left:auto;flex:none;
+}
+@media(max-width:520px){.seal-bar .s{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.artifact-shot .frame:hover{transform:none}}
+
+/* ─── pricing ────────────────────────────────────────────── */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pcard{padding:clamp(22px,2.4vw,30px);display:flex;flex-direction:column}
+.pcard .pk{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--red);margin-bottom:14px;
+}
+.pcard h3{margin-bottom:12px}
+.pcard p{font-size:14.8px;color:var(--ink-2);line-height:1.55}
+@media(max-width:900px){.price-grid{grid-template-columns:1fr}}
+
+.worked{
+  margin-top:14px;background:var(--ink);color:#fff;border-radius:var(--r);
+  padding:clamp(24px,3.2vw,42px);
+  display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(26px,4vw,56px);align-items:center;
+}
+@media(max-width:900px){.worked{grid-template-columns:1fr}}
+.worked .eyebrow{color:#8A8578;margin-bottom:12px}
+.worked h3{color:#fff;font-size:clamp(20px,2.3vw,26px);max-width:20ch;line-height:1.15}
+.worked .wnote{color:rgba(255,255,255,.58);font-size:14.5px;margin-top:14px;max-width:44ch;line-height:1.6}
+.ledger{display:grid;gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden}
+.lrow{background:#1E1D22;display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:15px 20px}
+.lrow .lk{font-size:14.5px;color:rgba(255,255,255,.72)}
+.lrow .lv{font-family:var(--mono);font-size:15px;font-weight:600;color:#fff;flex:none}
+.lrow.sub .lk,.lrow.sub .lv{color:rgba(255,255,255,.5);font-size:13.5px}
+.lrow.net{background:#12A150}
+.lrow.net .lk{color:rgba(255,255,255,.92);font-weight:600}
+.lrow.net .lv{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.03em;color:#fff}
+.worked-foot{
+  margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.38);line-height:1.6;
+}
+
+/* ─── footer ─────────────────────────────────────────────── */
+footer{padding:36px 0 48px;border-top:1px solid var(--hair)}
+.foot-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.foot-in p{font-size:13px;color:var(--ink-3)}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:var(--ink-3);text-decoration:none}
+.foot-links a:hover{color:var(--ink)}
+.foot-links a.legal{color:var(--ink-2);font-weight:500}
+.foot-links a.legal:hover{color:var(--ink)}
+
+
+/* ─── sub-page header ────────────────────────────────────── */
+.page-head{padding:clamp(44px,5.5vw,80px) 0 clamp(36px,4.5vw,60px)}
+.page-head .eyebrow{display:block;margin-bottom:16px}
+.page-head h1{font-size:clamp(34px,5.2vw,58px);max-width:19ch;margin-bottom:20px}
+.page-head .lede{max-width:62ch}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="dot"></span>FohBoh <span class="bar">|</span> <span class="s">Sentry</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html" aria-current="page">Platform</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a class="report-link" href="caar-example.html">Example CAAR</a>
+    </div>
+    <a class="btn btn-primary btn-sm" href="pricing.html#request">Request a live demo</a>
+  </div>
+</nav>
+
+<!-- ══ PAGE HEAD ══ -->
+<header class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">The platform · Powered by FohBoh | MGE™</span>
+    <h1>Certification happens <span class="red">before</span> anything reaches your system of record.</h1>
+    <p class="lede">Eight deterministic steps, a Trust Score that gates the output, and an evidence standard built to hold up outside your building. No AI inference anywhere in the calculation.</p>
+  </div>
+</header>
+
+<hr class="rule">
+
+<!-- ══ TRUST METER ══ -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">The certification instrument</span>
+      <h2>A number only becomes a claim when the evidence supports it.</h2>
+      <p class="lede">Every certification cycle produces a Trust Score. It measures evidence coverage — how much of your data was actually there to check. A Certified Analytics &amp; Audit Report is issued only at 85 or above.</p>
+    </div>
+
+    <div class="card meter-card rv">
+      <div class="meter-top">
+        <h3>M02 · Delivery Services Provider recovery — current cycle</h3>
+        <div class="meter-read">
+          <div class="n" id="meterNum">91</div>
+          <span class="l">Trust Score · Certified</span>
+        </div>
+      </div>
+
+      <div class="meter">
+        <div class="track" aria-hidden="true">
+          <div class="band" style="flex:39;background:#DED7CD"></div>
+          <div class="band" style="flex:20;background:#CFC6BA"></div>
+          <div class="band" style="flex:20;background:#BEB4A6"></div>
+          <div class="band" style="flex:5;background:#8A8578"></div>
+          <div class="band" style="flex:16;background:var(--green)"></div>
+        </div>
+        <div class="gate"></div>
+        <div class="marker" id="marker"></div>
+        <div class="band-labels" aria-hidden="true">
+          <div style="flex:39"><b>Unverified</b>0–39</div>
+          <div style="flex:20"><b>Provisional</b>40–59</div>
+          <div style="flex:20"><b>Conditional</b>60–79</div>
+          <div style="flex:5"><b>Validated</b>80–84</div>
+          <div style="flex:16"><b>Certified</b>85–100</div>
+        </div>
+      </div>
+
+      <p class="meter-note">Below 85, Sentry still issues a hash-sealed report — stamped <strong>NOT CERTIFIED</strong>, with every gap itemized and the specific steps that would close it. You never get a certified answer built on incomplete evidence, and you never get silence about why.</p>
+      <p class="hashline">Specimen record · CAAR-M02-2026-07-000418 · narrative seal<br>sha256: fbfffe7c48071d42982a5adbac959f1fe181a87756e2238d9d31e9be29246c77</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══ SHIFT ══ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">The shift</span>
+      <h2>An audit tells you what happened last year. Sentry tells you what's true, every cycle.</h2>
+    </div>
+    <div class="compare rv">
+      <div class="card old">
+        <h3>Periodic audit</h3>
+        <ul>
+          <li>Evidence assembled under time pressure, once a year</li>
+          <li>Findings are already historical by the time you see them</li>
+          <li>Each engagement re-litigates whether the process was followed correctly</li>
+          <li>A gap in one location's records stalls everything</li>
+          <li>Recovery windows with processors and platforms close while you wait</li>
+        </ul>
+      </div>
+      <div class="card new">
+        <h3>Rolling certification</h3>
+        <ul>
+          <li>Evidence collected and reconciled weekly or monthly, not once a year</li>
+          <li>Every location's Trust Score reflects the latest cycle</li>
+          <li>The same 198-rule deterministic pipeline runs every time — reproducible by design</li>
+          <li>A CAAR is ready the moment a period qualifies</li>
+          <li>Claims get filed inside the dispute window, with the evidence already sealed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══ PIPELINE ══ -->
+<section id="pipeline">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">What happens after you connect</span>
+      <h2>You send data. Sentry does the rest.</h2>
+      <p class="lede">Your part is one thing: connect the sources, once, with our team. Everything below runs automatically, every cycle, without anyone on your side touching it — and it runs the same way every time, which is what makes the output reproducible.</p>
+    </div>
+    <div class="pipe rv">
+      <div class="step no-num">
+        <h4>Sealed on arrival</h4>
+        <p>Your data is hashed the moment it arrives, so what gets certified is provably what you sent.</p>
+      </div>
+      <div class="step no-num">
+        <h4>Checked against a second source</h4>
+        <p>POS against platform settlements, POS against bank deposits. A discrepancy has to appear in two systems to count.</p>
+      </div>
+      <div class="step no-num">
+        <h4>Scored, then certified</h4>
+        <p>198 deterministic rules run and a Trust Score is calculated. Below 85, nothing certifies — you get an itemized list of what's missing.</p>
+      </div>
+      <div class="step no-num">
+        <h4>Delivered as evidence</h4>
+        <p>A sealed CAAR, every dollar traced to the rule that found it. Ready to file, not to interpret.</p>
+      </div>
+    </div>
+    <div class="btn-row rv">
+      <a class="btn btn-red" href="pricing.html#request">Talk to an account manager</a>
+      <span class="btn-note">Thirty minutes. We'll tell you which of your sources are ready to certify and which aren't.</span>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══ EVIDENCE ══ -->
+<section id="evidence">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Evidence standard</span>
+      <h2>Built to hold up outside your building.</h2>
+      <p class="lede">Recovery claims get challenged. The output is structured so the argument is about the money, not about how the number was produced.</p>
+    </div>
+    <div class="evid rv">
+      <div class="card ev">
+        <span class="code">FRE 803(6)</span>
+        <h3>Business records exception</h3>
+        <p>Certified values are written to an append-only Vault at the time they're generated — the standard for records made in the regular course of business.</p>
+      </div>
+      <div class="card ev">
+        <span class="code">FRE 902(11)</span>
+        <h3>Self-authentication</h3>
+        <p>Every CAAR is sealed with a SHA-256 hash computed against the final rendered document, so authenticity doesn't require a live witness.</p>
+      </div>
+      <div class="card ev">
+        <span class="code">FRE 1002</span>
+        <h3>Best evidence rule</h3>
+        <p>The same inputs reproduce the same hash, every time. No model, no inference, nothing to re-litigate about how a number was reached.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══ DEEP DIVE ══ -->
+<section style="padding-top:clamp(40px,5vw,64px)">
+  <div class="wrap">
+    <div class="deep rv">
+      <div>
+        <span class="eyebrow">Technical deep dive</span>
+        <h2>The whole architecture, on one page.</h2>
+        <p>Every claim above, in full: the chain of custody, how a Trust Score is built, the certification states, and how a CAAR self-authenticates. Written for the person who has to sign off on it.</p>
+        <div class="btn-row">
+          <a class="btn btn-red" id="infoBtn" href="#" target="_blank" rel="noopener">Open the infographic</a>
+          <a class="btn btn-ghost" href="pricing.html#request">Request a live demo</a>
+        </div>
+      </div>
+      <div class="deep-toc" aria-label="What the infographic covers">
+        <div class="toc-row"><span class="i">01</span><span class="t">Three layers, one provable chain of custody</span></div>
+        <div class="toc-row"><span class="i">02</span><span class="t">Four steps, one locked record</span></div>
+        <div class="toc-row"><span class="i">03</span><span class="t">Three certified revenue streams</span><span class="n">M01–M03</span></div>
+        <div class="toc-row"><span class="i">04</span><span class="t">One score that gates every CAAR</span></div>
+        <div class="toc-row"><span class="i">05</span><span class="t">How certification status is reached</span></div>
+        <div class="toc-row"><span class="i">06</span><span class="t">Self-authenticating evidence, no witness required</span><span class="n">FRE 902</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA BAND ══ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="band-cta rv">
+      <div>
+        <h2>See a live cycle run on your own numbers.</h2>
+        <p>Thirty minutes with an account manager, using a real M01 or M02 cycle. If we don't think you'll recover enough to justify the program, we'll say so on the call.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-red" href="pricing.html#request">Request a live demo</a>
+        <a class="btn btn-ghost" href="index.html#demo" data-play>Watch the overview</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <p>FohBoh | Sentry — currently available exclusively through white-glove onboarding.</p>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html">Platform</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="caar-example.html">Example CAAR</a>
+      <a href="model.html">Sentry Model</a>
+      <a class="legal" href="terms.html">Terms of Service</a>
+      <a class="legal" href="privacy.html">Privacy Policy</a>
+      <a href="mailto:sentrysales@fohboh.com">sentrysales@fohboh.com</a>
+    </div>
+    <p>© 2026 FohBoh.ai, Inc. All rights reserved · Patent pending</p>
+  </div>
+</footer>
+
+<script>
+/* ─────────────────────────────────────────────────────────────
+   CONFIG — swap these values and the site is wired up.
+   ───────────────────────────────────────────────────────────── */
+const CONFIG = {
+  // Vimeo player EMBED url (not the vimeo.com watch page). Leave empty to keep the poster.
+  VIDEO_EMBED : "https://player.vimeo.com/video/1212469219?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479",
+  // FormSubmit endpoint. Swap for the /el/ alias once activated so the address is not scrapeable.
+  FORM_ENDPOINT : "https://formsubmit.co/ajax/sentrydemorequest@fohboh.com",
+  // Where the Sentry infographic is hosted.
+  INFOGRAPHIC_URL: "https://fohbohsentry-infographic.netlify.app/",
+  SALES_EMAIL : "sentrysales@fohboh.com"
+};
+
+/* infographic (Platform page only) */
+var infoBtn = document.getElementById('infoBtn');
+if (infoBtn) infoBtn.href = CONFIG.INFOGRAPHIC_URL;
+
+/* video (Home page only) */
+var frame = document.getElementById('videoFrame');
+function playVideo(){
+  if(!frame) return;
+  if(!CONFIG.VIDEO_EMBED) return;
+  var join = CONFIG.VIDEO_EMBED.indexOf('?') > -1 ? '&' : '?';
+  frame.innerHTML = '<iframe src="'+CONFIG.VIDEO_EMBED+join+'autoplay=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="FohBoh | Sentry™ Walkthrough"></iframe>';
+  frame.style.cursor='default';
+}
+if (frame) frame.addEventListener('click', playVideo);
+document.querySelectorAll('[data-play]').forEach(function(el){
+  el.addEventListener('click',function(e){
+    var demo = document.getElementById('demo');
+    if(!demo) return;                 // link falls through to the Home page
+    e.preventDefault();
+    demo.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(playVideo,420);
+  });
+});
+
+/* request form (Home + Pricing) */
+var reqForm = document.getElementById('reqForm');
+if (reqForm) reqForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  const f = e.target;
+  if(!f.company.value || !f.name.value || !f.email.value){
+    alert('Add your company, name, and work email so we can route this to the right specialist.');
+    return;
+  }
+  if(CONFIG.JOTFORM_URL){ f.action = CONFIG.JOTFORM_URL; f.method='POST'; f.submit(); return; }
+  const src = Array.from(f.querySelectorAll('input[name="sources"]:checked')).map(function(c){return c.value}).join(', ');
+  const body = [
+    'Company: '+f.company.value,
+    'Locations: '+f.locations.value,
+    'System type: '+f.systype.value,
+    'Data sources: '+src,
+    'Primary objective: '+f.objective.value,
+    'Contact: '+f.name.value,
+    'Email: '+f.email.value,
+    '',
+    f.notes.value
+  ].join('\n');
+  window.location.href = 'mailto:'+CONFIG.SALES_EMAIL
+    +'?subject='+encodeURIComponent('Sentry live demo request — '+f.company.value)
+    +'&body='+encodeURIComponent(body);
+});
+
+/* trust meter + reveals */
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const marker = document.getElementById('marker');
+const io = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(!en.isIntersecting) return;
+    en.target.classList.add('in');
+    if(marker && en.target.querySelector && en.target.querySelector('#marker')){
+      setTimeout(function(){ marker.style.left = '91%'; }, reduce?0:250);
+    }
+    io.unobserve(en.target);
+  });
+},{threshold:.16});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+if(reduce && marker) marker.style.left='91%';
+</script>
+</body>
+</html>

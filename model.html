@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sentry Model — one engine, seven certified modules | FohBoh | Sentry</title>
+<meta name="description" content="One engine, seven certified modules. Every FohBoh | Sentry module runs on MGE — a deterministic certification stack, not a mesh of independent agents.">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── tokens (matched to landing page) ───────────────────── */
+:root{
+  --paper:#F6F2ED;
+  --card:#FFFFFF;
+  --ink:#17161A;
+  --ink-2:#57534C;
+  --ink-3:#8A857C;
+  --hair:#E5DFD6;
+  --red:#D42A1F;
+  --red-deep:#A81E15;
+  --red-tint:#FBE8E5;
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --r:16px;
+  --shadow:0 1px 2px rgba(23,22,26,.04),0 8px 24px rgba(23,22,26,.05);
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:6px}
+
+/* ─── nav ────────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:50;background:rgba(246,242,237,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--hair);
+}
+.wrap{max-width:1240px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.03em;text-decoration:none}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--red);flex:none}
+.logo .bar{color:#CFC8BE;font-weight:500}
+.logo .s{color:var(--red);font-style:italic}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{font-size:14.5px;color:var(--ink-2);text-decoration:none;font-weight:500;white-space:nowrap}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a[aria-current]{color:var(--ink);font-weight:600}
+.nav-links a.report-link{color:var(--red);font-weight:600;display:inline-flex;align-items:center;gap:7px}
+.nav-links a.report-link::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);flex:none}
+@media(max-width:1140px){.nav-links{display:none}}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--body);font-weight:600;font-size:14px;
+  padding:11px 18px;border-radius:10px;border:1px solid transparent;
+  text-decoration:none;cursor:pointer;background:var(--ink);color:#fff;
+  transition:background .15s ease;
+}
+.btn:hover{background:#000}
+.btn{white-space:nowrap}
+@media(max-width:520px){
+  .nav-in{gap:12px}
+  .btn{font-size:12.5px;padding:9px 13px}
+  .logo{font-size:16.5px;gap:8px}
+}
+
+/* ─── doc head ───────────────────────────────────────────── */
+.doc-head{padding:clamp(40px,5vw,68px) 0 clamp(28px,3.5vw,40px)}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:16px}
+h1{font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0;font-size:clamp(34px,5vw,54px)}
+.doc-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--hair);background:var(--card);border-radius:999px;padding:7px 14px;color:var(--ink-2);
+}
+.chip.accent{background:var(--red-tint);border-color:transparent;color:var(--red-deep)}
+.doc-intro{margin-top:26px;max-width:70ch;font-size:clamp(16px,1.5vw,17.5px);color:var(--ink-2)}
+.doc-intro p + p{margin-top:14px}
+
+/* ─── layout ─────────────────────────────────────────────── */
+.doc-grid{display:grid;grid-template-columns:260px 1fr;gap:clamp(28px,4vw,64px);align-items:start;padding-bottom:clamp(56px,7vw,96px)}
+@media(max-width:960px){.doc-grid{grid-template-columns:1fr}}
+
+.toc{position:sticky;top:96px}
+@media(max-width:960px){
+  .toc{position:static;background:var(--card);border:1px solid var(--hair);border-radius:var(--r);padding:20px 22px}
+}
+.toc h2{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.toc a{
+  display:flex;gap:10px;text-decoration:none;font-size:13.5px;color:var(--ink-2);
+  line-height:1.4;padding:6px 10px;border-radius:8px;transition:background .15s ease,color .15s ease;
+}
+.toc a:hover{background:rgba(23,22,26,.045);color:var(--ink)}
+.toc a .num{font-family:var(--mono);font-size:11px;color:var(--ink-3);flex:none;width:20px;padding-top:1px}
+
+.doc-body{min-width:0;max-width:80ch}
+.doc-body section{scroll-margin-top:96px}
+.doc-body section + section{margin-top:clamp(34px,4vw,48px);padding-top:clamp(30px,3.5vw,42px);border-top:1px solid var(--hair)}
+.doc-body h2{
+  font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.12;
+  font-size:clamp(22px,2.5vw,27px);margin:0 0 18px;display:flex;gap:14px;align-items:baseline;
+}
+.doc-body h2 .num{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--red);flex:none;padding-top:2px}
+.doc-body h3{font-family:var(--display);font-weight:700;font-size:16.5px;letter-spacing:-.01em;margin:26px 0 8px;color:var(--ink)}
+.doc-body p{margin:0 0 14px;color:var(--ink-2);font-size:15.5px;line-height:1.68}
+.doc-body p:last-child{margin-bottom:0}
+.doc-body strong{color:var(--ink);font-weight:600}
+.doc-body ul{margin:0 0 14px;padding:0;list-style:none;display:grid;gap:11px}
+.doc-body li{display:flex;gap:12px;color:var(--ink-2);font-size:15.5px;line-height:1.6}
+.doc-body li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--red);margin-top:10px}
+.doc-body a[href]{color:var(--red);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+
+.callout{
+  background:var(--card);border:1px solid var(--hair);border-left:3px solid var(--red);
+  border-radius:10px;padding:18px 20px;margin:0 0 18px;
+}
+.callout p{margin:0;font-size:15px}
+.callout p + p{margin-top:10px}
+.callout .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:8px}
+
+.tbl-scroll{overflow-x:auto;margin:0 0 18px;-webkit-overflow-scrolling:touch}
+table{
+  width:100%;border-collapse:collapse;background:var(--card);
+  border:1px solid var(--hair);border-radius:var(--r);overflow:hidden;font-size:14.5px;min-width:520px;
+}
+th{
+  text-align:left;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);padding:14px 16px;border-bottom:1px solid var(--hair);
+  background:#FBF9F6;vertical-align:bottom;
+}
+td{padding:15px 16px;border-bottom:1px solid var(--hair);color:var(--ink-2);vertical-align:top;line-height:1.55}
+tbody tr:last-child td{border-bottom:0}
+td strong,td b{color:var(--ink);font-weight:600}
+
+/* ─── footer ─────────────────────────────────────────────── */
+footer{padding:36px 0 48px;border-top:1px solid var(--hair)}
+.foot-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.foot-in p{font-size:13px;color:var(--ink-3);margin:0}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:var(--ink-3);text-decoration:none}
+.foot-links a:hover{color:var(--ink)}
+
+.totop{
+  position:fixed;right:22px;bottom:22px;z-index:60;
+  width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;border:0;
+  display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;
+  transition:opacity .25s ease;box-shadow:0 6px 20px rgba(23,22,26,.22);
+}
+.totop.on{opacity:1;pointer-events:auto}
+@media print{
+  .nav,.toc,.totop{display:none}
+  body{background:#fff}
+  .doc-grid{grid-template-columns:1fr}
+  .doc-body{max-width:none}
+}
+
+/* ─── the model ──────────────────────────────────────────── */
+.model-head{max-width:54ch}
+.model-head .mark{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.03em;margin-bottom:18px}
+.model-head .mark i{color:#CFC8BE;font-style:normal;margin:0 5px}
+.model-head .mark b{color:var(--red)}
+.model-head .mark sup{font-size:10px;color:var(--ink-3);font-weight:600}
+.model-head h1{font-size:clamp(30px,4.1vw,46px);line-height:1.04;margin-bottom:20px}
+.model-head p{font-size:15.5px;color:var(--ink-2);line-height:1.65;margin-bottom:13px}
+
+.legend{display:grid;gap:10px;justify-items:end;text-align:right}
+@media(max-width:900px){.legend{justify-items:start;text-align:left;margin-top:26px}}
+.legend .ttl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}
+.lg{display:flex;align-items:center;gap:11px;font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+.lg .sw{flex:none;width:30px;height:2px;border-radius:2px}
+.lg .sw.red{background:var(--red)}
+.lg .sw.dark{background:#3A3833}
+.lg .dia{flex:none;width:11px;height:11px;border:1.4px solid #6B665E;transform:rotate(45deg)}
+.chipline{
+  display:inline-block;margin-top:6px;border:1px solid var(--hair);border-radius:999px;
+  padding:6px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+
+.model-top{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:start;
+  padding-bottom:clamp(26px,3.4vw,44px)}
+@media(max-width:900px){.model-top{grid-template-columns:1fr}}
+
+.orbit{position:relative;width:100%;aspect-ratio:16/9;margin:0 auto}
+.orbit svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hub{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:23%;aspect-ratio:1;border-radius:50%;background:#fff;border:1px solid #DCD6CC;
+  display:grid;place-content:center;text-align:center;z-index:2;
+  box-shadow:0 2px 10px rgba(23,22,26,.05);
+}
+.hub .bd{font-family:var(--mono);font-size:.72vw;letter-spacing:.2em;color:var(--red)}
+.hub .mge{font-family:var(--display);font-weight:800;font-size:3.1vw;letter-spacing:-.05em;line-height:1.05;margin:.2vw 0}
+.hub .fu{font-size:.86vw;color:var(--ink-2)}
+.hub .dt{margin-top:.9vw;font-family:var(--mono);font-size:.62vw;letter-spacing:.13em;color:var(--ink-3);line-height:1.7}
+.mcard{
+  position:absolute;transform:translate(-50%,-50%);width:20%;z-index:3;
+  background:#fff;border:1px solid var(--hair);border-radius:9px;
+  padding:.85vw 1vw;box-shadow:0 1px 3px rgba(23,22,26,.05),0 10px 26px rgba(23,22,26,.07);
+}
+.mcard .r{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:.35vw}
+.mcard .id{font-family:var(--mono);font-size:.76vw;font-weight:600;letter-spacing:.1em;color:var(--red)}
+.mcard .ct{font-family:var(--mono);font-size:.6vw;letter-spacing:.09em;color:var(--ink-3);white-space:nowrap}
+.mcard h3{font-family:var(--display);font-weight:700;font-size:1.02vw;letter-spacing:-.02em;line-height:1.2;margin:0 0 .28vw;color:var(--ink)}
+.mcard p{margin:0;font-size:.72vw;color:var(--ink-3);line-height:1.35}
+
+.model-foot{
+  display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;justify-content:space-between;
+  margin-top:clamp(22px,3vw,40px);padding-top:20px;border-top:1px solid var(--hair);
+}
+.model-foot .k{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--red);flex:none}
+.model-foot .t{font-size:14px;color:var(--ink-2);line-height:1.5;flex:1;min-width:260px}
+.model-foot .pp{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);flex:none}
+
+/* stacked fallback — the radial layout needs width to read */
+.orbit-stack{display:none}
+@media(max-width:900px){
+  .orbit{display:none}
+  .orbit-stack{display:grid;gap:12px}
+  .stack-hub{background:var(--ink);color:#fff;border-radius:var(--r);padding:26px;text-align:center}
+  .stack-hub .bd{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--red)}
+  .stack-hub .mge{font-family:var(--display);font-weight:800;font-size:44px;letter-spacing:-.05em;line-height:1;margin:6px 0}
+  .stack-hub .fu{font-size:14px;color:rgba(255,255,255,.62)}
+  .stack-hub .dt{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.5)}
+  .stack-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:560px){.stack-grid{grid-template-columns:1fr}}
+  .sm{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:15px 17px}
+  .sm .r{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:7px}
+  .sm .id{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--red)}
+  .sm .ct{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ink-3)}
+  .sm h3{font-family:var(--display);font-weight:700;font-size:15.5px;letter-spacing:-.015em;margin:0 0 4px;color:var(--ink)}
+  .sm p{margin:0;font-size:13px;color:var(--ink-3);line-height:1.4}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="dot"></span>FohBoh <span class="bar">|</span> <span class="s">Sentry</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html">Platform</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a class="report-link" href="report.html">Example CAAR</a>
+      <a href="model.html" aria-current="page">Sentry Model</a>
+      </div>
+    <a class="btn btn-primary btn-sm" href="pricing.html#request">Request a live demo</a>
+  </div>
+</nav>
+
+<div class="wrap" style="padding-top:clamp(40px,5vw,68px)">
+
+  <div class="model-top">
+    <div class="model-head">
+      <span class="eyebrow">Certified intelligence infrastructure</span>
+      <div class="mark" style="margin-top:14px">FohBoh<i>|</i><b>Sentry</b><sup>&trade;</sup></div>
+      <h1>One engine.<br>Seven certified modules.</h1>
+      <p>Every Sentry module runs on MGE — a deterministic, proprietary certification stack. Not a mesh of independent agents: an orchestrated group governed by one engine.</p>
+      <p>Sentry intelligence infrastructure was created to provide the immutable resources to recover revenue from metric leakage. Sentry is a revenue generator, not a cost center.</p>
+    </div>
+
+    <div class="legend">
+      <span class="ttl">The API contract</span>
+      <span class="lg">MGE &rarr; module &middot; certified facts <span class="sw red"></span></span>
+      <span class="lg">Module &rarr; MGE &middot; findings + evidence <span class="sw dark"></span></span>
+      <span class="lg">Trust Gate &middot; only certified passes <span class="dia"></span></span>
+      <span class="chipline">Bi-directional &middot; Reproducible</span>
+    </div>
+  </div>
+
+  <div class="orbit">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <ellipse cx="50" cy="50" rx="42" ry="38" fill="none" stroke="#E5DFD6" stroke-width=".25" vector-effect="non-scaling-stroke"/>
+      <ellipse cx="50" cy="50" rx="26" ry="23" fill="none" stroke="#EDE7DE" stroke-width=".25" stroke-dasharray="1 2" vector-effect="non-scaling-stroke"/>
+      <line x1="50.00" y1="36.50" x2="50.00" y2="19.60" stroke="#D42A1F" stroke-width=".5" stroke-dasharray="2.6 2" vector-effect="non-scaling-stroke"/><rect x="48.90" y="28.00" width="2.2" height="2.2" fill="#fff" stroke="#6B665E" stroke-width=".28" vector-effect="non-scaling-stroke" transform="rotate(45 50.00 29.10)"/><line x1="60.95" y1="42.10" x2="76.27" y2="31.05" stroke="#D42A1F" stroke-width=".5" stroke-dasharray="2.6 2" vector-effect="non-scaling-stroke"/><rect x="66.96" y="35.87" width="2.2" height="2.2" fill="#fff" stroke="#6B665E" stroke-width=".28" vector-effect="non-scaling-stroke" transform="rotate(45 68.06 36.97)"/><line x1="63.22" y1="52.73" x2="82.76" y2="56.76" stroke="#D42A1F" stroke-width=".5" stroke-dasharray="2.6 2" vector-effect="non-scaling-stroke"/><rect x="71.42" y="53.55" width="2.2" height="2.2" fill="#fff" stroke="#6B665E" stroke-width=".28" vector-effect="non-scaling-stroke" transform="rotate(45 72.52 54.65)"/><line x1="56.34" y1="61.92" x2="64.58" y2="77.39" stroke="#D42A1F" stroke-width=".5" stroke-dasharray="2.6 2" vector-effect="non-scaling-stroke"/><rect x="58.92" y="67.73" width="2.2" height="2.2" fill="#fff" stroke="#6B665E" stroke-width=".28" vector-effect="non-scaling-stroke" transform="rotate(45 60.02 68.83)"/><line x1="43.66" y1="61.92" x2="35.42" y2="77.39" stroke="#D42A1F" stroke-width=".5" stroke-dasharray="2.6 2" vector-effect="non-scaling-stroke"/><rect x="38.88" y="67.73" width="2.2" height="2.2" fill="#fff" stroke="#6B665E" stroke-width=".28" vector-effect="non-scaling-stroke" transform="rotate(45 39.98 68.83)"/><line x1="36.78" y1="52.73" x2="17.24" y2="56.76" stroke="#D42A1F" stroke-width=".5" stroke-dasharray="2.6 2" vector-effect="non-scaling-stroke"/><rect x="26.38" y="53.55" width="2.2" height="2.2" fill="#fff" stroke="#6B665E" stroke-width=".28" vector-effect="non-scaling-stroke" transform="rotate(45 27.48 54.65)"/><line x1="39.05" y1="42.10" x2="23.73" y2="31.05" stroke="#D42A1F" stroke-width=".5" stroke-dasharray="2.6 2" vector-effect="non-scaling-stroke"/><rect x="30.84" y="35.87" width="2.2" height="2.2" fill="#fff" stroke="#6B665E" stroke-width=".28" vector-effect="non-scaling-stroke" transform="rotate(45 31.94 36.97)"/>
+    </svg>
+    <div class="hub"><span class="bd">FohBoh</span>
+      <span class="mge">MGE</span>
+      <span class="fu">Metrics Governance Engine</span>
+      <span class="dt">Deterministic<br>198 rules &middot; zero ML</span></div>
+      <div class="mcard" style="left:50.0%;top:12.0%">
+        <div class="r"><span class="id">M01</span><span class="ct">107 rules</span></div>
+        <h3>Merchant Fee Recovery</h3><p>Card processor overcharges</p>
+      </div>
+      <div class="mcard" style="left:82.8%;top:26.3%">
+        <div class="r"><span class="id">M02</span><span class="ct">83 rules</span></div>
+        <h3>Delivery Fee Recovery</h3><p>DSP commission overcharges</p>
+      </div>
+      <div class="mcard" style="left:90.9%;top:58.5%">
+        <div class="r"><span class="id">M03</span><span class="ct">108 rules</span></div>
+        <h3>Royalty Fee Recovery</h3><p>Franchise royalty variance</p>
+      </div>
+      <div class="mcard" style="left:68.2%;top:84.2%">
+        <div class="r"><span class="id">M04</span><span class="ct">94 rules</span></div>
+        <h3>Supply Chain Certification</h3><p>Vendor invoice variance</p>
+      </div>
+      <div class="mcard" style="left:31.8%;top:84.2%">
+        <div class="r"><span class="id">M05</span><span class="ct">Labor</span></div>
+        <h3>Workforce Fee Recovery</h3><p>Labor &amp; payroll vendor overcharges</p>
+      </div>
+      <div class="mcard" style="left:9.1%;top:58.5%">
+        <div class="r"><span class="id">M06</span><span class="ct">StarBar</span></div>
+        <h3>Certified Inventory</h3><p>Beverage &amp; bar variance</p>
+      </div>
+      <div class="mcard" style="left:17.2%;top:26.3%">
+        <div class="r"><span class="id">M07</span><span class="ct">SnapCount</span></div>
+        <h3>High-Frequency Counts</h3><p>Physical inventory certification</p>
+      </div>
+  </div>
+
+  <div class="orbit-stack">
+    <div class="stack-hub">
+      <span class="bd">FohBoh</span>
+      <div class="mge">MGE</div>
+      <span class="fu">Metrics Governance Engine</span>
+      <div class="dt">Deterministic &middot; 198 rules &middot; zero ML</div>
+    </div>
+    <div class="stack-grid">
+        <div class="sm">
+          <div class="r"><span class="id">M01</span><span class="ct">107 rules</span></div>
+          <h3>Merchant Fee Recovery</h3><p>Card processor overcharges</p>
+        </div>
+        <div class="sm">
+          <div class="r"><span class="id">M02</span><span class="ct">83 rules</span></div>
+          <h3>Delivery Fee Recovery</h3><p>DSP commission overcharges</p>
+        </div>
+        <div class="sm">
+          <div class="r"><span class="id">M03</span><span class="ct">108 rules</span></div>
+          <h3>Royalty Fee Recovery</h3><p>Franchise royalty variance</p>
+        </div>
+        <div class="sm">
+          <div class="r"><span class="id">M04</span><span class="ct">94 rules</span></div>
+          <h3>Supply Chain Certification</h3><p>Vendor invoice variance</p>
+        </div>
+        <div class="sm">
+          <div class="r"><span class="id">M05</span><span class="ct">Labor</span></div>
+          <h3>Workforce Fee Recovery</h3><p>Labor &amp; payroll vendor overcharges</p>
+        </div>
+        <div class="sm">
+          <div class="r"><span class="id">M06</span><span class="ct">StarBar</span></div>
+          <h3>Certified Inventory</h3><p>Beverage &amp; bar variance</p>
+        </div>
+        <div class="sm">
+          <div class="r"><span class="id">M07</span><span class="ct">SnapCount</span></div>
+          <h3>High-Frequency Counts</h3><p>Physical inventory certification</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="model-foot">
+    <span class="k">API contract</span>
+    <span class="t">Every module reads only certified facts and writes findings back with Trust Score + Cert ID.</span>
+    <span class="pp">Patent pending &middot; FohBoh.ai</span>
+  </div>
+
+</div>
+
+<footer>
+  <div class="wrap foot-in">
+    <p>FohBoh | Sentry — currently available exclusively through white-glove onboarding.</p>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html">Platform</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="report.html">Example CAAR</a>
+      <a href="model.html">Sentry Model</a>
+      <a class="legal" href="terms.html">Terms of Service</a>
+      <a class="legal" href="privacy.html">Privacy Policy</a>
+      <a href="mailto:sentrysales@fohboh.com">sentrysales@fohboh.com</a>
+    </div>
+    <p>© 2026 FohBoh.ai, Inc. All rights reserved · Patent pending</p>
+  </div>
+</footer>
+
+<button class="totop" id="toTop" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M8 3L3 8M8 3l5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+var toTop = document.getElementById('toTop');
+window.addEventListener('scroll', function(){
+  toTop.classList.toggle('on', window.scrollY > 700);
+}, {passive:true});
+toTop.addEventListener('click', function(){
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+</script>
+</body>
+</html>

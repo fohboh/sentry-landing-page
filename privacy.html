@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — FohBoh | Sentry</title>
+<meta name="description" content="FohBoh.ai Privacy Policy, Version 3.1, effective August 1, 2026. How we collect, use, disclose, retain, and protect personal information across MGE, Sentry, Cortex, and related services.">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── tokens (matched to landing page) ───────────────────── */
+:root{
+  --paper:#F6F2ED;
+  --card:#FFFFFF;
+  --ink:#17161A;
+  --ink-2:#57534C;
+  --ink-3:#8A857C;
+  --hair:#E5DFD6;
+  --red:#D42A1F;
+  --red-deep:#A81E15;
+  --red-tint:#FBE8E5;
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --r:16px;
+  --shadow:0 1px 2px rgba(23,22,26,.04),0 8px 24px rgba(23,22,26,.05);
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:6px}
+
+/* ─── nav ────────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:50;background:rgba(246,242,237,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--hair);
+}
+.wrap{max-width:1240px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.03em;text-decoration:none}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--red);flex:none}
+.logo .bar{color:#CFC8BE;font-weight:500}
+.logo .s{color:var(--red);font-style:italic}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{font-size:14.5px;color:var(--ink-2);text-decoration:none;font-weight:500;white-space:nowrap}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a[aria-current]{color:var(--ink);font-weight:600}
+.nav-links a.report-link{color:var(--red);font-weight:600;display:inline-flex;align-items:center;gap:7px}
+.nav-links a.report-link::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);flex:none}
+@media(max-width:1140px){.nav-links{display:none}}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--body);font-weight:600;font-size:14px;
+  padding:11px 18px;border-radius:10px;border:1px solid transparent;
+  text-decoration:none;cursor:pointer;background:var(--ink);color:#fff;
+  transition:background .15s ease;
+}
+.btn:hover{background:#000}
+.btn{white-space:nowrap}
+@media(max-width:520px){
+  .nav-in{gap:12px}
+  .btn{font-size:12.5px;padding:9px 13px}
+  .logo{font-size:16.5px;gap:8px}
+}
+
+/* ─── doc head ───────────────────────────────────────────── */
+.doc-head{padding:clamp(40px,5vw,68px) 0 clamp(28px,3.5vw,40px)}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:16px}
+h1{font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0;font-size:clamp(34px,5vw,54px)}
+.doc-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--hair);background:var(--card);border-radius:999px;padding:7px 14px;color:var(--ink-2);
+}
+.chip.accent{background:var(--red-tint);border-color:transparent;color:var(--red-deep)}
+.doc-intro{margin-top:26px;max-width:70ch;font-size:clamp(16px,1.5vw,17.5px);color:var(--ink-2)}
+.doc-intro p + p{margin-top:14px}
+
+/* ─── layout ─────────────────────────────────────────────── */
+.doc-grid{display:grid;grid-template-columns:260px 1fr;gap:clamp(28px,4vw,64px);align-items:start;padding-bottom:clamp(56px,7vw,96px)}
+@media(max-width:960px){.doc-grid{grid-template-columns:1fr}}
+
+.toc{position:sticky;top:96px}
+@media(max-width:960px){
+  .toc{position:static;background:var(--card);border:1px solid var(--hair);border-radius:var(--r);padding:20px 22px}
+}
+.toc h2{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.toc a{
+  display:flex;gap:10px;text-decoration:none;font-size:13.5px;color:var(--ink-2);
+  line-height:1.4;padding:6px 10px;border-radius:8px;transition:background .15s ease,color .15s ease;
+}
+.toc a:hover{background:rgba(23,22,26,.045);color:var(--ink)}
+.toc a .num{font-family:var(--mono);font-size:11px;color:var(--ink-3);flex:none;width:20px;padding-top:1px}
+
+.doc-body{min-width:0;max-width:80ch}
+.doc-body section{scroll-margin-top:96px}
+.doc-body section + section{margin-top:clamp(34px,4vw,48px);padding-top:clamp(30px,3.5vw,42px);border-top:1px solid var(--hair)}
+.doc-body h2{
+  font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.12;
+  font-size:clamp(22px,2.5vw,27px);margin:0 0 18px;display:flex;gap:14px;align-items:baseline;
+}
+.doc-body h2 .num{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--red);flex:none;padding-top:2px}
+.doc-body h3{font-family:var(--display);font-weight:700;font-size:16.5px;letter-spacing:-.01em;margin:26px 0 8px;color:var(--ink)}
+.doc-body p{margin:0 0 14px;color:var(--ink-2);font-size:15.5px;line-height:1.68}
+.doc-body p:last-child{margin-bottom:0}
+.doc-body strong{color:var(--ink);font-weight:600}
+.doc-body ul{margin:0 0 14px;padding:0;list-style:none;display:grid;gap:11px}
+.doc-body li{display:flex;gap:12px;color:var(--ink-2);font-size:15.5px;line-height:1.6}
+.doc-body li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--red);margin-top:10px}
+.doc-body a[href]{color:var(--red);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+
+.callout{
+  background:var(--card);border:1px solid var(--hair);border-left:3px solid var(--red);
+  border-radius:10px;padding:18px 20px;margin:0 0 18px;
+}
+.callout p{margin:0;font-size:15px}
+.callout p + p{margin-top:10px}
+.callout .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:8px}
+
+.tbl-scroll{overflow-x:auto;margin:0 0 18px;-webkit-overflow-scrolling:touch}
+table{
+  width:100%;border-collapse:collapse;background:var(--card);
+  border:1px solid var(--hair);border-radius:var(--r);overflow:hidden;font-size:14.5px;min-width:520px;
+}
+th{
+  text-align:left;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);padding:14px 16px;border-bottom:1px solid var(--hair);
+  background:#FBF9F6;vertical-align:bottom;
+}
+td{padding:15px 16px;border-bottom:1px solid var(--hair);color:var(--ink-2);vertical-align:top;line-height:1.55}
+tbody tr:last-child td{border-bottom:0}
+td strong,td b{color:var(--ink);font-weight:600}
+
+/* ─── footer ─────────────────────────────────────────────── */
+footer{padding:36px 0 48px;border-top:1px solid var(--hair)}
+.foot-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.foot-in p{font-size:13px;color:var(--ink-3);margin:0}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:var(--ink-3);text-decoration:none}
+.foot-links a:hover{color:var(--ink)}
+
+.totop{
+  position:fixed;right:22px;bottom:22px;z-index:60;
+  width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;border:0;
+  display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;
+  transition:opacity .25s ease;box-shadow:0 6px 20px rgba(23,22,26,.22);
+}
+.totop.on{opacity:1;pointer-events:auto}
+@media print{
+  .nav,.toc,.totop{display:none}
+  body{background:#fff}
+  .doc-grid{grid-template-columns:1fr}
+  .doc-body{max-width:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="dot"></span>FohBoh <span class="bar">|</span> <span class="s">Sentry</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html">Platform</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a class="report-link" href="report.html">Example CAAR</a>
+      <a href="privacy.html" aria-current="page">Privacy</a>
+    </div>
+    <a class="btn btn-primary btn-sm" href="pricing.html#request">Request a live demo</a>
+  </div>
+</nav>
+
+<div class="wrap doc-head">
+  <span class="eyebrow">FohBoh.ai / Legal</span>
+  <h1>Privacy Policy</h1>
+  <div class="doc-meta">
+    <span class="chip accent">Version 3.1</span>
+    <span class="chip">Effective August 1, 2026</span>
+    <span class="chip">FohBoh.ai, Inc. · Delaware</span>
+  </div>
+  <div class="doc-intro">
+    <p>This Privacy Policy explains how FohBoh.ai, Inc. (“FohBoh,” “we,” “us,” or “our”) collects, uses, discloses, retains, and protects personal information through fohboh.ai, the Sentry and Cortex pages and applications, standalone or embedded MGE services, related APIs and connectors, events, communications, and other services that link to this Policy (collectively, the “Services”).</p>
+    <p>This Policy addresses personal information about identifiable people. It does not govern non-personal business data except where that data is linked or reasonably linkable to a person. A customer agreement, DPA, or employee notice may provide additional or different terms.</p>
+  </div>
+</div>
+
+<div class="wrap doc-grid">
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#s1"><span class="num">01</span><span>Our roles</span></a></li>
+      <li><a href="#s2"><span class="num">02</span><span>Personal information we collect</span></a></li>
+      <li><a href="#s3"><span class="num">03</span><span>How we use personal information</span></a></li>
+      <li><a href="#s4"><span class="num">04</span><span>Certification Records, IUM, human activity, and AI</span></a></li>
+      <li><a href="#s5"><span class="num">05</span><span>Sources of personal information</span></a></li>
+      <li><a href="#s6"><span class="num">06</span><span>How we disclose personal information</span></a></li>
+      <li><a href="#s7"><span class="num">07</span><span>Cookies and similar technologies</span></a></li>
+      <li><a href="#s8"><span class="num">08</span><span>Legal bases for EEA, UK, and similar jurisdictions</span></a></li>
+      <li><a href="#s9"><span class="num">09</span><span>Data retention</span></a></li>
+      <li><a href="#s10"><span class="num">10</span><span>Security</span></a></li>
+      <li><a href="#s11"><span class="num">11</span><span>International data transfers</span></a></li>
+      <li><a href="#s12"><span class="num">12</span><span>Privacy rights and choices</span></a></li>
+      <li><a href="#s13"><span class="num">13</span><span>Children</span></a></li>
+      <li><a href="#s14"><span class="num">14</span><span>Third-party services and links</span></a></li>
+      <li><a href="#s15"><span class="num">15</span><span>Changes to this Policy</span></a></li>
+      <li><a href="#s16"><span class="num">16</span><span>Contact</span></a></li>
+      <li><a href="#apxA"><span class="num">A</span><span>Notice at collection summary</span></a></li>
+      <li><a href="#apxB"><span class="num">B</span><span>Product-specific notices</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- BODY -->
+  <main class="doc-body">
+
+    <section id="s1">
+      <h2><span class="num">01</span><span>Our roles</span></h2>
+      <h3>FohBoh as controller/business.</h3>
+      <p>We determine the purposes and means of processing account, website, sales, event, billing, security, and business-contact information used to operate FohBoh’s business.</p>
+      <h3>FohBoh as processor/service provider.</h3>
+      <p>When we process Customer Data on behalf of an enterprise customer to provide MGE, Sentry, Cortex, CAAR, connector, or API services, the customer generally determines the purposes and means of that processing and FohBoh acts on documented instructions. The customer’s privacy notice and our DPA govern that processing. Individuals should ordinarily direct requests about Customer Data to the relevant customer.</p>
+      <h3>FohBoh for Certification Records and IUM.</h3>
+      <p>We determine the purposes and means of processing FohBoh-owned certification and uncertified logs, security and operational telemetry, usage and IUM measurements, and related integrity records when used to operate, secure, verify, protect, and improve our certification infrastructure. Where those records contain personal information, this Policy, applicable privacy law, confidentiality duties, and the customer agreement continue to apply regardless of ownership.</p>
+      <p>Customers are responsible for providing required notices and obtaining required rights or permissions for personal information they make available through the Services.</p>
+    </section>
+
+    <section id="s2">
+      <h2><span class="num">02</span><span>Personal information we collect</span></h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Category</th><th scope="col">Examples</th><th scope="col">Typical source</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Identifiers and account data</strong></td><td>Name, business email, telephone number, login identifier, organization, role, authentication and account settings.</td><td>You, your employer/customer, identity provider.</td></tr>
+            <tr><td><strong>Commercial and relationship data</strong></td><td>Subscription, order, billing, pilot, partner, support, meeting, and communication records.</td><td>You, customer administrators, sales/support interactions.</td></tr>
+            <tr><td><strong>Internet and device activity</strong></td><td>IP address, browser, device, pages viewed, referring URLs, session events, feature usage, logs, cookie or similar identifiers.</td><td>Your device, website and service telemetry.</td></tr>
+            <tr><td><strong>Professional information</strong></td><td>Employer, title, work location, franchise or business affiliation, permissions, and role-based access.</td><td>You, your organization, integrations.</td></tr>
+            <tr><td><strong>Customer operational data</strong></td><td>Transaction, order, delivery, processor, vendor, contract, inventory, labor, payroll, royalty, supply-chain, or location records that may contain employee, customer, vendor-contact, or other personal information.</td><td>Customer uploads; POS, payroll, DSP, processor, vendor and other authorized systems.</td></tr>
+            <tr><td><strong>Credentials and integration data</strong></td><td>API keys, OAuth tokens, connector identifiers, service-account metadata and system permissions.</td><td>You, administrators, enabled integrations.</td></tr>
+            <tr><td><strong>Certification and evidence metadata</strong></td><td>Certified and uncertified logs, rule and KPI versions, mappings, rule execution or failure, Trust Scores, certification status, source references, timestamps, hashes, signatures, exceptions, approvals, override records, CAAR, lineage, provenance and audit metadata.</td><td>MGE/Sentry processing and authorized users.</td></tr>
+            <tr><td><strong>Cortex content</strong></td><td>Prompts, queries, voice or text input, responses, feedback, approved context and related telemetry.</td><td>Authorized users and configured services.</td></tr>
+            <tr><td><strong>Inferences and analytics</strong></td><td>Product usage trends, fraud/security signals, service health, support needs, and account-level operational patterns.</td><td>Derived from the information above.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <span class="lbl">Please do not upload</span>
+        <p>The Services are not designed to receive full payment-card numbers, CVVs, Social Security numbers, protected health information, biometric identifiers, precise geolocation, or other regulated sensitive personal information unless a written agreement expressly authorizes the data and safeguards. Please do not upload such information without authorization.</p>
+      </div>
+    </section>
+
+    <section id="s3">
+      <h2><span class="num">03</span><span>How we use personal information</span></h2>
+      <ul>
+        <li>provide, authenticate, configure, support, and improve the Services;</li>
+        <li>ingest, normalize, reconcile, govern, certify, score, and document authorized Customer Data through MGE and Sentry;</li>
+        <li>generate, preserve, deliver, and verify CAARs, evidence references, audit trails, integrity metadata, and related artifacts;</li>
+        <li>create and maintain FohBoh Certification Records and IUM; verify certification activity; preserve rule-performance and certification history; and develop non-customer-specific methods and operational know-how;</li>
+        <li>provide Cortex prompts, responses, summaries, and other AI-assisted features;</li>
+        <li>operate APIs, connectors, tenant isolation, access controls, logging, monitoring, incident response, and abuse prevention;</li>
+        <li>measure subscription, certification-event, API, location, feature, and IUM usage as defined by an applicable agreement;</li>
+        <li>administer billing, pilots, customer relationships, training, communications, and legal notices;</li>
+        <li>comply with law, enforce agreements, protect rights and safety, resolve disputes, and establish or defend legal claims;</li>
+        <li>create aggregated or de-identified information for service analytics, capacity planning, benchmarking, and product improvement, subject to contractual restrictions and commitments not to re-identify it.</li>
+      </ul>
+    </section>
+
+    <section id="s4">
+      <h2><span class="num">04</span><span>Certification Records, IUM, human activity, and AI</span></h2>
+      <p>MGE and Sentry use deterministic rules for variance calculations; the same governed inputs and rule version are intended to produce the same calculation. Authorized people may enter contract terms, validate mappings, approve exceptions, or invoke governed overrides. We may record those actions as evidence, security, or audit metadata.</p>
+      <p>FohBoh owns Intelligence Under Management (“IUM”) and the certified and uncertified logs generated by MGE, Sentry, and headless trust-layer processing (“FohBoh Certification Records”), including certification events, rule-execution history, certification status, Trust Score history, exceptions, overrides, hashes, signatures, lineage, provenance, operational telemetry, usage measurements, and the compilation and structure of those records. Customer retains ownership of Customer Data and the readable content of its source records. FohBoh’s ownership does not eliminate privacy rights, confidentiality restrictions, security obligations, or contractual limits applicable to information contained in a log.</p>
+      <p>In a headless deployment for a data platform, POS provider, or system of record, source data is processed automatically within the authorized technical pathway. FohBoh does not routinely inspect or use readable source data for an independent purpose. Human access, if technically possible, is restricted to authorized support, security or incident response, legal compliance, or another purpose permitted by the applicable agreement. Deployments designated as “no-view” use the technical restrictions defined in their Security Addendum.</p>
+      <p>Cortex may send authorized prompts and context to approved AI providers to generate responses. MGE certification of a source metric does not make every AI-generated statement certified. We contractually and technically limit provider use where available and as specified in the applicable DPA or enterprise agreement.</p>
+      <p>We do not use Customer Data to train a general-purpose model for unrelated customers unless the customer expressly authorizes that use in writing. We may use service telemetry and de-identified or aggregated information for security, quality, and improvement as allowed by contract and law.</p>
+      <p>The Services are not intended to make solely automated decisions that produce legal or similarly significant effects concerning individuals. Customers must provide appropriate human review and comply with laws applicable to their use of outputs.</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="num">05</span><span>Sources of personal information</span></h2>
+      <p>We collect personal information directly from you; from your organization and its administrators; through your use of the Services; from systems, vendors, and integrations you authorize; from service providers and business partners; and from public or commercially available business sources where lawful.</p>
+    </section>
+
+    <section id="s6">
+      <h2><span class="num">06</span><span>How we disclose personal information</span></h2>
+      <p>We may disclose personal information to:</p>
+      <ul>
+        <li>cloud hosting, database, observability, cybersecurity, identity, support, communications, document-generation, and other subprocessors that help provide the Services;</li>
+        <li>AI model and related technology providers when needed for an authorized Cortex feature and subject to applicable provider and contractual controls;</li>
+        <li>POS, payroll, delivery, processor, vendor, storage, analytics, and other integrations enabled or directed by Customer;</li>
+        <li>the applicable headless, reseller, or platform partner, while it remains a partner in good standing, for access to FohBoh Certification Records generated through its authorized deployment and only as permitted by the partner agreement;</li>
+        <li>professional advisers, auditors, insurers, financing sources, and transaction counterparties under appropriate duties or safeguards;</li>
+        <li>government authorities, courts, or other persons when required by law or reasonably necessary to protect rights, security, safety, or the integrity of the Services;</li>
+        <li>an acquirer, successor, affiliate, or other party in a merger, financing, reorganization, bankruptcy, sale of assets, or similar transaction, subject to applicable law and commitments.</li>
+      </ul>
+      <div class="callout">
+        <span class="lbl">No sale, no targeted advertising</span>
+        <p>We do not sell personal information for money. We do not share personal information for cross-context behavioral advertising or process it for targeted advertising as those terms are defined by applicable U.S. state privacy laws. If our practices change, we will update this Policy and provide required choices before the change applies.</p>
+      </div>
+    </section>
+
+    <section id="s7">
+      <h2><span class="num">07</span><span>Cookies and similar technologies</span></h2>
+      <p>We and authorized providers may use essential cookies and similar technologies for authentication, security, preferences, load balancing, and service operation, and analytics technologies to understand website and product use. Where required, non-essential technologies will be controlled through a consent or preference tool. Browser settings may block some technologies, but essential features may not function.</p>
+      <p>We do not currently respond to browser “Do Not Track” signals as a universal standard has not been adopted. Where legally required and technically supported, we honor recognized opt-out preference signals for covered sale, sharing, or targeted-advertising activity; we do not currently engage in those activities.</p>
+    </section>
+
+    <section id="s8">
+      <h2><span class="num">08</span><span>Legal bases for EEA, UK, and similar jurisdictions</span></h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Purpose</th><th scope="col">Typical legal basis</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Provide contracted Services and account functionality</strong></td><td>Performance of a contract or steps requested before entering a contract.</td></tr>
+            <tr><td><strong>Secure, administer, support, measure, and improve the Services</strong></td><td>Legitimate interests in operating a secure and effective B2B service, balanced against individual rights.</td></tr>
+            <tr><td><strong>Required records, compliance, and legal process</strong></td><td>Compliance with legal obligations and establishment or defense of legal claims.</td></tr>
+            <tr><td><strong>Optional marketing or non-essential technologies</strong></td><td>Consent where required; otherwise legitimate interests subject to applicable choices.</td></tr>
+            <tr><td><strong>Customer Data processed for an enterprise customer</strong></td><td>The customer determines the legal basis; FohBoh processes on documented instructions under a DPA.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="s9">
+      <h2><span class="num">09</span><span>Data retention</span></h2>
+      <p>We retain personal information only for as long as reasonably necessary for the purposes described, including to provide Services, preserve security and transaction records, meet contractual evidence and audit requirements, comply with law, resolve disputes, and enforce agreements. Actual periods depend on the data class and applicable agreement.</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Data class</th><th scope="col">General retention approach</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Account and relationship records</strong></td><td>For the active relationship and a reasonable period afterward for administration, tax, dispute, and legal needs.</td></tr>
+            <tr><td><strong>Customer Data and generated outputs</strong></td><td>During the service term and for the return/deletion period stated in the enterprise agreement, DPA, or retention schedule.</td></tr>
+            <tr><td><strong>FohBoh Certification Records and CAAR evidence</strong></td><td>As configured or contractually required—and as reasonably needed to preserve IUM, rule performance, reproducibility, chain of custody, audit readiness, security, and version history. Partner access may end before FohBoh retention; legal holds may extend retention.</td></tr>
+            <tr><td><strong>Security, access, API, and audit logs</strong></td><td>For periods appropriate to security monitoring, investigation, usage verification, and contracted audit requirements.</td></tr>
+            <tr><td><strong>Billing and IUM metering records</strong></td><td>For the contract, billing-dispute, tax, audit, and legal limitation periods.</td></tr>
+            <tr><td><strong>Website analytics and cookies</strong></td><td>According to the applicable cookie or analytics setting and provider configuration.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Deletion may not remove records that must be retained by law or agreement, are subject to legal hold, reside in protected backups until ordinary rotation, or consist of limited integrity, security, billing, or audit metadata. A cryptographic hash may remain personal information if it can reasonably be linked to a person; we do not treat hashing alone as anonymization.</p>
+    </section>
+
+    <section id="s10">
+      <h2><span class="num">10</span><span>Security</span></h2>
+      <p>We use administrative, technical, and organizational safeguards designed for the data and risks involved. Depending on the Service and agreement, these may include encryption in transit and at rest, role-based access, multi-tenant isolation, credential and key controls, logging, monitoring, integrity hashes, digital signatures, vulnerability management, backups, incident response, and personnel controls.</p>
+      <p>No system is completely secure. Detailed and binding security commitments are contained in the applicable Security Addendum, DPA, and enterprise agreement. Public descriptions do not expand or replace those commitments. Customers share responsibility for endpoint security, identity administration, least privilege, connector configuration, and lawful data handling.</p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="num">11</span><span>International data transfers</span></h2>
+      <p>FohBoh is based in the United States, and information may be processed in the United States and other countries where we or our authorized providers operate. Where required, we use recognized transfer mechanisms and safeguards, such as adequacy decisions, standard contractual clauses, and contractual and technical supplementary measures. Details may be provided in the applicable DPA.</p>
+    </section>
+
+    <section id="s12">
+      <h2><span class="num">12</span><span>Privacy rights and choices</span></h2>
+      <p>Depending on where you reside and applicable exemptions, you may have rights to request access, correction, deletion, portability, or information about processing; to object to or restrict certain processing; to opt out of covered sale, sharing, targeted advertising, or profiling; to withdraw consent where processing is based on consent; and to appeal a denied request.</p>
+      <p>Submit a request to <a href="mailto:privacy@fohboh.ai?subject=Privacy%20Request">privacy@fohboh.ai</a> with the subject “Privacy Request.” We may verify identity and authority and may ask you to identify the relevant FohBoh customer. Authorized agents must provide legally sufficient authorization. We will not discriminate against you for exercising applicable rights.</p>
+      <p>If your information is contained in Customer Data, FohBoh ordinarily acts for the customer. We may refer the request to that customer or assist it under our DPA. You may also contact the customer directly. Rights are subject to legal limitations, exemptions, and retention obligations.</p>
+      <p>You may opt out of non-transactional marketing emails through the unsubscribe link. Service, security, legal, billing, and account communications are not marketing and may continue while relevant.</p>
+    </section>
+
+    <section id="s13">
+      <h2><span class="num">13</span><span>Children</span></h2>
+      <p>The Services are business services not directed to children, and users must be at least 18. We do not knowingly collect personal information from children under 13 through the Services. If you believe a child has provided personal information, contact <a href="mailto:privacy@fohboh.ai">privacy@fohboh.ai</a>.</p>
+    </section>
+
+    <section id="s14">
+      <h2><span class="num">14</span><span>Third-party services and links</span></h2>
+      <p>The Services may link to or integrate with third-party services. Their privacy practices are governed by their notices, not this Policy. Customer administrators decide which integrations to enable and should evaluate the third party’s terms, permissions, and data practices.</p>
+    </section>
+
+    <section id="s15">
+      <h2><span class="num">15</span><span>Changes to this Policy</span></h2>
+      <p>We may update this Policy prospectively. We will post the revised version and effective date and provide additional notice when required by law or contract. We will not quietly or retroactively use previously collected personal information for a materially incompatible purpose without the notice, choice, or authorization required by law and applicable agreements.</p>
+    </section>
+
+    <section id="s16">
+      <h2><span class="num">16</span><span>Contact</span></h2>
+      <p>FohBoh.ai, Inc. is a Delaware corporation. Privacy questions, rights requests, and complaints may be sent to <a href="mailto:privacy@fohboh.ai">privacy@fohboh.ai</a>. Enterprise customers should also use the contacts and procedures in their DPA or agreement.</p>
+    </section>
+
+    <section id="apxA">
+      <h2><span class="num">A</span><span>Appendix A — Notice at collection summary</span></h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">What to know</th><th scope="col">Summary</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Categories collected</strong></td><td>Identifiers/account data; commercial and professional information; device and internet activity; Customer operational data; credentials/integration data; certification/evidence metadata; Cortex content; and derived service analytics.</td></tr>
+            <tr><td><strong>Purposes</strong></td><td>Provide, secure, support, certify, document, measure, bill, and improve the Services; operate MGE, Sentry, Cortex, CAAR, APIs, and connectors; communicate; comply with law; and protect rights.</td></tr>
+            <tr><td><strong>Disclosures</strong></td><td>Authorized service providers, AI providers for Cortex, customer-enabled integrations, advisers, authorities, and transaction parties as described in this Policy.</td></tr>
+            <tr><td><strong>Sale/sharing</strong></td><td>We do not sell personal information for money or share it for cross-context behavioral advertising.</td></tr>
+            <tr><td><strong>Retention</strong></td><td>Only as long as reasonably necessary for service, security, evidence, contractual, billing, audit, legal, and dispute purposes, subject to the applicable agreement and retention schedule.</td></tr>
+            <tr><td><strong>Rights contact</strong></td><td><a href="mailto:privacy@fohboh.ai">privacy@fohboh.ai</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="apxB">
+      <h2><span class="num">B</span><span>Appendix B — Product-specific notices</span></h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Surface</th><th scope="col">Additional notice</th></tr></thead>
+          <tbody>
+            <tr><td><strong>FohBoh.ai website</strong></td><td>Primarily processes visitor, business-contact, cookie, event, and communications data. Authenticated account processing is described below.</td></tr>
+            <tr><td><strong>Sentry / CAAR</strong></td><td>Processes authorized operational and vendor records through deterministic rules; may record human-entered terms, mappings, approvals, exceptions, and overrides; preserves source references, evidence and integrity metadata.</td></tr>
+            <tr><td><strong>Cortex</strong></td><td>Processes prompts and approved context and may disclose them to authorized AI providers. Responses are probabilistic; do not submit unnecessary personal or sensitive information in prompts.</td></tr>
+            <tr><td><strong>Standalone/headless MGE and APIs</strong></td><td>Processes source data automatically within customer-configured scopes; creates FohBoh-owned certified and uncertified logs, calls, certification events, versions, outputs, errors, IUM measures, and security/audit records; provides the authorized partner contract-limited log access while in good standing.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="wrap foot-in">
+    <p>FohBoh | Sentry — currently available exclusively through white-glove onboarding.</p>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html">Platform</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="report.html">Example CAAR</a>
+      <a href="model.html">Sentry Model</a>
+      <a class="legal" href="terms.html">Terms of Service</a>
+      <a class="legal" href="privacy.html">Privacy Policy</a>
+      <a href="mailto:sentrysales@fohboh.com">sentrysales@fohboh.com</a>
+    </div>
+    <p>© 2026 FohBoh.ai, Inc. All rights reserved · Patent pending</p>
+  </div>
+</footer>
+
+<button class="totop" id="toTop" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M8 3L3 8M8 3l5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+var toTop = document.getElementById('toTop');
+window.addEventListener('scroll', function(){
+  toTop.classList.toggle('on', window.scrollY > 700);
+}, {passive:true});
+toTop.addEventListener('click', function(){
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+</script>
+</body>
+</html>

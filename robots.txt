@@ -1,0 +1,8 @@
+# FohBoh | Sentry
+User-agent: *
+Allow: /
+
+# The example CAAR is sample data — useful for humans, noise for search.
+Disallow: /caar-example.html
+
+Sitemap: https://sentry-landingpage-v3.netlify.app/sitemap.xml

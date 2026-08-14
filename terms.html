@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms of Service — FohBoh | Sentry</title>
+<meta name="description" content="FohBoh.ai Terms of Service, Version 3.1, effective August 1, 2026. Governing terms for MGE, Sentry, Cortex, CAAR, APIs, and related services.">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── tokens (matched to landing page) ───────────────────── */
+:root{
+  --paper:#F6F2ED;
+  --card:#FFFFFF;
+  --ink:#17161A;
+  --ink-2:#57534C;
+  --ink-3:#8A857C;
+  --hair:#E5DFD6;
+  --red:#D42A1F;
+  --red-deep:#A81E15;
+  --red-tint:#FBE8E5;
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --r:16px;
+  --shadow:0 1px 2px rgba(23,22,26,.04),0 8px 24px rgba(23,22,26,.05);
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:6px}
+
+/* ─── nav ────────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:50;background:rgba(246,242,237,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--hair);
+}
+.wrap{max-width:1240px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.03em;text-decoration:none}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--red);flex:none}
+.logo .bar{color:#CFC8BE;font-weight:500}
+.logo .s{color:var(--red);font-style:italic}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{font-size:14.5px;color:var(--ink-2);text-decoration:none;font-weight:500;white-space:nowrap}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a[aria-current]{color:var(--ink);font-weight:600}
+.nav-links a.report-link{color:var(--red);font-weight:600;display:inline-flex;align-items:center;gap:7px}
+.nav-links a.report-link::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);flex:none}
+@media(max-width:1140px){.nav-links{display:none}}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--body);font-weight:600;font-size:14px;
+  padding:11px 18px;border-radius:10px;border:1px solid transparent;
+  text-decoration:none;cursor:pointer;background:var(--ink);color:#fff;
+  transition:background .15s ease;
+}
+.btn:hover{background:#000}
+.btn{white-space:nowrap}
+@media(max-width:520px){
+  .nav-in{gap:12px}
+  .btn{font-size:12.5px;padding:9px 13px}
+  .logo{font-size:16.5px;gap:8px}
+}
+
+/* ─── doc head ───────────────────────────────────────────── */
+.doc-head{padding:clamp(40px,5vw,68px) 0 clamp(28px,3.5vw,40px)}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:16px}
+h1{font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0;font-size:clamp(34px,5vw,54px)}
+.doc-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--hair);background:var(--card);border-radius:999px;padding:7px 14px;color:var(--ink-2);
+}
+.chip.accent{background:var(--red-tint);border-color:transparent;color:var(--red-deep)}
+.doc-intro{margin-top:26px;max-width:70ch;font-size:clamp(16px,1.5vw,17.5px);color:var(--ink-2)}
+.doc-intro p + p{margin-top:14px}
+
+/* ─── layout ─────────────────────────────────────────────── */
+.doc-grid{display:grid;grid-template-columns:260px 1fr;gap:clamp(28px,4vw,64px);align-items:start;padding-bottom:clamp(56px,7vw,96px)}
+@media(max-width:960px){.doc-grid{grid-template-columns:1fr}}
+
+.toc{position:sticky;top:96px}
+@media(max-width:960px){
+  .toc{position:static;background:var(--card);border:1px solid var(--hair);border-radius:var(--r);padding:20px 22px}
+}
+.toc h2{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.toc a{
+  display:flex;gap:10px;text-decoration:none;font-size:13.5px;color:var(--ink-2);
+  line-height:1.4;padding:6px 10px;border-radius:8px;transition:background .15s ease,color .15s ease;
+}
+.toc a:hover{background:rgba(23,22,26,.045);color:var(--ink)}
+.toc a .num{font-family:var(--mono);font-size:11px;color:var(--ink-3);flex:none;width:20px;padding-top:1px}
+
+.doc-body{min-width:0;max-width:80ch}
+.doc-body section{scroll-margin-top:96px}
+.doc-body section + section{margin-top:clamp(34px,4vw,48px);padding-top:clamp(30px,3.5vw,42px);border-top:1px solid var(--hair)}
+.doc-body h2{
+  font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.12;
+  font-size:clamp(22px,2.5vw,27px);margin:0 0 18px;display:flex;gap:14px;align-items:baseline;
+}
+.doc-body h2 .num{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--red);flex:none;padding-top:2px}
+.doc-body h3{font-family:var(--display);font-weight:700;font-size:16.5px;letter-spacing:-.01em;margin:26px 0 8px;color:var(--ink)}
+.doc-body p{margin:0 0 14px;color:var(--ink-2);font-size:15.5px;line-height:1.68}
+.doc-body p:last-child{margin-bottom:0}
+.doc-body strong{color:var(--ink);font-weight:600}
+.doc-body ul{margin:0 0 14px;padding:0;list-style:none;display:grid;gap:11px}
+.doc-body li{display:flex;gap:12px;color:var(--ink-2);font-size:15.5px;line-height:1.6}
+.doc-body li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--red);margin-top:10px}
+.doc-body a[href]{color:var(--red);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+
+.callout{
+  background:var(--card);border:1px solid var(--hair);border-left:3px solid var(--red);
+  border-radius:10px;padding:18px 20px;margin:0 0 18px;
+}
+.callout p{margin:0;font-size:15px}
+.callout p + p{margin-top:10px}
+.callout .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:8px}
+
+.tbl-scroll{overflow-x:auto;margin:0 0 18px;-webkit-overflow-scrolling:touch}
+table{
+  width:100%;border-collapse:collapse;background:var(--card);
+  border:1px solid var(--hair);border-radius:var(--r);overflow:hidden;font-size:14.5px;min-width:520px;
+}
+th{
+  text-align:left;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);padding:14px 16px;border-bottom:1px solid var(--hair);
+  background:#FBF9F6;vertical-align:bottom;
+}
+td{padding:15px 16px;border-bottom:1px solid var(--hair);color:var(--ink-2);vertical-align:top;line-height:1.55}
+tbody tr:last-child td{border-bottom:0}
+td strong,td b{color:var(--ink);font-weight:600}
+td .tm{font-family:var(--display);font-weight:800;letter-spacing:-.02em;color:var(--ink);font-size:15px}
+
+.legal-block{
+  background:#F1ECE4;border:1px solid var(--hair);border-radius:12px;padding:20px 22px;margin:0 0 18px;
+}
+.legal-block p{font-size:13.5px;line-height:1.62;color:var(--ink-2);letter-spacing:.005em;margin-bottom:12px}
+.legal-block p:last-child{margin-bottom:0}
+
+.clickwrap{
+  background:var(--card);border:2px solid var(--ink);border-radius:12px;padding:20px 22px;margin:0 0 18px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.clickwrap .box{width:18px;height:18px;border:2px solid var(--ink);border-radius:4px;flex:none;margin-top:3px}
+.clickwrap p{margin:0;color:var(--ink);font-weight:500;font-size:15px}
+
+/* ─── footer ─────────────────────────────────────────────── */
+footer{padding:36px 0 48px;border-top:1px solid var(--hair)}
+.foot-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.foot-in p{font-size:13px;color:var(--ink-3);margin:0}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:var(--ink-3);text-decoration:none}
+.foot-links a:hover{color:var(--ink)}
+
+.totop{
+  position:fixed;right:22px;bottom:22px;z-index:60;
+  width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;border:0;
+  display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;
+  transition:opacity .25s ease;box-shadow:0 6px 20px rgba(23,22,26,.22);
+}
+.totop.on{opacity:1;pointer-events:auto}
+@media print{
+  .nav,.toc,.totop{display:none}
+  body{background:#fff}
+  .doc-grid{grid-template-columns:1fr}
+  .doc-body{max-width:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="dot"></span>FohBoh <span class="bar">|</span> <span class="s">Sentry</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html">Platform</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a class="report-link" href="report.html">Example CAAR</a>
+      <a href="terms.html" aria-current="page">Terms</a>
+    </div>
+    <a class="btn btn-primary btn-sm" href="pricing.html#request">Request a live demo</a>
+  </div>
+</nav>
+
+<div class="wrap doc-head">
+  <span class="eyebrow">FohBoh.ai / Legal</span>
+  <h1>Terms of Service</h1>
+  <div class="doc-meta">
+    <span class="chip accent">Version 3.1</span>
+    <span class="chip">Effective August 1, 2026</span>
+    <span class="chip">FohBoh.ai, Inc. · Delaware</span>
+  </div>
+  <div class="doc-intro">
+    <p>These Terms of Service (these “Terms”) are a binding agreement between FohBoh.ai, Inc., a Delaware corporation (“FohBoh,” “we,” “us,” or “our”), and the person or organization accessing the Services (“you” or “Customer”). They govern the FohBoh.ai website, the Sentry and Cortex pages and applications, standalone or embedded MGE services, related APIs, documentation, pilots, and other services that link to these Terms (collectively, the “Services”).</p>
+  </div>
+</div>
+
+<div class="wrap doc-grid">
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#s1"><span class="num">01</span><span>Acceptance, authority, and contract hierarchy</span></a></li>
+      <li><a href="#s2"><span class="num">02</span><span>The FohBoh architecture and Services</span></a></li>
+      <li><a href="#s3"><span class="num">03</span><span>Accounts and authorized users</span></a></li>
+      <li><a href="#s4"><span class="num">04</span><span>Customer Data, Certification Records, and permissions</span></a></li>
+      <li><a href="#s5"><span class="num">05</span><span>Certification scope, Trust Scores, and CAARs</span></a></li>
+      <li><a href="#s6"><span class="num">06</span><span>Cortex and AI-assisted outputs</span></a></li>
+      <li><a href="#s7"><span class="num">07</span><span>APIs, connectors, and developer obligations</span></a></li>
+      <li><a href="#s8"><span class="num">08</span><span>Intelligence Under Management and usage measurement</span></a></li>
+      <li><a href="#s9"><span class="num">09</span><span>Security and shared responsibility</span></a></li>
+      <li><a href="#s10"><span class="num">10</span><span>Acceptable use</span></a></li>
+      <li><a href="#s11"><span class="num">11</span><span>Intellectual property, outputs, and feedback</span></a></li>
+      <li><a href="#s12"><span class="num">12</span><span>Confidentiality</span></a></li>
+      <li><a href="#s13"><span class="num">13</span><span>Fees, taxes, pilots, and suspension</span></a></li>
+      <li><a href="#s14"><span class="num">14</span><span>Termination and data return</span></a></li>
+      <li><a href="#s15"><span class="num">15</span><span>Disclaimers</span></a></li>
+      <li><a href="#s16"><span class="num">16</span><span>Limitation of liability</span></a></li>
+      <li><a href="#s17"><span class="num">17</span><span>Indemnification</span></a></li>
+      <li><a href="#s18"><span class="num">18</span><span>Governing law and disputes</span></a></li>
+      <li><a href="#s19"><span class="num">19</span><span>Changes to these Terms</span></a></li>
+      <li><a href="#s20"><span class="num">20</span><span>General terms</span></a></li>
+      <li><a href="#s21"><span class="num">21</span><span>Contact and legal notices</span></a></li>
+      <li><a href="#apxA"><span class="num">A</span><span>Required first-login clickwrap</span></a></li>
+      <li><a href="#apxB"><span class="num">B</span><span>Agreements aligned before launch</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- BODY -->
+  <main class="doc-body">
+
+    <section id="s1">
+      <h2><span class="num">01</span><span>Acceptance, authority, and contract hierarchy</span></h2>
+      <p>By clicking an acceptance control, creating or using an account, accessing an authenticated Service, or otherwise using the Services, you agree to these Terms. If you use the Services for an organization, you represent that you are authorized to bind that organization. If you lack authority or do not agree, do not use the Services.</p>
+      <div class="callout">
+        <span class="lbl">Signed agreements control</span>
+        <p>If Customer and FohBoh have executed an Order Form, master services or subscription agreement, data processing addendum (“DPA”), security addendum, API schedule, service-level agreement, pilot agreement, or other written agreement, that agreement controls to the extent of a conflict. The order of precedence is: (1) signed Order Form or master agreement; (2) DPA and Security Addendum for their subject matter; (3) signed product, API, CAAR, IUM, or service schedules; and (4) these Terms. Marketing materials and landing-page copy do not amend the agreement.</p>
+      </div>
+      <p>The Privacy Policy describes our handling of personal information. Acceptance of these Terms includes acknowledgement that the <a href="privacy.html">Privacy Policy</a> has been made available; it is not blanket consent to processing that requires separate consent under applicable law.</p>
+    </section>
+
+    <section id="s2">
+      <h2><span class="num">02</span><span>The FohBoh architecture and Services</span></h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">Component</th><th scope="col">Role</th><th scope="col">Important boundary</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tm">MGE™</span></td>
+              <td>Metrics Governance Engine; a deterministic rules and certification infrastructure layer that normalizes, reconciles, applies governed metrics and rules, scores data quality, and produces traceable outputs.</td>
+              <td>MGE certifies only the defined data, calculations, rules, scope, and evidence stated in an output. It does not certify legal compliance, business judgment, forecasts, or truth outside that scope.</td>
+            </tr>
+            <tr>
+              <td><span class="tm">Sentry™</span></td>
+              <td>Certified Loss Prevention Platform powered by MGE; identifies and documents financial leakage, discrepancies, and potentially recoverable value.</td>
+              <td>Sentry’s variance calculations use locked deterministic rules, not AI or machine-learning inference. Sentry does not guarantee recovery or third-party acceptance.</td>
+            </tr>
+            <tr>
+              <td><span class="tm">Cortex™</span></td>
+              <td>Certified operational-intelligence interface that may use AI to interpret or communicate MGE-certified data and approved context.</td>
+              <td>Cortex responses are probabilistic and advisory. They may be incomplete or incorrect and require human review before action.</td>
+            </tr>
+            <tr>
+              <td><span class="tm">CAAR™</span></td>
+              <td>Certified Analytics &amp; Audit Report deliverable produced through the applicable Sentry/MGE workflow.</td>
+              <td>A CAAR is evidence-grade, audit-ready documentation of defined reconciliation findings. It is not a legal opinion, independent audit, court-admissibility guarantee, judgment, invoice, or promise of recovery.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The Services are designed primarily for read-only access to source systems. A connector or feature may perform a write or action only when expressly enabled and authorized by Customer in the applicable agreement or configuration.</p>
+    </section>
+
+    <section id="s3">
+      <h2><span class="num">03</span><span>Accounts and authorized users</span></h2>
+      <ul>
+        <li>You must be at least 18 and use the Services only for lawful business purposes.</li>
+        <li>Registration information must be accurate, current, and associated with an authorized business user.</li>
+        <li>Credentials, API keys, tokens, and service accounts are confidential. You are responsible for access through credentials issued to you, except to the extent caused by FohBoh’s breach of its obligations.</li>
+        <li>Customer administrators control user access and must promptly disable users who no longer require access.</li>
+        <li>You must notify FohBoh promptly of suspected unauthorized access or credential compromise.</li>
+      </ul>
+    </section>
+
+    <section id="s4">
+      <h2><span class="num">04</span><span>Customer Data, Certification Records, and permissions</span></h2>
+      <p>“Customer Data” means data, files, credentials, instructions, configurations, contracts, statements, records, and other content submitted to or made accessible through the Services by or for Customer. Customer Data does not include FohBoh Certification Records as defined below. Customer retains its rights in Customer Data.</p>
+      <p>Customer grants FohBoh and its authorized subprocessors a limited, non-exclusive right to host, copy, transmit, transform, analyze, and otherwise process Customer Data only to provide, secure, support, measure, and improve the Services as permitted by the applicable agreement and Privacy Policy. FohBoh does not acquire ownership of Customer Data.</p>
+      <p>“FohBoh Certification Records” means the certified and uncertified records generated by operation of MGE, Sentry, or a headless trust-layer deployment, including certification-event logs, rule-execution and rule-failure records, certification status, Trust Score history, exception and override records, timestamps, event identifiers, hashes, signatures, lineage and provenance metadata, processing and performance telemetry, usage measurements, and the compilation, structure, and relationships among those records. FohBoh Certification Records exclude the readable content of Customer Data and do not transfer ownership of Customer’s underlying transactions, contracts, statements, or other source records.</p>
+      <p>As between the parties, FohBoh owns all right, title, and interest in FohBoh Certification Records and Intelligence Under Management, including their compilation, structure, methods, derived know-how, and associated intellectual property. This ownership is subject to FohBoh’s confidentiality, security, privacy, and contractual obligations and does not authorize disclosure of Customer-identifiable information to another customer or partner.</p>
+      <p>A partner in good standing may access or receive the FohBoh Certification Records generated through its authorized deployment only as provided in the applicable agreement. “Good standing” means the partner agreement remains active, required fees are current, access has not been suspended, and no uncured material breach exists. Log access is a limited, non-exclusive, non-transferable contractual right and does not convey ownership. Continuing access may be suspended or terminated when the partner is no longer in good standing. Previously delivered copies may be retained only as permitted by the applicable agreement or required by law and remain subject to confidentiality and use restrictions.</p>
+      <p>Customer represents and warrants that it has all rights, notices, consents, instructions, and lawful bases needed for FohBoh to process Customer Data, including data obtained from employees, franchisees, vendors, delivery service providers, payment processors, point-of-sale systems, and other third parties.</p>
+      <div class="callout">
+        <span class="lbl">Do not submit</span>
+        <p>Do not submit full payment-card numbers, CVVs, Social Security numbers, protected health information, biometric identifiers, precise geolocation, or other regulated sensitive data unless the applicable written agreement expressly authorizes it and defines the required safeguards.</p>
+      </div>
+    </section>
+
+    <section id="s5">
+      <h2><span class="num">05</span><span>Certification scope, Trust Scores, and CAARs</span></h2>
+      <h3>Certification is scoped.</h3>
+      <p>A “certified” output means that specified inputs and calculations were processed under an identified version of MGE rules, KPI definitions, thresholds, and controls and achieved the stated certification status or Trust Score. Certification does not extend to omitted data, inaccurate source records, external events, human intent, forecasts, legal rights, regulatory compliance, or conclusions outside the output.</p>
+      <h3>Source-data dependency.</h3>
+      <p>Outputs depend on the completeness, accuracy, timeliness, and authorization of Customer Data and third-party source records. A deterministic process can reproduce a result from the same inputs without proving that the underlying inputs are complete or correct.</p>
+      <h3>Human activity and overrides.</h3>
+      <p>Authorized persons may enter contract terms, configure profiles, validate mappings, approve exceptions, or use governed override capabilities. Where applicable, the Services may preserve those activities in audit logs and evidence references. FohBoh does not represent that every pipeline step is free of human input.</p>
+      <h3>CAAR limitations.</h3>
+      <p>A CAAR documents vendor-billing or operational discrepancies identified through reconciliation. Every certified finding is intended to be traceable to identified source records and the applicable rule set. A CAAR is not legal, tax, accounting, investment, or forensic-audit advice. Admissibility and evidentiary weight depend on the facts, forum, foundation, applicable rules, and actions of the parties. FohBoh does not guarantee that a third party will accept a finding, issue a credit, pay an amount, or that any recovery will occur.</p>
+      <p>Forward-looking or annualized projections are estimates and must be identified separately from certified findings. A “Certified Recoverable Amount” or similar label is a calculation under the stated rules and evidence; it is not an adjudication of liability or assurance of collection.</p>
+    </section>
+
+    <section id="s6">
+      <h2><span class="num">06</span><span>Cortex and AI-assisted outputs</span></h2>
+      <p>Cortex may use third-party or proprietary AI models to explain, summarize, query, or act upon certified data and approved context. AI-assisted responses (“AI Outputs”) are probabilistic, may vary, and may contain errors, omissions, bias, or outdated information.</p>
+      <ul>
+        <li>Review AI Outputs and underlying certified data before making operational, employment, financial, safety, legal, or other material decisions.</li>
+        <li>Do not use Cortex as the sole basis for decisions that produce legal or similarly significant effects on an individual.</li>
+        <li>Do not treat Cortex as a substitute for professional advice or Customer’s internal controls.</li>
+        <li>MGE certification of source metrics does not certify every statement generated by an AI model.</li>
+      </ul>
+      <p>FohBoh will not use Customer Data to train a general-purpose model for unrelated customers unless Customer expressly authorizes that use in a written agreement. Service telemetry and de-identified or aggregated information may be used as described in the Privacy Policy and applicable agreement.</p>
+    </section>
+
+    <section id="s7">
+      <h2><span class="num">07</span><span>APIs, connectors, and developer obligations</span></h2>
+      <ul>
+        <li>Use APIs and connectors only within documented scopes, rate limits, authentication requirements, and Customer authorizations.</li>
+        <li>Keep keys and tokens secure; do not embed secrets in public code or share credentials between unaffiliated customers.</li>
+        <li>Do not bypass tenant isolation, access controls, certification gates, logging, usage meters, or technical limits.</li>
+        <li>Do not misrepresent an uncertified, provisional, estimated, superseded, or AI-generated output as MGE-certified.</li>
+        <li>Do not remove provenance, version, hash, status, Trust Score, disclaimer, or other integrity metadata from a certified artifact when that metadata is required to interpret it.</li>
+      </ul>
+      <p>API versions, schemas, endpoints, or dependencies may change. Contracted support, notice, deprecation, and availability commitments are governed only by an applicable signed agreement or SLA.</p>
+      <p>Third-party integrations are provided subject to the third party’s terms and availability. Customer authorizes FohBoh to exchange data with each integration Customer enables. FohBoh is not responsible for changes, errors, outages, or acts of unaffiliated third-party systems.</p>
+    </section>
+
+    <section id="s8">
+      <h2><span class="num">08</span><span>Intelligence Under Management and usage measurement</span></h2>
+      <p>“Intelligence Under Management” or “IUM” is the FohBoh-owned intelligence asset and measurement framework created through the governance, certification, control, measurement, and operational application of certification activity across the Services. IUM includes the accumulated systems, methods, rule and performance intelligence, certification history, operational leverage, and non-customer-specific know-how reflected in FohBoh Certification Records.</p>
+      <p>IUM may also serve as a contractual measure of the volume, value, scope, or operational leverage of intelligence governed, certified, accessed, or delivered through the Services. Depending on the Order Form, the measure may include certified economic activity, certification events, managed metrics, locations, transactions, API calls, governed reasoning or outputs, or another agreed unit.</p>
+      <p>FohBoh owns IUM. Customer and partners receive no ownership interest in IUM, MGE, Sentry, FohBoh Certification Records, or FohBoh’s aggregated methods and know-how merely because Customer Data is processed through the Services. Conversely, FohBoh’s ownership of IUM does not transfer ownership of Customer Data, certified economic activity, Customer’s business, or the readable content of Customer source records.</p>
+      <p>The applicable Order Form must define any billable IUM unit, exclusions, rate, measurement period, reporting method, and dispute process. FohBoh Certification Records and metering records will be used to calculate usage, subject to Customer’s right to raise a good-faith billing dispute under the applicable agreement.</p>
+    </section>
+
+    <section id="s9">
+      <h2><span class="num">09</span><span>Security and shared responsibility</span></h2>
+      <p>FohBoh maintains administrative, technical, and organizational safeguards designed for the nature of the Services and data processed. Security commitments—including encryption, access controls, tenant isolation, logging, incident notification, business continuity, vulnerability management, audit rights, and deletion—are governed by the applicable Security Addendum, DPA, and enterprise agreement.</p>
+      <p>In a headless MGE or Sentry trust-layer deployment for a data platform, POS provider, or system of record, source data is processed automatically within the authorized technical pathway. FohBoh does not routinely inspect or use the readable content of that data for an independent purpose. Human access, if technically possible, is limited to personnel with a need to know and only for authorized support, security or incident response, legal compliance, or another purpose expressly permitted by the applicable agreement. A deployment expressly designated as “no-view” will use the technical access restrictions stated in its Security Addendum.</p>
+      <p>Customer is responsible for lawful data collection; endpoint and identity security; least-privilege user administration; connector authorization; secure configuration; backups of source systems; review of outputs; and timely notice of suspected misuse. No system is completely secure, and general website descriptions are not a warranty or expansion of negotiated security commitments.</p>
+    </section>
+
+    <section id="s10">
+      <h2><span class="num">10</span><span>Acceptable use</span></h2>
+      <p>You will not, and will not permit others to:</p>
+      <ul>
+        <li>use the Services unlawfully, fraudulently, deceptively, or to violate another person’s rights;</li>
+        <li>access data, tenants, systems, or accounts without authorization;</li>
+        <li>introduce malware, probe or disrupt security, overload the Services, or evade rate limits;</li>
+        <li>reverse engineer, decompile, discover source code or non-public rules, or extract model weights, except to the limited extent a prohibition is unenforceable by law;</li>
+        <li>benchmark or use the Services to build or train a competing certification engine, loss-prevention platform, or AI service without written permission;</li>
+        <li>use outputs to harass, discriminate against, exploit, or make unlawful decisions about individuals;</li>
+        <li>remove proprietary notices or falsely imply endorsement, certification, partnership, audit opinion, or legal approval by FohBoh.</li>
+      </ul>
+    </section>
+
+    <section id="s11">
+      <h2><span class="num">11</span><span>Intellectual property, outputs, and feedback</span></h2>
+      <p>FohBoh and its licensors own the Services, MGE rules and architecture, KPI registry and vault structures, scoring methods, FohBoh Certification Records, IUM, software, documentation, interfaces, templates, trademarks, and all related intellectual property. Except for Customer Data, no rights are granted except the limited right to use the Services and authorized outputs during the applicable term.</p>
+      <p>Subject to payment and these Terms, Customer may use Customer-specific reports and outputs for its internal business purposes and, where permitted by the applicable agreement, in communications with its vendors, advisors, auditors, insurers, franchisees, or counsel. Integrity metadata and applicable disclaimers must remain with any CAAR or certified artifact.</p>
+      <p>If you provide feedback, you grant FohBoh a perpetual, worldwide, royalty-free right to use it without identifying you or disclosing Customer Confidential Information.</p>
+    </section>
+
+    <section id="s12">
+      <h2><span class="num">12</span><span>Confidentiality</span></h2>
+      <p>Each party may receive non-public information that a reasonable person would understand to be confidential. The receiving party will use it only to perform or receive the Services, protect it with reasonable care, and disclose it only to personnel and service providers with a need to know and confidentiality obligations. This section does not replace a signed nondisclosure or enterprise agreement, which controls if more protective.</p>
+    </section>
+
+    <section id="s13">
+      <h2><span class="num">13</span><span>Fees, taxes, pilots, and suspension</span></h2>
+      <p>Fees, subscription periods, recovery-based fees, certification-event fees, IUM charges, location fees, implementation charges, and payment terms are stated in the applicable Order Form or pilot agreement. Unless that agreement states otherwise, fees are non-cancellable and non-refundable, and Customer is responsible for applicable taxes other than taxes on FohBoh’s net income.</p>
+      <p>Pilot, beta, preview, or evaluation features may be incomplete, changed, suspended, or discontinued and may have additional terms. FohBoh may suspend access for nonpayment, security risk, unlawful use, material breach, or conduct that threatens the Services or other customers, using reasonable notice where circumstances permit.</p>
+    </section>
+
+    <section id="s14">
+      <h2><span class="num">14</span><span>Termination and data return</span></h2>
+      <p>These Terms apply while you access the Services. Account, subscription, termination, export, retention, and deletion rights are governed by the applicable agreement. After termination, Customer’s access ends, but provisions concerning payment, intellectual property, confidentiality, disclaimers, liability, dispute resolution, and other terms that by nature should survive will survive.</p>
+      <p>Unless the applicable agreement states otherwise, a partner’s continuing access to FohBoh Certification Records ends when the partnership or authorized deployment ends or the partner ceases to be in good standing. FohBoh may retain FohBoh Certification Records, IUM, audit logs, hashes, billing records, and legal or security evidence as required by law, the applicable agreement, or legitimate operational, security, intellectual-property, and recordkeeping needs. Retention of a hash or audit record does not necessarily permit reconstruction of source data.</p>
+    </section>
+
+    <section id="s15">
+      <h2><span class="num">15</span><span>Disclaimers</span></h2>
+      <div class="legal-block">
+        <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE SERVICES, WEBSITE, APIS, OUTPUTS, AND DOCUMENTATION ARE PROVIDED “AS IS” AND “AS AVAILABLE.” FOHBOH DISCLAIMS IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, AND ANY WARRANTY ARISING FROM COURSE OF DEALING OR USAGE.</p>
+        <p>FOHBOH DOES NOT WARRANT UNINTERRUPTED OR ERROR-FREE OPERATION; COMPLETE OR ACCURATE THIRD-PARTY DATA; ANY PARTICULAR TRUST SCORE, FINDING, SAVINGS, RECOVERY, BUSINESS OUTCOME, LEGAL RESULT, OR EVIDENTIARY RULING; OR THAT AI OUTPUTS WILL BE ACCURATE OR SUITABLE FOR A PARTICULAR DECISION. CONTRACTED WARRANTIES OR SERVICE LEVELS IN A SIGNED AGREEMENT CONTROL.</p>
+      </div>
+    </section>
+
+    <section id="s16">
+      <h2><span class="num">16</span><span>Limitation of liability</span></h2>
+      <div class="legal-block">
+        <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, NEITHER PARTY WILL BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES, OR FOR LOST PROFITS, REVENUE, GOODWILL, OR BUSINESS INTERRUPTION, EVEN IF ADVISED OF THE POSSIBILITY. FOHBOH’S AGGREGATE LIABILITY ARISING OUT OF OR RELATING TO THE SERVICES WILL NOT EXCEED THE FEES PAID OR PAYABLE BY CUSTOMER FOR THE AFFECTED SERVICES DURING THE 12 MONTHS BEFORE THE EVENT GIVING RISE TO LIABILITY.</p>
+      </div>
+      <p>The exclusions and cap do not apply to the extent prohibited by law or superseded by a signed agreement. Counsel should align carve-outs for confidentiality, data security, infringement, indemnity, gross negligence, and willful misconduct with the enterprise contract stack.</p>
+    </section>
+
+    <section id="s17">
+      <h2><span class="num">17</span><span>Indemnification</span></h2>
+      <p>Customer will defend and indemnify FohBoh and its affiliates, officers, directors, and personnel from third-party claims arising from Customer Data; Customer’s lack of required rights, notices, or permissions; Customer’s unlawful or unauthorized use; or Customer’s material breach of these Terms. FohBoh will provide prompt notice and reasonable cooperation, and Customer may not settle a claim in a manner that admits fault by or imposes obligations on FohBoh without written consent. Any reciprocal FohBoh indemnity is governed by a signed enterprise agreement.</p>
+    </section>
+
+    <section id="s18">
+      <h2><span class="num">18</span><span>Governing law and disputes</span></h2>
+      <p>These Terms are governed by Texas law, without regard to conflict-of-law rules. Unless a signed agreement provides otherwise, the state and federal courts located in Dallas County, Texas have exclusive jurisdiction, and each party consents to personal jurisdiction and venue there. Before filing a claim, the parties will attempt in good faith for 30 days to resolve it through written notice and business-level discussion. Either party may seek immediate equitable relief for misuse of intellectual property, confidential information, credentials, or systems.</p>
+    </section>
+
+    <section id="s19">
+      <h2><span class="num">19</span><span>Changes to these Terms</span></h2>
+      <p>We may update these Terms prospectively. We will post the new version and effective date and provide additional notice when required by law or contract. We will not retroactively expand rights to use previously collected Customer Data in a materially different way without the notice or authorization required by applicable law and agreement. Material changes may require renewed clickwrap acceptance. Changes to negotiated enterprise terms require the amendment process in the applicable agreement.</p>
+    </section>
+
+    <section id="s20">
+      <h2><span class="num">20</span><span>General terms</span></h2>
+      <p>Neither party may assign these Terms without the other’s consent, except in connection with a merger, reorganization, sale of substantially all assets, or assignment to an affiliate, provided the assignee assumes the obligations. FohBoh may use subcontractors while remaining responsible as stated in the applicable agreement. Neither party is liable for delay caused by events beyond reasonable control. If a provision is unenforceable, it will be modified to the minimum extent necessary and the remainder will continue. Failure to enforce is not a waiver. These Terms and incorporated agreements are the entire agreement concerning their subject matter.</p>
+    </section>
+
+    <section id="s21">
+      <h2><span class="num">21</span><span>Contact and legal notices</span></h2>
+      <p>Questions about these Terms may be sent to <a href="mailto:privacy@fohboh.ai?subject=Terms%20Inquiry">privacy@fohboh.ai</a> with the subject line “Terms Inquiry.” Formal notices must follow the notice provision in the applicable signed agreement. FohBoh.ai, Inc. is a Delaware corporation.</p>
+    </section>
+
+    <section id="apxA">
+      <h2><span class="num">A</span><span>Appendix A — Required first-login clickwrap</span></h2>
+      <p>Recommended acceptance language:</p>
+      <div class="clickwrap">
+        <span class="box" aria-hidden="true"></span>
+        <p>I am authorized to use this account for my organization. I have read and agree to the FohBoh.ai Terms of Service (Version 3.1) and acknowledge the FohBoh.ai Privacy Policy (Version 3.1).</p>
+      </div>
+      <p>The Terms and Privacy Policy titles must be separate, conspicuous hyperlinks opening the exact accepted versions. The acceptance box must be unchecked by default; access to authenticated features remains blocked until acceptance.</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Record to preserve</th><th scope="col">Minimum content</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Acceptance identity</strong></td><td>User ID, organization/customer ID, name or business email, and administrator/authority status if used.</td></tr>
+            <tr><td><strong>Accepted instrument</strong></td><td>Exact checkbox text, Terms version and effective date, Privacy version and effective date, and immutable document URL or document hash.</td></tr>
+            <tr><td><strong>Event evidence</strong></td><td>UTC timestamp, IP address, user agent/device context, authentication method, product entry point (Sentry, Cortex, MGE/API), and success event.</td></tr>
+            <tr><td><strong>Renewal</strong></td><td>Require reacceptance for material Terms changes; display notice and record acknowledgement for material Privacy changes. Preserve prior versions.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Do not combine marketing permission, optional model-training permission, cookie consent, or sensitive-data consent into this required checkbox. Obtain each separately when applicable.</p>
+    </section>
+
+    <section id="apxB">
+      <h2><span class="num">B</span><span>Appendix B — Agreements that must be aligned before launch</span></h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Document</th><th scope="col">Required revision</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Master Services / Subscription Agreement</strong></td><td>Adopt the architecture, CAAR, certification, AI-output, contract-hierarchy, limitation, and ownership language in these Terms.</td></tr>
+            <tr><td><strong>Data Processing Addendum</strong></td><td>Define controller/processor roles; instructions; subprocessors; transfers; rights requests; retention/deletion; audit support; AI-provider restrictions; and Customer obligations.</td></tr>
+            <tr><td><strong>Security Addendum</strong></td><td>State implemented controls precisely; shared responsibility; tenant isolation; API/key management; logging; incident notice; vulnerability management; BCP/DR; audit evidence; and exclusions. Remove absolute security claims.</td></tr>
+            <tr><td><strong>MGE/API Schedule</strong></td><td>Define certification events, versioning, schemas, integrity metadata, usage meters, keys, rate limits, deprecation, support, and prohibited circumvention.</td></tr>
+            <tr><td><strong>CAAR Methodology &amp; Use Addendum</strong></td><td>Use “Certified Analytics &amp; Audit Report”; prohibit admissibility/recovery guarantees; document human entry/overrides; separate projections; require source citations and disclaimer retention.</td></tr>
+            <tr><td><strong>IUM Pricing Schedule</strong></td><td>Confirm FohBoh ownership of IUM and Certification Records; define partner access while in good standing; and state the exact billable unit, calculation, exclusions, rate, measurement period, reports, auditability, and billing-dispute process.</td></tr>
+            <tr><td><strong>Subprocessor List &amp; Retention Schedule</strong></td><td>Publish current providers, processing purpose/location, change notice, and product/data-class retention periods.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="wrap foot-in">
+    <p>FohBoh | Sentry — currently available exclusively through white-glove onboarding.</p>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html">Platform</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="report.html">Example CAAR</a>
+      <a href="model.html">Sentry Model</a>
+      <a class="legal" href="terms.html">Terms of Service</a>
+      <a class="legal" href="privacy.html">Privacy Policy</a>
+      <a href="mailto:sentrysales@fohboh.com">sentrysales@fohboh.com</a>
+    </div>
+    <p>© 2026 FohBoh.ai, Inc. All rights reserved · Patent pending</p>
+  </div>
+</footer>
+
+<button class="totop" id="toTop" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M8 3L3 8M8 3l5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+var toTop = document.getElementById('toTop');
+window.addEventListener('scroll', function(){
+  toTop.classList.toggle('on', window.scrollY > 700);
+}, {passive:true});
+toTop.addEventListener('click', function(){
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+</script>
+</body>
+</html>

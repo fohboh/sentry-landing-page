@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — FohBoh | Sentry</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F2ED; --card:#FFFFFF; --ink:#17161A; --ink-2:#57534C; --ink-3:#8A857C;
+  --hair:#E5DFD6; --red:#D42A1F; --red-deep:#A81E15; --red-tint:#FBE8E5;
+  --display:'Archivo',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --r:16px; --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1240px;margin:0 auto;width:100%;padding-left:var(--pad);padding-right:var(--pad)}
+
+.nav{border-bottom:1px solid var(--hair);background:rgba(246,242,237,.9)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;
+  font-size:19px;letter-spacing:-.03em;text-decoration:none}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--red);flex:none}
+.logo .bar{color:#CFC8BE;font-weight:500}
+.logo .s{color:var(--red);font-style:italic}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;white-space:nowrap;
+  font-family:var(--body);font-weight:600;font-size:14px;padding:11px 18px;border-radius:10px;
+  border:1px solid transparent;text-decoration:none;background:var(--ink);color:#fff}
+.btn:hover{background:#000}
+
+main{flex:1;display:flex;align-items:center;padding:clamp(48px,8vw,110px) 0}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:18px}
+h1{font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.04;
+  margin:0 0 20px;font-size:clamp(36px,6vw,64px);max-width:16ch}
+.red{color:var(--red)}
+.lede{font-size:clamp(16.5px,1.6vw,19px);color:var(--ink-2);max-width:52ch;margin:0}
+.links{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);
+  border-radius:var(--r);overflow:hidden;margin-top:36px;max-width:640px}
+.links a{background:var(--card);padding:16px 20px;display:flex;align-items:center;gap:14px;
+  text-decoration:none;transition:background .15s ease}
+.links a:hover{background:#FBF9F6}
+.links .k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--red);flex:none;width:80px}
+.links .t{font-size:15px;color:var(--ink);font-weight:500}
+.links .d{font-size:13.5px;color:var(--ink-3);margin-left:auto;text-align:right}
+@media(max-width:560px){.links .d{display:none}.links .k{width:64px}}
+
+footer{padding:28px 0 40px;border-top:1px solid var(--hair)}
+.foot-in{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
+.foot-in p{font-size:13px;color:var(--ink-3);margin:0}
+.foot-links{display:flex;gap:20px;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:var(--ink-3);text-decoration:none}
+.foot-links a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="dot"></span>FohBoh <span class="bar">|</span> <span class="s">Sentry</span></a>
+    <a class="btn" href="pricing.html#request">Request a live demo</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <span class="eyebrow">404 · Page not found</span>
+    <h1>That page isn't <span class="red">certified</span>.</h1>
+    <p class="lede">Or more accurately — it doesn't exist. The link may be out of date, or the address may have a typo in it. Here's everything that does exist:</p>
+
+    <div class="links">
+      <a href="index.html"><span class="k">Home</span><span class="t">What Sentry is, and what a CAAR does</span><span class="d">Start here</span></a>
+      <a href="pricing.html"><span class="k">Pricing</span><span class="t">Priced against certified recovery</span><span class="d">The model</span></a>
+      <a href="report.html"><span class="k">CAAR</span><span class="t">A complete example report, front to back</span><span class="d">The deliverable</span></a>
+      <a href="terms.html"><span class="k">Legal</span><span class="t">Terms of Service</span><span class="d">v3.1</span></a>
+      <a href="privacy.html"><span class="k">Legal</span><span class="t">Privacy Policy</span><span class="d">v3.1</span></a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <p>FohBoh | Sentry — currently available exclusively through white-glove onboarding.</p>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="report.html">Example CAAR</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="mailto:sentrysales@fohboh.com">sentrysales@fohboh.com</a>
+    </div>
+    <p>© 2026 FohBoh.ai, Inc. All rights reserved</p>
+  </div>
+</footer>
+
+</body>
+</html>
