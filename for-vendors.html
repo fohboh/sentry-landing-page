@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For the Vendor — Understanding a CAAR | FohBoh | Sentry</title>
+<meta name="description" content="A guide for merchant processors, delivery platforms and franchisors who have received a Certified Analysis &amp; Audit Report. What it is, how it was produced, how to verify it, and how to respond.">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── tokens (matched to the Sentry site) ────────────────── */
+:root{
+  --paper:#F6F2ED;
+  --card:#FFFFFF;
+  --ink:#17161A;
+  --ink-2:#57534C;
+  --ink-3:#8A857C;
+  --hair:#E5DFD6;
+  --red:#D42A1F;
+  --red-deep:#A81E15;
+  --red-tint:#FBE8E5;
+  --green:#12A150;
+  --green-tint:#E7F5EC;
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --r:16px;
+  --shadow:0 1px 2px rgba(23,22,26,.04),0 8px 24px rgba(23,22,26,.05);
+  --pad:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:6px}
+
+/* ─── nav ────────────────────────────────────────────────── */
+.nav{position:sticky;top:0;z-index:50;background:rgba(246,242,237,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--hair)}
+.wrap{max-width:1240px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.03em;text-decoration:none}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--red);flex:none}
+.logo .bar{color:#CFC8BE;font-weight:500}
+.logo .s{color:var(--red);font-style:italic}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{font-size:14.5px;color:var(--ink-2);text-decoration:none;font-weight:500;white-space:nowrap}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a[aria-current]{color:var(--ink);font-weight:600}
+.nav-links a.report-link{color:var(--red);font-weight:600;display:inline-flex;align-items:center;gap:7px}
+.nav-links a.report-link::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);flex:none}
+@media(max-width:1140px){.nav-links{display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--body);font-weight:600;font-size:14px;
+  padding:11px 18px;border-radius:10px;border:1px solid transparent;text-decoration:none;cursor:pointer;background:var(--ink);color:#fff;
+  transition:background .15s ease;white-space:nowrap}
+.btn:hover{background:#000}
+.btn-ghost{background:transparent;color:var(--ink);border-color:#CFC8BE}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(23,22,26,.03)}
+@media(max-width:520px){.nav-in{gap:12px}.btn{font-size:12.5px;padding:9px 13px}.logo{font-size:16.5px;gap:8px}}
+
+/* ─── doc head ───────────────────────────────────────────── */
+.doc-head{padding:clamp(40px,5vw,68px) 0 clamp(26px,3.5vw,38px)}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:16px}
+h1{font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0;font-size:clamp(34px,5vw,54px)}
+.doc-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--hair);background:var(--card);border-radius:999px;padding:7px 14px;color:var(--ink-2)}
+.chip.accent{background:var(--red-tint);border-color:transparent;color:var(--red-deep)}
+.doc-intro{margin-top:26px;max-width:70ch;font-size:clamp(16px,1.5vw,17.5px);color:var(--ink-2)}
+.doc-intro p+p{margin-top:14px}
+
+/* ─── layout ─────────────────────────────────────────────── */
+.doc-grid{display:grid;grid-template-columns:260px 1fr;gap:clamp(28px,4vw,64px);align-items:start;padding-bottom:clamp(56px,7vw,96px)}
+@media(max-width:960px){.doc-grid{grid-template-columns:1fr}}
+.toc{position:sticky;top:96px}
+@media(max-width:960px){.toc{position:static;background:var(--card);border:1px solid var(--hair);border-radius:var(--r);padding:20px 22px}}
+.toc h2{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.toc a{display:flex;gap:10px;text-decoration:none;font-size:13.5px;color:var(--ink-2);line-height:1.4;padding:6px 10px;border-radius:8px;
+  transition:background .15s ease,color .15s ease}
+.toc a:hover{background:rgba(23,22,26,.045);color:var(--ink)}
+.toc a .num{font-family:var(--mono);font-size:11px;color:var(--ink-3);flex:none;width:20px;padding-top:1px}
+
+.doc-body{min-width:0;max-width:80ch}
+.doc-body section{scroll-margin-top:96px}
+.doc-body section+section{margin-top:clamp(34px,4vw,48px);padding-top:clamp(30px,3.5vw,42px);border-top:1px solid var(--hair)}
+.doc-body h2{font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.12;font-size:clamp(22px,2.5vw,27px);
+  margin:0 0 18px;display:flex;gap:14px;align-items:baseline}
+.doc-body h2 .num{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--red);flex:none;padding-top:2px}
+.doc-body h3{font-family:var(--display);font-weight:700;font-size:16.5px;letter-spacing:-.01em;margin:26px 0 8px;color:var(--ink)}
+.doc-body p{margin:0 0 14px;color:var(--ink-2);font-size:15.5px;line-height:1.68}
+.doc-body p:last-child{margin-bottom:0}
+.doc-body strong{color:var(--ink);font-weight:600}
+.doc-body ul{margin:0 0 14px;padding:0;list-style:none;display:grid;gap:11px}
+.doc-body li{display:flex;gap:12px;color:var(--ink-2);font-size:15.5px;line-height:1.6}
+.doc-body li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--red);margin-top:10px}
+.doc-body a[href]{color:var(--red);font-weight:500;text-decoration:underline;text-underline-offset:2px}
+
+.callout{background:var(--card);border:1px solid var(--hair);border-left:3px solid var(--red);border-radius:10px;padding:18px 20px;margin:0 0 18px}
+.callout p{margin:0;font-size:15px}
+.callout p+p{margin-top:10px}
+.callout .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:8px}
+.callout.calm{border-left-color:var(--green)}
+.callout.calm .lbl{color:#0B7A3C}
+
+.tbl-scroll{overflow-x:auto;margin:0 0 18px;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--hair);border-radius:var(--r);overflow:hidden;font-size:14.5px;min-width:520px}
+th{text-align:left;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);
+  padding:14px 16px;border-bottom:1px solid var(--hair);background:#FBF9F6;vertical-align:bottom}
+td{padding:15px 16px;border-bottom:1px solid var(--hair);color:var(--ink-2);vertical-align:top;line-height:1.55}
+tbody tr:last-child td{border-bottom:0}
+td strong,td b{color:var(--ink);font-weight:600}
+td .mono{font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+
+/* tier bands */
+.tiers{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:12px;overflow:hidden;margin:0 0 18px}
+.tier{background:var(--card);padding:15px 18px;display:flex;gap:16px;align-items:flex-start}
+.tier .band{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;padding:4px 10px;border-radius:999px;flex:none;min-width:104px;text-align:center}
+.tier.c .band{background:var(--green-tint);color:#0B7A3C}
+.tier.v .band{background:#FBF3E2;color:#8A6410}
+.tier.r .band{background:#F0EBE3;color:var(--ink-3)}
+.tier .t{font-size:14.5px;color:var(--ink-2);line-height:1.55}
+.tier .t b{color:var(--ink)}
+
+/* verify block */
+.verify{background:#0B0E15;border-radius:12px;padding:20px 22px;margin:0 0 18px;border:1px solid rgba(255,255,255,.08)}
+.verify .lbl{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#F5C842;display:block;margin-bottom:10px}
+.verify p{color:#B8C0D2;font-size:14px;margin:0 0 10px}
+.verify code{display:block;font-family:var(--mono);font-size:12.5px;color:#E4E8F1;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.09);border-radius:7px;padding:11px 13px;margin:0 0 8px;overflow-x:auto;white-space:pre}
+.verify .fine{color:#7D8798;font-size:12.5px;margin:0}
+
+/* ─── footer ─────────────────────────────────────────────── */
+footer{padding:36px 0 48px;border-top:1px solid var(--hair)}
+.foot-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.foot-in p{font-size:13px;color:var(--ink-3);margin:0}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:var(--ink-3);text-decoration:none}
+.foot-links a:hover{color:var(--ink)}
+.foot-links a[aria-current]{color:var(--ink);font-weight:600}
+
+.totop{position:fixed;right:22px;bottom:22px;z-index:60;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;border:0;
+  display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s ease;box-shadow:0 6px 20px rgba(23,22,26,.22)}
+.totop.on{opacity:1;pointer-events:auto}
+@media print{.nav,.toc,.totop{display:none}body{background:#fff}.doc-grid{grid-template-columns:1fr}.doc-body{max-width:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="dot"></span>FohBoh <span class="bar">|</span> <span class="s">Sentry</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html">Platform</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a class="report-link" href="caar-example.html">Example CAAR</a>
+      <a href="for-vendors.html" aria-current="page">For the Vendor</a>
+    </div>
+    <a class="btn" href="mailto:certification@fohboh.com?subject=CAAR%20inquiry">Contact certification</a>
+  </div>
+</nav>
+
+<div class="wrap doc-head">
+  <span class="eyebrow">FohBoh.ai / For the Vendor</span>
+  <h1>You have received a CAAR.<br>Here is what it is.</h1>
+  <div class="doc-meta">
+    <span class="chip accent">Certified Analysis &amp; Audit Report</span>
+    <span class="chip">Guide for vendors</span>
+    <span class="chip">FohBoh.ai, Inc.</span>
+  </div>
+  <div class="doc-intro">
+    <p>One of your restaurant customers has sent you a Certified Analysis &amp; Audit Report — a CAAR — identifying discrepancies in what they were billed. This page explains what that document is, how it was produced, how to check it yourself, and what a useful response looks like.</p>
+    <p>It is written for the person who has to evaluate the claim: a billing analyst, an account manager, a controller, or counsel. It is not a sales page.</p>
+  </div>
+</div>
+
+<div class="wrap doc-grid">
+
+  <nav class="toc" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#s1"><span class="num">01</span><span>What a CAAR is, and who produced it</span></a></li>
+      <li><a href="#s2"><span class="num">02</span><span>What FohBoh is, and is not</span></a></li>
+      <li><a href="#s3"><span class="num">03</span><span>How the numbers were produced</span></a></li>
+      <li><a href="#s4"><span class="num">04</span><span>Reading the report</span></a></li>
+      <li><a href="#s5"><span class="num">05</span><span>The Trust Score, and why you only see certified reports</span></a></li>
+      <li><a href="#s6"><span class="num">06</span><span>The record is fixed at issue</span></a></li>
+      <li><a href="#s7"><span class="num">07</span><span>Verifying it yourself</span></a></li>
+      <li><a href="#s8"><span class="num">08</span><span>The evidence pack</span></a></li>
+      <li><a href="#s9"><span class="num">09</span><span>Responding well</span></a></li>
+      <li><a href="#s10"><span class="num">10</span><span>If you disagree</span></a></li>
+      <li><a href="#s11"><span class="num">11</span><span>What a CAAR does not claim</span></a></li>
+      <li><a href="#s12"><span class="num">12</span><span>Questions</span></a></li>
+    </ol>
+  </nav>
+
+  <main class="doc-body">
+
+    <section id="s1">
+      <h2><span class="num">01</span><span>What a CAAR is, and who produced it</span></h2>
+      <p>A CAAR is a reconciliation report. It compares what you billed a customer against two other things: the customer's own transaction records, and the rate schedule in the agreement the two of you signed. Where those three sources disagree, the report says so, states the amount, and cites the specific records the finding rests on.</p>
+      <p>It was produced by FohBoh | Sentry, an independent certification service the operator uses to audit vendor billing. Nobody at the operator's business calculated the figures, and nobody at FohBoh negotiated them. The report is the output of a fixed rule set applied to sealed data.</p>
+      <p>That distinction is the reason this document exists rather than a spreadsheet. A spreadsheet from a customer invites a conversation about methodology. A CAAR is designed to make the methodology the least interesting part of the conversation, so the two of you can talk about the money.</p>
+    </section>
+
+    <section id="s2">
+      <h2><span class="num">02</span><span>What FohBoh is, and is not</span></h2>
+      <p>Worth being direct about this, because it changes how you should read the claim.</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">FohBoh is</th><th scope="col">FohBoh is not</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>A certification service. It normalizes, reconciles and certifies operational data, and issues a sealed report.</td>
+              <td><strong>Not a debt collector.</strong> It does not pursue payment, contact you on the operator's behalf, or take a share of anything you credit.</td>
+            </tr>
+            <tr>
+              <td>Paid a fixed fee by the operator for producing the certified report, whether or not you ever pay a cent.</td>
+              <td><strong>Not on contingency.</strong> There is no bounty. FohBoh has no financial interest in the size of the finding or the outcome of your discussion.</td>
+            </tr>
+            <tr>
+              <td>Independent of both parties, sitting between the operator's systems and their books.</td>
+              <td><strong>Not the operator's agent.</strong> The claim is the operator's to make. FohBoh certified the record; it did not file the claim and will not argue it.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout calm">
+        <span class="lbl">Why this should matter to you</span>
+        <p>An auditor paid a percentage of what it finds has a reason to find more. This one does not — its fee is the same whether the report shows $400 or $40,000, and the same whether you credit the amount or refuse it. If you were preparing to discount the findings as motivated, that argument does not apply here.</p>
+      </div>
+    </section>
+
+    <section id="s3">
+      <h2><span class="num">03</span><span>How the numbers were produced</span></h2>
+      <p>Eight steps, in the same order, every time. The order is the point, because it determines what could and could not have influenced the result.</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Step</th><th scope="col">What happens</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1 · Ingest</strong></td><td>Source data arrives from the operator's systems and from your own statement and settlement files, as issued.</td></tr>
+            <tr><td><strong>2 · Seal</strong></td><td>Every file is hashed with SHA-256 the moment it is received — <strong>before any analysis runs</strong>. This is what establishes that the evidence was not shaped to fit a conclusion.</td></tr>
+            <tr><td><strong>3 · Normalize</strong></td><td>Records are mapped into a common structure so unlike formats can be compared without altering values.</td></tr>
+            <tr><td><strong>4 · Reconcile</strong></td><td>Cross-system comparison — point-of-sale against your settlements, settlements against bank deposits, billed rates against the executed schedule.</td></tr>
+            <tr><td><strong>5 · Apply rules</strong></td><td>A governed, versioned rule set executes. The report names the rule behind each finding by its identifier.</td></tr>
+            <tr><td><strong>6 · Score</strong></td><td>Evidence coverage is measured and a Trust Score is calculated. See section 05.</td></tr>
+            <tr><td><strong>7 · Narrative seal</strong></td><td>The written findings are generated from the results and sealed with their own hash.</td></tr>
+            <tr><td><strong>8 · Issue</strong></td><td>The report is released with its hash, its rule versions, and its evidence manifest attached.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>No artificial intelligence is involved in the calculations.</h3>
+      <p>The engine is deterministic. It has no model, no inference, no sampling, no extrapolation and no estimation in the variance calculations. Given the same inputs and the same rule version, it returns the same result — the same figures, and the same hash. That property is what makes the report reproducible rather than merely plausible, and it means "the model got it wrong" is not an available explanation for a discrepancy.</p>
+      <p>Findings are stated at the level the underlying data supports: individual transactions, individual batches, individual orders. Where a report states a count — thirty-four batches, four hundred and seventeen pickup orders — every one of them is identified in the evidence manifest.</p>
+    </section>
+
+    <section id="s4">
+      <h2><span class="num">04</span><span>Reading the report</span></h2>
+      <p>Every CAAR carries the same structure. If you review more than one, the second takes a fraction of the time.</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Section</th><th scope="col">What you will find, and what to do with it</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Cover</strong></td><td>The CAAR identifier, the entity, the period, the module, the total certified recoverable amount, and the Trust Score. Quote the CAAR identifier in every reply — it is how both sides stay on the same document.</td></tr>
+            <tr><td><strong>Chain of custody</strong></td><td>Each source file, when it was received, and its hash at receipt. Check the files listed are the ones you issued.</td></tr>
+            <tr><td><strong>Findings</strong></td><td>One entry per discrepancy: what was billed, what the agreement provides for, the difference, the rule that fired, and the records involved. This is where a disagreement should be aimed.</td></tr>
+            <tr><td><strong>Contract basis</strong></td><td>The specific provisions each finding is measured against, as loaded from the executed agreement. If you believe an amendment supersedes one, this is the section to address.</td></tr>
+            <tr><td><strong>Evidence manifest</strong></td><td>Every source record, by identifier. This is how a stated count becomes checkable.</td></tr>
+            <tr><td><strong>Seal</strong></td><td>The SHA-256 hash of the final document, the rule-set version, and the timestamp of issue.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A practical note: the certified recoverable amount on the cover is a calculation under the stated rules and evidence. It is not an invoice, and it is not an assertion that a court has decided anything. It is the number the record supports.</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="num">05</span><span>The Trust Score, and why you only see certified reports</span></h2>
+      <p>Every run produces a Trust Score from 0 to 100. It measures <strong>evidence coverage</strong> — how much of the data needed to check a finding was actually present — rather than confidence in the conclusion. A run with gaps scores lower, and the report names each gap.</p>
+      <div class="tiers">
+        <div class="tier c"><span class="band">85–100</span><span class="t"><b>Certified.</b> A CAAR is issued. Evidence coverage was complete enough to stand behind the figures. This is the only tier you will ever receive.</span></div>
+        <div class="tier v"><span class="band">75–84</span><span class="t"><b>Validated.</b> A sealed report is issued to the operator listing every evidence gap and how to close it — but no CAAR, and no certified amount.</span></div>
+        <div class="tier r"><span class="band">0–74</span><span class="t"><b>Reviewed.</b> A sealed report is issued to the operator with the gaps itemised. Again no CAAR, and no certified amount.</span></div>
+      </div>
+      <p>The consequence is worth stating plainly: <strong>if the evidence had been thin, you would not be holding this document.</strong> A run that cannot be certified never becomes a CAAR. The operator receives it, sees exactly what was missing, and either closes the gap and runs again or lets it go. Nothing reaches you until the coverage threshold is met.</p>
+      <p>So the Trust Score on your cover page is not a hedge. It is the residue of a gate the run had to pass before the report existed.</p>
+    </section>
+
+    <section id="s6">
+      <h2><span class="num">06</span><span>The record is fixed at issue</span></h2>
+      <p>A CAAR is sealed at the moment it is generated. Its hash is computed over the final rendered document, and the document is written to an append-only vault under storage-level retention controls. From that point forward it cannot be edited — not by the operator, not by their accountant, not by FohBoh, and not by anyone who later wishes the number were different.</p>
+      <p>The same applies to the source evidence. Each file was hashed at receipt, before any rule ran, so the inputs are as fixed as the output.</p>
+      <p>Two things follow, and they cut in both directions.</p>
+      <ul>
+        <li><strong>The version in your inbox is the version that persists.</strong> If this discussion is still running in eighteen months, in front of an auditor or in a proceeding, the document produced will be byte-for-byte the one you are reading now. There is no later, softer revision to wait for.</li>
+        <li><strong>The same permanence protects you.</strong> The operator cannot quietly enlarge a finding after you have responded, add a discrepancy that was not in the original run, or produce a differently-worded version of the report that suits them better. If they want to change the figures, they have to run a new certification — which gets a new identifier, a new hash, and a visible relationship to this one.</li>
+      </ul>
+      <div class="callout">
+        <span class="lbl">Practical consequence</span>
+        <p>If you re-save, re-export, or print the attached PDF to a new file, the hash will no longer match — not because anything was falsified, but because the bytes changed. Keep the original file as received. If you need to circulate it internally, forward it rather than re-generating it.</p>
+      </div>
+    </section>
+
+    <section id="s7">
+      <h2><span class="num">07</span><span>Verifying it yourself</span></h2>
+      <p>You do not have to take the seal on faith, and you do not need anything from FohBoh to check it. The hash is printed on the report. Compute it on the file you received and compare.</p>
+      <div class="verify">
+        <span class="lbl">Confirming the seal</span>
+        <p>macOS or Linux:</p>
+        <code>shasum -a 256 CAAR-M02-2026-07-000418.pdf</code>
+        <p>Windows PowerShell:</p>
+        <code>Get-FileHash -Algorithm SHA256 .\CAAR-M02-2026-07-000418.pdf</code>
+        <p class="fine">The value returned should match the SHA-256 printed in the report's seal section, character for character. If it matches, the document is exactly as issued. If it does not, the file has been altered or re-saved somewhere between issue and your inbox — ask the operator for the original.</p>
+      </div>
+      <p>Verifying the seal confirms integrity: that this is the document that was issued, unchanged. It does not, on its own, mean you agree with the findings — that is what section 10 is for. But it does remove one whole category of argument from the table, which is usually in everyone's interest.</p>
+    </section>
+
+    <section id="s8">
+      <h2><span class="num">08</span><span>The evidence pack</span></h2>
+      <p>Alongside the CAAR, the operator can provide the complete evidence pack: every source record the reconciliation relied on, sealed, with the manifest that ties each one to the findings it supports. That includes your own settlement and statement files exactly as you issued them.</p>
+      <p>The pack exists so your team can reproduce the calculation independently. If your figure differs from the report's, working through the pack will show where the two diverge — a different denominator, a different effective date, a rate table that was never loaded, an amendment that was not provided. In practice that is where most disagreements actually live, and finding it is faster than exchanging positions.</p>
+      <p>If you have received the CAAR but not the pack, ask the operator for it. If you are being escalated to, you have probably received both.</p>
+    </section>
+
+    <section id="s9">
+      <h2><span class="num">09</span><span>Responding well</span></h2>
+      <p>What makes a response useful, from the perspective of getting this closed:</p>
+      <ul>
+        <li><strong>Reference the finding, not the report.</strong> Findings are numbered. A response that addresses finding 4 specifically moves things forward; one that addresses "the claim" does not.</li>
+        <li><strong>If a document supersedes the contract basis, send it.</strong> An amended addendum or a countersigned tier change resolves a finding immediately if it exists — and if it was never provided to the operator, it could not have been loaded.</li>
+        <li><strong>If your own records differ, say where.</strong> Give the transaction, batch or order identifiers. The manifest makes them directly comparable.</li>
+        <li><strong>If a finding is correct, credit it and set it aside.</strong> Partial resolution is normal. Most CAARs contain a mix, and separating the agreed items from the disputed ones shrinks the conversation quickly.</li>
+      </ul>
+      <h3>What does not work</h3>
+      <p>A general denial, a restatement of policy, or a referral to a self-service portal will not close a certified claim. The record is specific, so a non-specific response leaves the operator with nothing to evaluate — and it is itself preserved in the claim file, which is not a pattern that reads well later. Operators track rejections; a third one typically moves the matter to outside counsel with the sealed pack attached, which is a worse outcome for both sides than a substantive reply now.</p>
+    </section>
+
+    <section id="s10">
+      <h2><span class="num">10</span><span>If you disagree</span></h2>
+      <p>Disagreeing with a CAAR is entirely reasonable, and the document is built to make a real disagreement legible. There are only a few places one can live:</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th scope="col">Where the dispute sits</th><th scope="col">How to resolve it</th></tr></thead>
+          <tbody>
+            <tr><td><strong>The contract basis is wrong</strong></td><td>An amendment, addendum or schedule change was in force and was not loaded. Provide the executed document with its effective date.</td></tr>
+            <tr><td><strong>The source data is incomplete</strong></td><td>A file you issued was missing or partial. Identify it; the chain-of-custody section lists exactly what was received.</td></tr>
+            <tr><td><strong>The interpretation is contested</strong></td><td>You read a provision differently — which base commission applies to, what counts as a qualifying transaction. State your reading and cite the clause. This is a genuine dispute and the record does not pretend to settle it.</td></tr>
+            <tr><td><strong>The arithmetic is wrong</strong></td><td>Rare, and checkable. Reproduce it from the pack and show the divergence. If a rule is defective, that matters well beyond this one claim and FohBoh will want to know.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Notice what is not on that list: whether the numbers were assembled honestly, whether the evidence was selected to suit the conclusion, and whether the document has been altered since issue. Those are the arguments the seal and the pre-analysis hashing are designed to retire, so that the remaining conversation is about substance.</p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="num">11</span><span>What a CAAR does not claim</span></h2>
+      <p>Being precise about the limits is part of the document being trustworthy.</p>
+      <ul>
+        <li><strong>It is not a legal opinion,</strong> and it is not an independent audit under any auditing standard.</li>
+        <li><strong>It does not adjudicate liability.</strong> A certified recoverable amount is a calculation under stated rules and evidence, not a determination that you owe it.</li>
+        <li><strong>It does not guarantee admissibility.</strong> The report is structured to self-authenticate, and evidentiary weight is decided by a court on the facts, the forum and the applicable rules — not by FohBoh.</li>
+        <li><strong>It does not certify your systems, your compliance, or your conduct.</strong> It certifies a reconciliation of defined data against defined terms, for one period.</li>
+        <li><strong>It cannot certify what it was not given.</strong> Certification attaches to the data in scope. Records that were never provided are outside it, and the report says which.</li>
+      </ul>
+    </section>
+
+    <section id="s12">
+      <h2><span class="num">12</span><span>Questions</span></h2>
+      <p>Questions about the <strong>claim</strong> — the amount, the credit, the timing — go to the operator. It is their claim, and FohBoh will not discuss it on their behalf or intervene in it.</p>
+      <p>Questions about the <strong>methodology</strong> — how a rule works, what a Trust Score band means, how to verify a seal, how to reproduce a figure from the pack — can come to FohBoh directly at <a href="mailto:certification@fohboh.com?subject=CAAR%20methodology%20inquiry">certification@fohboh.com</a>. We will answer them for either party, because a methodology that only one side understands is not much of a standard.</p>
+      <p>If you would like to see the structure of a CAAR before yours arrives, there is an <a href="caar-example.html">example report</a> published in full.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="wrap foot-in">
+    <p>FohBoh | Sentry — certified revenue recovery for restaurant operators.</p>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="platform.html">Platform</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="caar-example.html">Example CAAR</a>
+      <a href="model.html">Sentry Model</a>
+      <a href="for-vendors.html" aria-current="page">For the Vendor</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="mailto:certification@fohboh.com">certification@fohboh.com</a>
+    </div>
+    <p>© 2026 FohBoh.ai, Inc. All rights reserved · Patent pending</p>
+  </div>
+</footer>
+
+<button class="totop" id="toTop" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M8 3L3 8M8 3l5 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+var toTop = document.getElementById('toTop');
+window.addEventListener('scroll', function(){
+  toTop.classList.toggle('on', window.scrollY > 700);
+}, {passive:true});
+toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+</script>
+</body>
+</html>
