@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pricing — $199/location/month plus a Certification Transaction Fee | FohBoh | Sentry</title>
-<meta name="description" content="Sentry is $199 per location per month with a 10–15% Certification Transaction Fee on certified recoverable value. Charter accounts through September 30, 2026 pay no subscription.">
+<meta name="description" content="Sentry is $199 per location per month with a 10–15% Certification Transaction Fee on certified recoverable value.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -412,29 +412,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 }
 
 
-/* ─── charter banner ─────────────────────────────────────── */
-.charter{
-  background:var(--ink);color:#fff;border-radius:var(--r);
-  padding:clamp(22px,2.8vw,34px);margin-bottom:14px;
-  display:grid;grid-template-columns:1.35fr auto;gap:clamp(20px,3vw,40px);align-items:center;
-}
-@media(max-width:860px){.charter{grid-template-columns:1fr}}
-.charter-tag{
-  display:inline-flex;align-items:center;gap:9px;background:rgba(18,161,80,.18);
-  color:#5FD98F;border-radius:999px;padding:7px 14px;margin-bottom:14px;
-  font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-}
-.charter-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal);flex:none}
-.charter h3{color:#fff;font-size:clamp(19px,2.2vw,25px);max-width:24ch;line-height:1.15}
-.charter p{color:rgba(255,255,255,.62);font-size:14.8px;margin-top:12px;max-width:56ch;line-height:1.6}
-.ctoggle{display:inline-flex;background:rgba(255,255,255,.09);border-radius:10px;padding:4px;gap:4px}
-.cbtn{
-  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  background:transparent;color:rgba(255,255,255,.55);border:0;border-radius:7px;
-  padding:10px 18px;cursor:pointer;transition:background .15s ease,color .15s ease;white-space:nowrap;
-}
-.cbtn.on{background:var(--teal);color:#fff;font-weight:600}
-.charter-note{font-size:12.5px;color:rgba(255,255,255,.38);margin-top:12px;max-width:26ch}
 
 /* ─── plan matrix ────────────────────────────────────────── */
 .plan-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:stretch}
@@ -462,10 +439,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 .pnum{font-family:var(--display);font-weight:800;font-size:clamp(40px,5vw,54px);letter-spacing:-.05em;line-height:1}
 .pwas{font-family:var(--display);font-weight:700;font-size:20px;color:var(--ink-3);text-decoration:line-through;letter-spacing:-.03em}
 .punit{font-size:14px;color:var(--ink-3)}
-.plan-waived{
-  font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
-  color:#008C8C;background:var(--teal-tint);border-radius:999px;padding:5px 10px;
-}
 .plan-min{font-size:14.5px;color:var(--ink-2);margin-top:14px;line-height:1.55}
 .plan-list{list-style:none;margin:22px 0 0;padding:22px 0 0;border-top:1px solid var(--hair);display:grid;gap:13px}
 .plan-list li{display:flex;gap:11px;font-size:14.5px;color:var(--ink-2);line-height:1.5}
@@ -553,7 +526,7 @@ footer{padding:36px 0 48px;border-top:1px solid var(--hair)}
   <div class="wrap">
     <span class="eyebrow">Commercial model</span>
     <h1>You pay on what the engine <span class="red">certifies</span>.</h1>
-    <p class="lede">A per-location subscription plus a Certification Transaction Fee on certified recoverable value. Certified — not recovered: the CAAR is the evidence that the money is owed, and the fee is invoiced when that evidence seals. Charter accounts onboarded through September 30, 2026 pay the transaction fee only.</p>
+    <p class="lede">A per-location subscription plus a Certification Transaction Fee on certified recoverable value. Certified — not recovered: the CAAR is the evidence that the money is owed, and the fee is invoiced when that evidence seals.</p>
   </div>
 </header>
 
@@ -562,22 +535,6 @@ footer{padding:36px 0 48px;border-top:1px solid var(--hair)}
 <!-- ══ PRICING ══ -->
 <section id="pricing">
   <div class="wrap">
-
-    <!-- charter offer -->
-    <div class="charter rv">
-      <div>
-        <span class="charter-tag">Charter accounts · through September 30, 2026</span>
-        <h3>The subscription is waived. You pay only on what certifies.</h3>
-        <p>Charter accounts onboarded before September 30, 2026 pay no per-location subscription — not discounted, waived. The only invoice is the Certification Transaction Fee, charged per certification.</p>
-      </div>
-      <div>
-        <div class="ctoggle" role="group" aria-label="Pricing view">
-          <button type="button" class="cbtn on" data-mode="charter">Charter</button>
-          <button type="button" class="cbtn" data-mode="standard">Standard</button>
-        </div>
-        <p class="charter-note">Switch to standard to see pricing after the charter window closes.</p>
-      </div>
-    </div>
 
     <!-- plan matrix -->
     <div class="plan-wrap rv">
@@ -602,7 +559,6 @@ footer{padding:36px 0 48px;border-top:1px solid var(--hair)}
           <span class="pnum" id="planPrice">$0</span>
           <span class="pwas" id="planWas" hidden>$199</span>
           <span class="punit" id="planUnit">/ location / month</span>
-          <span class="plan-waived" id="planWaived">Waived · charter</span>
         </div>
 
         <p class="plan-min"><strong>Minimum 10 locations.</strong> <span id="planDesc"></span></p>
@@ -649,7 +605,7 @@ footer{padding:36px 0 48px;border-top:1px solid var(--hair)}
       <div>
         <span class="eyebrow">Worked example</span>
         <h3>The example CAAR, priced out.</h3>
-        <p class="wnote">One merchant, one delivery platform, one month, as a charter account. These are the actual figures from the sample report &mdash; the same arithmetic runs on your own numbers during the demo.</p>
+        <p class="wnote">One merchant, one delivery platform, one month. These are the actual figures from the sample report &mdash; the same arithmetic runs on your own numbers during the demo.</p>
       </div>
       <div>
         <div class="ledger">
@@ -658,25 +614,21 @@ footer{padding:36px 0 48px;border-top:1px solid var(--hair)}
             <span class="lv">$8,200.00</span>
           </div>
           <div class="lrow sub">
-            <span class="lk">Sentry subscription &mdash; charter account, waived</span>
-            <span class="lv">$0.00</span>
-          </div>
-          <div class="lrow sub">
             <span class="lk">Certification Transaction Fee &middot; 10% &middot; TIER-A</span>
             <span class="lv">&minus;$820.00</span>
           </div>
           <div class="lrow net">
-            <span class="lk">Net to the operator</span>
+            <span class="lk">Net from this certification</span>
             <span class="lv">$7,380.00</span>
           </div>
         </div>
-        <p class="worked-foot">Sample data &middot; TIER-A floor rate shown; your tier is set in the Order Form &middot; fee invoiced when the CAAR seals &middot; vendor response deadline 30 days from transmittal</p>
+        <p class="worked-foot">Sample data &middot; TIER-A floor rate shown; your tier is set in the Order Form &middot; fee invoiced when the CAAR seals &middot; per-location subscription billed separately &middot; vendor response deadline 30 days from transmittal</p>
       </div>
     </div>
 
     <div class="btn-row rv">
       <a class="btn btn-brand" href="#request">Get your rate scoped</a>
-      <span class="btn-note">Charter pricing applies to accounts onboarded on or before September 30, 2026.</span>
+      <span class="btn-note">Your rate tier, modules, and location count are set in the Order Form.</span>
     </div>
   </div>
 </section>
@@ -940,37 +892,26 @@ if(reduce && marker) marker.style.left='91%';
   if(!priceEl) return;
   var wasEl=document.getElementById('planWas'),
       unitEl=document.getElementById('planUnit'),
-      waivedEl=document.getElementById('planWaived'),
       descEl=document.getElementById('planDesc'),
       listEl=document.getElementById('planList'),
       badgeEl=document.getElementById('planBadge');
 
-  var plan='m01', mode='charter';
+  var plan='m01';
 
   function money(n){ return '$'+n; }
 
   function render(){
     var p=PLANS[plan];
-    if(mode==='charter'){
-      priceEl.textContent='$0';
-      wasEl.textContent=money(p.price); wasEl.hidden=false;
-      waivedEl.hidden=false;
-      unitEl.textContent='/ location / month';
-    } else {
-      priceEl.textContent=money(p.price);
-      if(p.was){ wasEl.textContent=money(p.was); wasEl.hidden=false; }
-      else { wasEl.hidden=true; }
-      waivedEl.hidden=true;
-      unitEl.textContent='/ location / month';
-    }
+    priceEl.textContent=money(p.price);
+    if(p.was){ wasEl.textContent=money(p.was); wasEl.hidden=false; }
+    else { wasEl.hidden=true; }
+    unitEl.textContent='/ location / month';
     descEl.textContent=p.desc;
-    if(p.badge && mode==='standard'){ badgeEl.textContent=p.badge; badgeEl.hidden=false; }
-    else if(p.badge && mode==='charter'){ badgeEl.textContent=p.badge; badgeEl.hidden=false; }
+    if(p.badge){ badgeEl.textContent=p.badge; badgeEl.hidden=false; }
     else { badgeEl.hidden=true; }
 
     var items=BASE.slice();
     if(p.extra) items.push(p.extra);
-    if(mode==='charter') items.unshift('Subscription waived \u2014 charter account, through Sep 30, 2026');
     listEl.innerHTML='';
     items.forEach(function(t){ var li=document.createElement('li'); li.textContent=t; listEl.appendChild(li); });
   }
@@ -979,12 +920,6 @@ if(reduce && marker) marker.style.left='91%';
     b.addEventListener('click',function(){
       document.querySelectorAll('.segbtn').forEach(function(x){x.classList.remove('on')});
       b.classList.add('on'); plan=b.getAttribute('data-plan'); render();
-    });
-  });
-  document.querySelectorAll('.cbtn').forEach(function(b){
-    b.addEventListener('click',function(){
-      document.querySelectorAll('.cbtn').forEach(function(x){x.classList.remove('on')});
-      b.classList.add('on'); mode=b.getAttribute('data-mode'); render();
     });
   });
   render();
