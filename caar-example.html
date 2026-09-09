@@ -19,6 +19,14 @@ body{
 }
 
 :root{
+  /* ── FohBoh.ai Website Identity System ───────────────── */
+  --brand:#6D28D9;
+  --brand-hover:#7C3AED;
+  --brand-tint:#F1EBFD;
+  --teal:#00A7A7;
+  --teal-deep:#008C8C;
+  --teal-tint:#E0F5F5;
+
   --ink:#1C1208;
   --ink2:rgba(28,18,8,.6);
   --ink3:rgba(28,18,8,.38);
@@ -28,9 +36,9 @@ body{
   --amber:#C8820A;
   --amber-light:rgba(200,130,10,.08);
   --amber-border:rgba(200,130,10,.22);
-  --green:#1A7A4A;
-  --green-light:rgba(26,122,74,.08);
-  --green-border:rgba(26,122,74,.18);
+  --green:#00A7A7;
+  --green-light:rgba(0,167,167,.08);
+  --green-border:rgba(0,167,167,.18);
   --red:#C0392B;
   --red-light:rgba(192,57,43,.07);
   --border:rgba(0,0,0,.1);
@@ -94,7 +102,7 @@ body{
 }
 .cover-stripe{
   position:absolute;top:0;left:0;right:0;height:5px;
-  background:linear-gradient(90deg,#1A3F7A 0%,#C8820A 50%,#1A7A4A 100%);
+  background:linear-gradient(90deg,#1A3F7A 0%,#C8820A 50%,#00A7A7 100%);
 }
 .cover-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px}
 .cover-brand{font-size:15px;font-weight:800;color:var(--navy);letter-spacing:-.02em}
@@ -107,7 +115,7 @@ body{
   font-size:10px;font-weight:700;padding:3px 10px;border-radius:3px;
   letter-spacing:.05em;
 }
-.badge-certified{background:#1A7A4A;color:white}
+.badge-certified{background:#00A7A7;color:white}
 .badge-fre{background:var(--navy);color:white}
 .badge-dcls{background:rgba(0,0,0,.07);color:var(--ink2);border:1px solid var(--border)}
 
@@ -123,7 +131,7 @@ body{
 .cover-field-sub{font-size:10px;color:var(--ink3);margin-top:1px}
 
 .cover-recovery{
-  background:linear-gradient(135deg,rgba(26,63,122,.07) 0%,rgba(26,122,74,.05) 100%);
+  background:linear-gradient(135deg,rgba(26,63,122,.07) 0%,rgba(0,167,167,.05) 100%);
   border:1px solid var(--navy-border);
   border-radius:6px;
   padding:16px 20px;
@@ -131,12 +139,12 @@ body{
   margin-bottom:20px;
 }
 .recovery-label{font-size:9.5px;font-weight:700;letter-spacing:.08em;color:var(--navy);text-transform:uppercase}
-.recovery-amount{font-size:28px;font-weight:800;color:var(--green);letter-spacing:-.04em}
+.recovery-amount{font-size:28px;font-weight:800;color:var(--teal);letter-spacing:-.04em}
 .recovery-annualized{font-size:10.5px;color:var(--ink3);margin-top:2px}
 .recovery-ts{text-align:right}
 .ts-number{font-size:32px;font-weight:800;color:var(--navy);letter-spacing:-.04em;line-height:1}
 .ts-label{font-size:9.5px;font-weight:700;color:var(--navy);letter-spacing:.04em}
-.ts-zone{font-size:10px;font-weight:700;color:var(--green);margin-top:2px}
+.ts-zone{font-size:10px;font-weight:700;color:var(--teal);margin-top:2px}
 
 .cover-warning{
   background:var(--amber-light);border:1px solid var(--amber-border);
@@ -168,8 +176,8 @@ body{
   border-top:2px solid var(--navy);
   font-weight:700;color:var(--ink);background:var(--navy-light);
 }
-.cert-table td.amount{text-align:right;font-weight:700;color:var(--green);font-family:var(--mono);font-size:11px}
-.cert-table td.amount-red{text-align:right;font-weight:700;color:var(--red);font-family:var(--mono);font-size:11px}
+.cert-table td.amount{text-align:right;font-weight:700;color:var(--teal);font-family:var(--mono);font-size:11px}
+.cert-table td.amount-red{text-align:right;font-weight:700;color:var(--brand);font-family:var(--mono);font-size:11px}
 .cert-table td.amount-total{text-align:right;font-weight:800;color:var(--navy);font-family:var(--mono);font-size:12px}
 .cert-table td.rule-id{font-family:var(--mono);font-size:10px;color:var(--amber);font-weight:600}
 .cert-table td.mono-sm{font-family:var(--mono);font-size:10px;color:var(--ink3)}
@@ -179,14 +187,14 @@ body{
 .gate-table th{font-size:9px;font-weight:700;letter-spacing:.08em;color:white;background:var(--navy);padding:6px 8px;text-align:left}
 .gate-table td{padding:6px 8px;border-bottom:1px solid var(--border2);vertical-align:middle}
 .gate-table tr:last-child td{border-bottom:none;border-top:2px solid var(--navy);font-weight:700;background:var(--navy-light)}
-.gate-pass{color:var(--green);font-weight:700}
+.gate-pass{color:var(--teal);font-weight:700}
 .gate-elevated{color:var(--amber);font-weight:700}
 .gate-score{font-family:var(--mono);font-size:11px;font-weight:700}
 .gate-weight{font-family:var(--mono);font-size:10px;color:var(--ink3)}
 .gate-bar-cell{width:80px}
 .gate-bar{height:5px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden}
 .gate-bar-fill{height:100%;border-radius:3px}
-.gate-fill-green{background:#1A7A4A}
+.gate-fill-green{background:#00A7A7}
 .gate-fill-amber{background:#C8820A}
 
 /* ── CHAIN OF CUSTODY ── */
@@ -195,7 +203,7 @@ body{
 .coc-table td{padding:5px 8px;border-bottom:1px solid var(--border2);font-family:var(--mono);font-size:9.5px;color:var(--ink2);vertical-align:top}
 .coc-table tr:last-child td{border-bottom:none}
 .coc-event{font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:600;color:var(--ink)}
-.coc-check{color:var(--green);font-weight:700;font-family:'Plus Jakarta Sans',sans-serif}
+.coc-check{color:var(--teal);font-weight:700;font-family:'Plus Jakarta Sans',sans-serif}
 
 /* ── ATTESTATION BLOCK ── */
 .attest-block{
@@ -223,7 +231,7 @@ body{
 .manifest-table td.comp-name{font-weight:600;color:var(--ink);font-size:10.5px;width:160px}
 .manifest-table td.comp-file{font-family:var(--mono);font-size:9px;color:var(--ink3);width:160px;word-break:break-all}
 .manifest-table td.comp-hash{font-family:var(--mono);font-size:9px;color:var(--ink3);word-break:break-all;line-height:1.5}
-.manifest-table td.comp-status{color:var(--green);font-weight:700;font-size:10px;white-space:nowrap;width:60px}
+.manifest-table td.comp-status{color:var(--teal);font-weight:700;font-size:10px;white-space:nowrap;width:60px}
 
 /* ── FORMULA BOX ── */
 .formula-box{
@@ -240,7 +248,7 @@ body{
 /* ── CALLOUT BOXES ── */
 .callout{border-radius:4px;padding:10px 14px;margin:10px 0;font-size:11px;line-height:1.6}
 .callout-navy{background:var(--navy-light);border-left:3px solid var(--navy)}
-.callout-green{background:var(--green-light);border-left:3px solid var(--green)}
+.callout-green{background:var(--green-light);border-left:3px solid var(--teal)}
 .callout-amber{background:var(--amber-light);border-left:3px solid var(--amber)}
 .callout strong{font-weight:700}
 
@@ -304,10 +312,10 @@ body{
 .caar-info-v{font-size:11px;color:var(--ink2);line-height:1.55}
 .caar-info-value{
   margin-top:10px;padding:8px 10px;background:var(--green-light);
-  border-left:2px solid var(--green);border-radius:3px;
+  border-left:2px solid var(--teal);border-radius:3px;
   font-size:10.5px;line-height:1.5;color:var(--ink);
 }
-.caar-info-value b{color:var(--green)}
+.caar-info-value b{color:var(--teal)}
 
 /* ─── preview gate ──────────────────────────────────── */
 
@@ -372,7 +380,7 @@ body{
     </div>
     <div class="cover-cert-badge">
       <span class="cert-badge badge-certified">✦ CERTIFIED · TS 92</span>
-      <span class="cert-badge badge-fre">FRE 803(6) · 902(13) · 902(14) · 1006</span>
+      <span class="cert-badge badge-fre">FRE 803(6) · 902(11) · 1002</span>
       <span class="cert-badge badge-dcls">certified narrative · KPI v1.0.0 Locked</span>
     </div>
   </div>
@@ -453,9 +461,9 @@ body{
     <div class="caar-info-panel-inner">
       <div class="caar-info-eyebrow">In plain language</div>
       <div class="caar-info-row"><span class="caar-info-k" style="color:var(--amber)">What it is</span><span class="caar-info-v">The header confirming this report cleared every quality check before it was ever generated.</span></div>
-      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--green)">Where the data comes from</span><span class="caar-info-v">The engine's own processing record for this specific run — not a judgment call made by a person after the fact.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--teal)">Where the data comes from</span><span class="caar-info-v">The engine's own processing record for this specific run — not a judgment call made by a person after the fact.</span></div>
       <div class="caar-info-row"><span class="caar-info-k" style="color:var(--navy)">What it does</span><span class="caar-info-v">Confirms the analysis actually completed and met the minimum data-quality bar before anything downstream was produced.</span></div>
-      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--red)">Why it matters</span><span class="caar-info-v">You're not looking at a rough first draft. Nothing reaches this page unless the underlying data already passed inspection.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--brand)">Why it matters</span><span class="caar-info-v">You're not looking at a rough first draft. Nothing reaches this page unless the underlying data already passed inspection.</span></div>
       <div class="caar-info-value">Worth more than a spreadsheet: a spreadsheet prints whatever was typed into it, right or wrong. This has a gate in front of it.</div>
     </div>
   </div>
@@ -469,7 +477,7 @@ body{
       <tbody>
         <tr>
           <td><strong>Certification State</strong></td>
-          <td style="color:var(--green);font-weight:700">S1 · CERTIFIED</td>
+          <td style="color:var(--teal);font-weight:700">S1 · CERTIFIED</td>
           <td style="color:var(--ink3)">Trust Score ≥ 85 · all CAAR conditions met</td>
         </tr>
         <tr>
@@ -484,12 +492,12 @@ body{
         </tr>
         <tr>
           <td><strong>R198 MASTER_SYSTEM_HEALTHY</strong></td>
-          <td style="color:var(--green);font-weight:700">PASS</td>
-          <td style="color:var(--ink3)">Supports the FRE 902(13) self-authentication design</td>
+          <td style="color:var(--teal);font-weight:700">PASS</td>
+          <td style="color:var(--ink3)">Supports the FRE 902(11) self-authentication design</td>
         </tr>
         <tr>
           <td><strong>CAAR Eligible</strong></td>
-          <td style="color:var(--green);font-weight:700">YES</td>
+          <td style="color:var(--teal);font-weight:700">YES</td>
           <td style="color:var(--ink3)">TS ≥ 85 + R198 pass + IUM > 50%</td>
         </tr>
         <tr>
@@ -522,9 +530,9 @@ body{
     <div class="caar-info-panel-inner">
       <div class="caar-info-eyebrow">In plain language</div>
       <div class="caar-info-row"><span class="caar-info-k" style="color:var(--amber)">What it is</span><span class="caar-info-v">The exact list of files, locations, and time period this report covers — nothing more, nothing less.</span></div>
-      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--green)">Where the data comes from</span><span class="caar-info-v">Your own POS exports, your vendor's statements, and your signed contract for the period stated.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--teal)">Where the data comes from</span><span class="caar-info-v">Your own POS exports, your vendor's statements, and your signed contract for the period stated.</span></div>
       <div class="caar-info-row"><span class="caar-info-k" style="color:var(--navy)">What it does</span><span class="caar-info-v">Draws a clear line around the analysis so there's no ambiguity about what was — and wasn't — reviewed.</span></div>
-      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--red)">Why it matters</span><span class="caar-info-v">Anyone reading this — you, your bookkeeper, even the vendor — can see precisely what was checked. Nothing can be dismissed as “we don't know what data you used.”</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--brand)">Why it matters</span><span class="caar-info-v">Anyone reading this — you, your bookkeeper, even the vendor — can see precisely what was checked. Nothing can be dismissed as “we don't know what data you used.”</span></div>
       <div class="caar-info-value">Worth more than a spot-check: a consultant samples a few months. This covers the full stated period, completely.</div>
     </div>
   </div>
@@ -567,8 +575,8 @@ body{
         <tr><td>Certification Period</td><td>2026-01-01 through 2026-01-31 (31 days)</td></tr>
         <tr><td>Platform Gross Sales</td><td style="font-family:var(--mono);font-weight:700">$75,000.00</td></tr>
         <tr><td>POS Delivery Sales</td><td style="font-family:var(--mono);font-weight:700">$73,500.00</td></tr>
-        <tr><td>DSP Commission Rate Applied</td><td style="font-family:var(--mono);font-weight:700;color:var(--red)">30%</td></tr>
-        <tr><td>Contracted Commission Rate</td><td style="font-family:var(--mono);font-weight:700;color:var(--green)">20%</td></tr>
+        <tr><td>DSP Commission Rate Applied</td><td style="font-family:var(--mono);font-weight:700;color:var(--brand)">30%</td></tr>
+        <tr><td>Contracted Commission Rate</td><td style="font-family:var(--mono);font-weight:700;color:var(--teal)">20%</td></tr>
         <tr><td>Total Records Evaluated</td><td style="font-family:var(--mono)">612</td></tr>
         <tr><td>Marketplace Facilitator Tax Note</td><td style="font-size:10.5px;color:var(--ink3)">Positive POS/settlement delta from marketplace facilitator tax is expected and is NOT a DFR recovery finding. Excluded per architecture rule.</td></tr>
       </tbody>
@@ -586,9 +594,9 @@ body{
     <div class="caar-info-panel-inner">
       <div class="caar-info-eyebrow">In plain language</div>
       <div class="caar-info-row"><span class="caar-info-k" style="color:var(--amber)">What it is</span><span class="caar-info-v">A plain statement of how the numbers were produced — the same checks, applied the same way, every single time.</span></div>
-      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--green)">Where the data comes from</span><span class="caar-info-v">The engine's internal processing log for this report — an automatic record, not something written up afterward.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--teal)">Where the data comes from</span><span class="caar-info-v">The engine's internal processing log for this report — an automatic record, not something written up afterward.</span></div>
       <div class="caar-info-row"><span class="caar-info-k" style="color:var(--navy)">What it does</span><span class="caar-info-v">Confirms no AI, no guesswork, and no estimation were involved anywhere in the calculation — only a fixed set of checks run consistently against your data.</span></div>
-      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--red)">Why it matters</span><span class="caar-info-v">Because the process is fixed and repeatable, running the same data through it again produces the same result — the kind of consistency auditors and attorneys look for in a business record.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--brand)">Why it matters</span><span class="caar-info-v">Because the process is fixed and repeatable, running the same data through it again produces the same result — the kind of consistency auditors and attorneys look for in a business record.</span></div>
       <div class="caar-info-value">Worth more than a consultant's judgment: a person's read on the numbers can shift day to day. This doesn't.</div>
     </div>
   </div>
@@ -603,14 +611,14 @@ body{
           <td>Every pipeline event is logged automatically at execution time (R152), on the same schedule every period, whether or not a variance is found — the hallmark of a regularly conducted activity.</td>
         </tr>
         <tr>
-          <td style="white-space:nowrap"><strong>FRE 902(13)</strong></td>
-          <td>Self-Authentication — Record of an Electronic Process</td>
-          <td>The Attestation Block (R149) and ExportPack Manifest (R151) let any recipient independently recompute and verify every hash. A compliant Rule 902(13) certification additionally requires a signed declaration of a qualified person, provided separately alongside this report where applicable. Authenticity does not require a live witness; foundation for the summary itself, under Rule 1006, is a separate question that declaration also addresses.</td>
+          <td style="white-space:nowrap"><strong>FRE 902(11)</strong></td>
+          <td>Self-Authentication of Business Records</td>
+          <td>The Attestation Block (R149) and ExportPack Manifest (R151) let any recipient independently recompute and verify every hash. A compliant Rule 902(11) certification additionally requires a signed custodian declaration, provided separately alongside this report where applicable.</td>
         </tr>
         <tr>
-          <td style="white-space:nowrap"><strong>FRE 1006</strong></td>
-          <td>Summaries to Prove Content</td>
-          <td>This report is a calculation proving the content of voluminous admissible records that cannot conveniently be examined in court. As amended December 1, 2024, Rule 1006 admits such a summary as substantive evidence, whether or not the underlying records are separately introduced. Original source files are included unmodified in ExportPack components #1 and #2 — the tender Rule 1006(b) requires.</td>
+          <td style="white-space:nowrap"><strong>FRE 1002</strong></td>
+          <td>Best Evidence Rule</td>
+          <td>Original source files are included unmodified in ExportPack components #1 and #2. Rule-governed normalization is documented separately in component #4. This report is a summary of those records, not a substitute for them.</td>
         </tr>
       </tbody>
     </table>
@@ -646,9 +654,9 @@ body{
     <div class="caar-info-panel-inner">
       <div class="caar-info-eyebrow">In plain language</div>
       <div class="caar-info-row"><span class="caar-info-k" style="color:var(--amber)">What it is</span><span class="caar-info-v">A single score summarizing how complete and reliable the underlying data was going into this analysis.</span></div>
-      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--green)">Where the data comes from</span><span class="caar-info-v">A set of automated checks — completeness, source verification, cross-system reconciliation, and others — run against your files during processing.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--teal)">Where the data comes from</span><span class="caar-info-v">A set of automated checks — completeness, source verification, cross-system reconciliation, and others — run against your files during processing.</span></div>
       <div class="caar-info-row"><span class="caar-info-k" style="color:var(--navy)">What it does</span><span class="caar-info-v">Breaks data quality down so you can see what's behind the number, instead of just being asked to trust it.</span></div>
-      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--red)">Why it matters</span><span class="caar-info-v">A high score means the findings in this report are standing on solid ground, not shaky or incomplete data.</span></div>
+      <div class="caar-info-row"><span class="caar-info-k" style="color:var(--brand)">Why it matters</span><span class="caar-info-v">A high score means the findings in this report are standing on solid ground, not shaky or incomplete data.</span></div>
       <div class="caar-info-value">Worth more than “trust me”: the quality check is shown, not just asserted.</div>
     </div>
   </div>
@@ -671,7 +679,7 @@ body{
           <td>Data Completeness</td>
           <td class="gate-weight">10%</td>
           <td class="gate-pass">PASS</td>
-          <td class="gate-score" style="color:var(--green)">10/10</td>
+          <td class="gate-score" style="color:var(--teal)">10/10</td>
           <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
           <td style="font-size:10px;color:var(--ink3)">All required fields present. No gaps. (R117)</td>
         </tr>
@@ -680,7 +688,7 @@ body{
           <td>Source Authenticity</td>
           <td class="gate-weight">9%</td>
           <td class="gate-pass">PASS</td>
-          <td class="gate-score" style="color:var(--green)">9/9</td>
+          <td class="gate-score" style="color:var(--teal)">9/9</td>
           <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
           <td style="font-size:10px;color:var(--ink3)">Source provenance verified. (R118 — no caveat)</td>
         </tr>
@@ -689,7 +697,7 @@ body{
           <td>Vendor Profile Currency</td>
           <td class="gate-weight">5%</td>
           <td class="gate-pass">PASS</td>
-          <td class="gate-score" style="color:var(--green)">5/5</td>
+          <td class="gate-score" style="color:var(--teal)">5/5</td>
           <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
           <td style="font-size:10px;color:var(--ink3)">Signed DSP contract exhibit on file and unexpired.</td>
         </tr>
@@ -698,7 +706,7 @@ body{
           <td>POS Reconciliation</td>
           <td class="gate-weight">12%</td>
           <td class="gate-pass">PASS</td>
-          <td class="gate-score" style="color:var(--green)">12/12</td>
+          <td class="gate-score" style="color:var(--teal)">12/12</td>
           <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
           <td style="font-size:10px;color:var(--ink3)">POS/DSP order-level reconciliation within ±0.8%. PASS threshold met. (R122)</td>
         </tr>
@@ -707,7 +715,7 @@ body{
           <td>Duplicate Absence</td>
           <td class="gate-weight">7%</td>
           <td class="gate-pass">PASS</td>
-          <td class="gate-score" style="color:var(--green)">7/7</td>
+          <td class="gate-score" style="color:var(--teal)">7/7</td>
           <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
           <td style="font-size:10px;color:var(--ink3)">No duplicate transactions detected. (R124)</td>
         </tr>
@@ -716,7 +724,7 @@ body{
           <td>Period Coverage</td>
           <td class="gate-weight">8%</td>
           <td class="gate-pass">PASS</td>
-          <td class="gate-score" style="color:var(--green)">8/8</td>
+          <td class="gate-score" style="color:var(--teal)">8/8</td>
           <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
           <td style="font-size:10px;color:var(--ink3)">Full period covered; no gaps. (R126)</td>
         </tr>
@@ -734,7 +742,7 @@ body{
           <td>KPI Formula Currency</td>
           <td class="gate-weight">9%</td>
           <td class="gate-pass">PASS</td>
-          <td class="gate-score" style="color:var(--green)">9/9</td>
+          <td class="gate-score" style="color:var(--teal)">9/9</td>
           <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
           <td style="font-size:10px;color:var(--ink3)">KPI formula v1.0.0 active and unchanged for full period. (R131)</td>
         </tr>
@@ -743,7 +751,7 @@ body{
           <td>Audit Trail Integrity</td>
           <td class="gate-weight">8%</td>
           <td class="gate-pass">PASS</td>
-          <td class="gate-score" style="color:var(--green)">8/8</td>
+          <td class="gate-score" style="color:var(--teal)">8/8</td>
           <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
           <td style="font-size:10px;color:var(--ink3)">Complete audit trail; no gaps in processing event log. (R133)</td>
         </tr>
@@ -752,7 +760,7 @@ body{
           <td>Narrative Hash Match</td>
           <td class="gate-weight">6%</td>
           <td class="gate-pass">PASS</td>
-          <td class="gate-score" style="color:var(--green)">6/6</td>
+          <td class="gate-score" style="color:var(--teal)">6/6</td>
           <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
           <td style="font-size:10px;color:var(--ink3)">Narrative hash recomputed and verified against Audit Trail entry. (R134)</td>
         </tr>
@@ -761,14 +769,14 @@ body{
           <td>CAAR Eligibility</td>
           <td class="gate-weight">6%</td>
           <td class="gate-pass">PASS</td>
-          <td class="gate-score" style="color:var(--green)">6/6</td>
+          <td class="gate-score" style="color:var(--teal)">6/6</td>
           <td class="gate-bar-cell"><div class="gate-bar"><div class="gate-bar-fill gate-fill-green" style="width:100%"></div></div></td>
           <td style="font-size:10px;color:var(--ink3)">Trust Score = 92 ≥ 85 threshold. CAAR unlocked. (R141)</td>
         </tr>
         <tr style="background:var(--navy-light)">
           <td colspan="2" style="font-weight:800;color:var(--navy)">TOTAL TRUST SCORE</td>
           <td class="gate-weight" style="font-weight:700;color:var(--navy)">100%</td>
-          <td style="color:var(--green);font-weight:800">CERTIFIED</td>
+          <td style="color:var(--teal);font-weight:800">CERTIFIED</td>
           <td class="gate-score" style="color:var(--navy);font-size:14px;font-weight:800">92 / 100</td>
           <td class="gate-bar-cell"><div class="gate-bar" style="height:7px"><div class="gate-bar-fill gate-fill-green" style="width:92%"></div></div></td>
           <td style="font-size:10px;color:var(--navy);font-weight:600">Certified zone: TS ≥ 85. All CAAR conditions met.</td>
